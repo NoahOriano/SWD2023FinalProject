@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 
-public class GameServer {
+public class GameServer{
     /**Maximum number of players which a game can run at once*/
     public static final int MAXPLAYERCOUNT = 10;
     /**

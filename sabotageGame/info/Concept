@@ -1,0 +1,68 @@
+Sabotage Game Concept //////////////////////////////////////////////////////////////////////////////////////////////////
+
+Social deduction game where players are members of a secret agency
+Within a certain number of rounds, all double agents must be found and voted out to win
+If the rounds run out and double agents remain, game is won for double agents
+Also, if the double agents make themselves a majority, game is won for double agents
+Idea is that an important mission is about to be launched determining the outcome of a war
+If double agents remain in the agency by the time of the mission, they will sabotage it
+Players must gather evidence, whether by discovering it, stealing it, or transferring it to other players
+This evidence is then used to determine who is a double agent or not
+The only issue is that only the double agents know who each-other is,
+and the double agents are capable of forging evidence against other players
+
+Best for rather large groups of players, as small parties will make the game easier for the non-double agents
+Larger groups require lots of communication and transfer of information
+
+Players can chat at any time with a global chat or chat with a specific player
+Double agents have the option to send a message to all other double agents
+
+Gameplay ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Each round, every player makes one action. These actions are as follows:
+- Search for evidence: determines whether another player is a double agent or not, the evidence gathered this way
+is only known to you until another action reveals it to another player or copies it
+- Pass evidence: give another player a copy of the evidence you have on another player
+- Steal evidence: take copies of up to three random pieces of evidence another player has
+- Forge evidence: generates evidence on another player, but only available to double agents,
+and the evidence is false: saying the player is something other than what they actually are
+
+Evidence can stack, indicating how many different sources the evidence has come from. For example, if player one
+generates evidence twice on the same player, the stack will only be traced to one player still, but if two players
+pass evidence on the same player to the same player, it will indicate that the evidence came from two sources in total
+Player of origin will not be visible however, but could be deduced or tracked, keep your memory sharp!
+
+At the end of every round, voting occurs to
+
+Graphics ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Will be drawn up separately, but must contain
+
+For action phase:
+- Chat box and chat log, with a chat log that can expand and be scrolled through
+- Option selector for chat log for who a message is sent to
+ Must have global, double agents (if on that team), and every player as options
+- Button which brings up a window with a QR code other players can scan to join the game or a code for joining the game
+- Number of remaining rounds
+- Ability to either select through every player, or click on each player in some sort of graphic to bring up
+action options and evidence against or for them that you have
+- Window for all your current evidence
+
+For voting phase:
+- Simple either pass or vote for a specific player option
+- Information about evidence on each player
+- Chat
+
+Evidence stack could be represented as green and red numbers representing number of evidence for and against player
+
+Random Events //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Since the gameplay would likely be too easy without additional events, random events may be added
+These could make the game harder for the good agents in various ways
+This could include evidence being convoluted, which the player generating the evidence will be informed of,
+but not other players
+Another way would be random events requiring a special separate mission, which requires a certain number of volunteers
+Those volunteers will loose their actions that turn, but if the special mission does not have enough volunteers, or if
+it contains a double agent, a round remaining might be lost.
+The chance for a round being lost is equal to number of spots filled by double agents or half of the empty spots over total
+Max chance then is 100% for being filled with double agents, 50% for being empty
