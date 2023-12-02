@@ -14,11 +14,10 @@ public class Game extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root;
-        root = FXMLLoader.load(getClass().getResource("VotingScene.fxml"));
-        Scene votingScene = new Scene(root);      // attach scene graph to scene
-        root = FXMLLoader.load(getClass().getResource("ActionScene.fxml"));
-        Scene actionScene = new Scene(root);      // attach scene graph to scene
+        root = FXMLLoader.load(getClass().getResource("GameJoinScene.fxml"));
+        Scene scene = new Scene(root);
         stage.setTitle("Sabotage");
+        stage.setScene(scene);
         stage.show();                       // display the stage
     }
 }
