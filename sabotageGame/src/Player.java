@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.security.SecureRandom;
 
 /**
  * Player Class is going to contain the action and data of a player inside the game
@@ -23,25 +24,17 @@ public class Player {
         this.profileName = newPlayer;
     }
 
+    public void setPlayerNumber(int playerNumber) {
+        this.playerNumber = playerNumber;
+    }
+
     public Player(String playerID){
         this.profileName = playerID;
     }
 
-    public int findPlayerIndex(String name){
-        int playerIndex = 0;
-        for(int x = 0; x< playerFiles.size();x++){
-            if(name.equals(playerFiles.get(x))){
-                playerIndex = x;
-            }
-            else{
-                return -1;
-            }
-        }
-        return playerIndex;
-    }
 
-    public void newInformation(String suspect, boolean good){
-        findPlayerIndex(suspect);
+    
+
 
     }
 
