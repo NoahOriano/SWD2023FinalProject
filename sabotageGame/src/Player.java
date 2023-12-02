@@ -8,7 +8,6 @@ import java.security.SecureRandom;
 public class Player {
     private boolean imposter;
     private String profileName;
-    private int playerNumber;
     private ArrayList<EvidenceFile> playerFiles;
     private ArrayList<EvidenceFile> searchFiles;
 
@@ -31,13 +30,10 @@ public class Player {
         this.profileName = newPlayer;
     }
 
-    public void setPlayerNumber(int playerNumber) {
-        this.playerNumber = playerNumber;
-    }
-
     public ArrayList<EvidenceFile> getPlayerFiles() {
         return playerFiles;
     }
+
     public void setPlayerFiles(ArrayList<EvidenceFile> playerFiles) {
         this.playerFiles = playerFiles;
     }
@@ -48,23 +44,35 @@ public class Player {
 
     public Player(String playerID, int newPlayerNumber){
         this.profileName = playerID;
-        this.playerNumber=newPlayerNumber;
     }
 
-    public void searchPlayerEvidence(Player lost){
+    public int searchPlayerEvidence(Player lost){
+        int output = 0;
         for(int x = 0; x< playerFiles.size();x++){
-            
+            if(lost == playerFiles.get(x).getSuspect() ){
+                output = x;
+            }
+            else{
+                output = -1;
+            }
         }
+        return output;
     }
 
 
-    public void search(Player suspect){
-
+    public ArrayList<EvidenceFile> search(Player suspect){
+        searchFiles = suspect.getPlayerFiles();
+        return searchFiles;
     }
+
     public void pass(Player ally, Player info){
-
+        int allyIndex = ally.searchPlayerEvidence(info);
+        int myIndex = searchPlayerEvidence(info);
+        ally.getPlayerFiles().get(allyIndex).addEvidence(getPlayerFiles().get(myIndex));
     }
     public void steal(Player victim){
+        SecureRandom gen = new SecureRandom();
+
 
     }
     public void forge(){

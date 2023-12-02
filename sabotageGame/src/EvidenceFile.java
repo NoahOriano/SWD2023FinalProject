@@ -42,6 +42,13 @@ public class EvidenceFile {
         return this.suspect;
     }
 
+    private ArrayList<Evidence> getMainFile(){
+        return this.mainFile;
+    }
+    private void setMainFile(ArrayList<Evidence> newMain){
+        this.mainFile = newMain;
+    }
+
     private int getGood(){
         return this.good;
     }
@@ -55,10 +62,6 @@ public class EvidenceFile {
             this.bad = this.bad+1;
         }
     }
-    public ArrayList<Evidence> grabFile(){
-        return this.mainFile;
-    }
-
 
     public EvidenceFile(Player newSuspect){
         this.suspect = newSuspect;
@@ -75,16 +78,16 @@ public class EvidenceFile {
      */
     public void addEvidence(EvidenceFile file){
         boolean preExists = true;
-        for(int x = 0;x< file.grabFile().size();x++){
+        for(int x = 0;x< file.getMainFile().size();x++){
 
             for(int y = 0;y<mainFile.size();y++){
-                if(file.grabFile().get(x).getInspector().equals(mainFile.get(y).getInspector()) && file.grabFile().get(x).isDoubleAgent() == mainFile.get(y).isDoubleAgent()){
+                if(file.getMainFile().get(x).getInspector().equals(mainFile.get(y).getInspector()) && file.getMainFile().get(x).isDoubleAgent() == mainFile.get(y).isDoubleAgent()){
                     preExists = false;
                 }
             }
             if(preExists){
-                mainFile.add(file.grabFile().get(x));
-                addPoints(file.grabFile().get(x).isDoubleAgent());
+                mainFile.add(file.getMainFile().get(x));
+                addPoints(file.getMainFile().get(x).isDoubleAgent());
             }
 
         }
