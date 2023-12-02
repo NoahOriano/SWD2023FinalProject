@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 // Will be converted to a private class in GameServer eventually
 // Separate to allow easier editing
-public class ServerClientHandler {
+public class ServerClientHandler implements Runnable{
     /**
      * Connection to the client
      */
@@ -25,7 +25,7 @@ public class ServerClientHandler {
     /**
      * Whether the ServerClientHandler has a connection still
      */
-    private boolean hasConnection;
+    private boolean hasConnection = true;
     /**
      * Whether the Client has performed their action or vote for this turn
      */
@@ -36,6 +36,10 @@ public class ServerClientHandler {
      */
 
     private ArrayList<ServerPlayerRepresentation> players = new ArrayList<ServerPlayerRepresentation>();
+
+    ServerClientHandler(Socket connection){
+        this.connection = connection;
+    }
     private void getStreams() throws IOException
     {
         // set up output stream for NetworkMessages
@@ -49,10 +53,10 @@ public class ServerClientHandler {
     /**
      * Uses connection to get the IO streams, and processes the connection to the client until terminated
      */
-    public void run(Socket connection)
+    @Override
+    public void run()
     {
         this.hasConnection = true;
-        this.connection = connection;
         try // connect to server, get streams, process connection
         {
             getStreams(); // get the input and output streams
@@ -79,7 +83,6 @@ public class ServerClientHandler {
     private void processConnection() throws IOException
     {
         NetworkMessage networkMessage = null;
-
         do // process messages sent from server
         {
             try
