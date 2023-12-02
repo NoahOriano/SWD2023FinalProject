@@ -65,7 +65,7 @@ public class Player {
         }
     }
 
-    /**
+    /** Helper Method
      * Allows the player class to find the index in their playerFiles of the player inputted
      * @param lost
      * @return
@@ -83,17 +83,25 @@ public class Player {
         return output;
     }
 
-    /**
+    /*
+    /** Main Action
      * Rough framework of the search action, implementation unclear currently
      * @param suspect
      * @return
-     */
+
     public ArrayList<EvidenceFile> search(Player suspect){
         searchFiles = suspect.getPlayerFiles();
         return searchFiles;
     }
+    */
+    /**Main Action
+     *
+     */
+    public void investigate(Player suspect){
 
-    /**
+    }
+
+    /** Main Action
      * Allows the player to send one EvidenceFile of their own to an ally player
      * @param ally
      * @param info
@@ -104,7 +112,7 @@ public class Player {
         ally.getPlayerFiles().get(allyIndex).addEvidenceFile(getPlayerFiles().get(myIndex));
     }
 
-    /**
+    /** Main Action
      * steal method allows the player to take 3 random piecies of individual evidence from the victim and add it to their
      * own files
      * @param victim
@@ -123,7 +131,7 @@ while(x<3){
 }
     }
 
-    /**
+    /** Imposter Action
      * forge method allows the imposter to make fradulent evidence and information about players
      */
     public void forge(){
@@ -132,8 +140,6 @@ while(x<3){
         }
 
     }
-
-
 
     }
 
