@@ -25,21 +25,34 @@ public class EvidenceFile {
         }
     }
 
+
+
     /**
      * ArrayList mainFile stores the individiual elements of Evidence for the suspect of the EvidenceFile that determine
      * his good or bad score
      */
     private ArrayList<Evidence> mainFile;
     /**
-     * The Player who's EvidenceFile
+     * The Player who the EvidenceFile is about
      */
     private Player suspect;
     /**
-     * The Player
+     * The Player who owns this EvidenceFile
      */
     private Player source;
+    /**
+     * Good counts the total number of evidence that indicate the Player suspect is good
+     */
     private int good;
+    /**
+     *  Bad counts the total number of evidence that indicate the Player suspect is bad
+     */
     private int bad;
+
+    /**
+     * Getters and Setters Below
+     * @return
+     */
 
     public Player getSuspect(){
         return this.suspect;
@@ -61,6 +74,11 @@ public class EvidenceFile {
     public int getBad() {
         return this.bad;
     }
+
+    /**
+     * addPoints is used to add the good and bad points for the suspect
+     * @param morality
+     */
     public void addPoints(boolean morality){
         if(morality){
             this.good = this.good+1;
@@ -85,6 +103,7 @@ public class EvidenceFile {
         this.mainFile.add(start);
         this.source = newSource;
     }
+
 
     public Evidence createEvidence(Player defendeant, Player prosecutor){
         Evidence newInfo = new Evidence(defendeant,prosecutor);

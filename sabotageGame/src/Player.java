@@ -54,12 +54,22 @@ public class Player {
         this.playerFiles = new ArrayList<>();
     }
 
+    /**
+     *Creates the initial playreFiles can't be in the constructor since it needs the playerOpponents
+     * @param opponents
+     * @param self
+     */
     public void createPlayerFiles(ArrayList<Player> opponents, Player self){
         for(int x =0; x< opponents.size();x++){
             this.playerFiles.add(new EvidenceFile(opponents.get(x),self));
         }
     }
 
+    /**
+     * Allows the player class to find the index in their playerFiles of the player inputted
+     * @param lost
+     * @return
+     */
     public int searchPlayerEvidence(Player lost){
         int output = 0;
         for(int x = 0; x< playerFiles.size();x++){
@@ -73,12 +83,21 @@ public class Player {
         return output;
     }
 
-
+    /**
+     * Rough framework of the search action, implementation unclear currently
+     * @param suspect
+     * @return
+     */
     public ArrayList<EvidenceFile> search(Player suspect){
         searchFiles = suspect.getPlayerFiles();
         return searchFiles;
     }
 
+    /**
+     * Allows the player to send one EvidenceFile of their own to an ally player
+     * @param ally
+     * @param info
+     */
     public void pass(Player ally, Player info){
         int allyIndex = ally.searchPlayerEvidence(info);
         int myIndex = searchPlayerEvidence(info);
@@ -102,10 +121,15 @@ while(x<3){
         x++;
     }
 }
-
-
     }
+
+    /**
+     * forge method allows the imposter to make fradulent evidence and information about players
+     */
     public void forge(){
+        if(!imposter){
+
+        }
 
     }
 
