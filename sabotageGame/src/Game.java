@@ -4,9 +4,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-import java.awt.*;
-
 public class Game extends Application {
     public static void main(String[] args) {
         launch(args);

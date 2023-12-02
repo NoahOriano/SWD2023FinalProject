@@ -3,31 +3,28 @@
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import javafx.scene.control.Button;
-
-import javax.swing.event.HyperlinkEvent;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.InetAddress;
 import java.net.Socket;
+
 
 /**
  * Contains all different window elements and handling for all three scenes
  * This is done to allow sharing of elements, such as chat, between scenes
  */
-public class SceneController {
+public class SceneControllerForSignOn {
     /**
      * Text area for the chat log
      */
@@ -90,26 +87,27 @@ public class SceneController {
     private ObjectInputStream input;
     @FXML
     public void initialize(){
-        joinServerButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                try {
-                    connection = new Socket(serverIPField.getText(), Integer.parseInt(serverPortField.getText()));
-                    output = new ObjectOutputStream(connection.getOutputStream());
-                    input = new ObjectInputStream(connection.getInputStream());
-                    output.writeObject(new NetworkMessage(MessageValues.MESSAGE, "Client Connected", null));
-                    output.flush();
+        if(joinServerButton != null) {
+            joinServerButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
                     try {
-                        setSignOnScreen(actionEvent);
+                        connection = new Socket(serverIPField.getText(), Integer.parseInt(serverPortField.getText()));
+                        output = new ObjectOutputStream(connection.getOutputStream());
+                        input = new ObjectInputStream(connection.getInputStream());
+                        output.writeObject(new NetworkMessage(MessageValues.MESSAGE, "Client Connected", null));
+                        output.flush();
+                        try {
+                            setSignOnScreen(actionEvent);
+                        } catch (IOException e) {
+                            System.out.println("Connected, but failed to switch screens");
+                        }
+                    } catch (IOException e) {
+                        System.out.println("NOT CONNECTED");
                     }
-                    catch(IOException e){
-                        System.out.println("Connected, but failed to switch screens");
-                    }
-                } catch (IOException e) {
-                    System.out.println("NOT CONNECTED");
                 }
-            }
-        });
+            });
+        }
     }
 
     public void setGameJoinScene(ActionEvent event) throws IOException {
@@ -127,8 +125,9 @@ public class SceneController {
         stage.show();                       // display the stage
     }
     public void setSignOnScreen(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("SignOnScreen.fxml"));
-        Scene scene = new Scene(root);      // attach scene graph to scene
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SignOnScreen.fxml"));
+        loader.setController(this);
+        Scene scene = new Scene(loader.load());      // attach scene graph to scene
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);              // attach scene to stage
         stage.show();                       // display the stage
