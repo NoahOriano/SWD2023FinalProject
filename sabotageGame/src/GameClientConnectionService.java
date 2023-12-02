@@ -29,6 +29,7 @@ public class GameClientConnectionService implements Runnable{
         try // set up server to receive connections; process connections
         {
             server = new ServerSocket(port, backlog); // create ServerSocket
+            sendMessageRequest("ServerSocket open on Client Connection Service");
             while (true) {
                 try {
                     waitForConnection(); // wait for a connection
@@ -44,7 +45,11 @@ public class GameClientConnectionService implements Runnable{
     /**Run the service*/
     @Override
     public void run() {
+        runServer();
+    }
 
+    public void sendMessageRequest(String message ){
+        connections.add(new MessageRequest(message));
     }
 
     /**Sends a connection back to game server*/
