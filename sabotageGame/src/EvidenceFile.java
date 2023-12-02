@@ -48,14 +48,14 @@ public class EvidenceFile {
         return this.source;
     }
 
-    private ArrayList<Evidence> getMainFile(){
+    public ArrayList<Evidence> getMainFile(){
         return this.mainFile;
     }
-    private void setMainFile(ArrayList<Evidence> newMain){
+    public void setMainFile(ArrayList<Evidence> newMain){
         this.mainFile = newMain;
     }
 
-    private int getGood(){
+    public int getGood(){
         return this.good;
     }
     public int getBad() {
@@ -91,12 +91,19 @@ public class EvidenceFile {
         this.mainFile.add(newInfo);
         return newInfo;
     }
+    public Boolean addEvidence(){
+        return false;
+    }
+
+
+
+
     /**
      * addEvidence takes in an EvidenceFile to add into itself by navigating through itself to ensure that the evidence being
      * added doesn't come from the same source with the same information and also increases the values of good or bad
      * @param file
      */
-    public void addEvidence(EvidenceFile file){
+    public void addEvidenceFile(EvidenceFile file){
         boolean preExists = true;
         for(int x = 0;x< file.getMainFile().size();x++){
 

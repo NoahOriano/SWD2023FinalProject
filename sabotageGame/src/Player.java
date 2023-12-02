@@ -82,11 +82,17 @@ public class Player {
     public void pass(Player ally, Player info){
         int allyIndex = ally.searchPlayerEvidence(info);
         int myIndex = searchPlayerEvidence(info);
-        ally.getPlayerFiles().get(allyIndex).addEvidence(getPlayerFiles().get(myIndex));
+        ally.getPlayerFiles().get(allyIndex).addEvidenceFile(getPlayerFiles().get(myIndex));
     }
     public void steal(Player victim){
         SecureRandom gen = new SecureRandom();
-
+int x = 0;
+while(x<3){
+    int randomFile = gen.nextInt(victim.getPlayerFiles().size());
+    int randomNum = gen.nextInt(victim.getPlayerFiles().get(randomFile).getMainFile().size());
+    int randomIndex = searchPlayerEvidence(victim.getPlayerFiles().get(randomFile).getSuspect());
+    //boolean added =
+}
 
 
     }
