@@ -24,6 +24,7 @@ Each round, every player makes one action. These actions are as follows:
 is only known to you until another action reveals it to another player or copies it
 - Pass evidence: give another player a copy of the evidence you have on another player
 - Steal evidence: take copies of up to three random pieces of evidence another player has
+
 - Forge evidence: generates evidence on another player, but only available to double agents,
 and the evidence is false: saying the player is something other than what they actually are
 

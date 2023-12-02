@@ -1,11 +1,12 @@
-
-
 /**
  * Player Class is going to contain the action and data of a player inside the game
  */
+
 public class Player {
     private boolean imposter;
     private String profileName;
+
+    private ArrayList<>
 
     public boolean getImposter(){
         return this.imposter;
@@ -23,5 +24,7 @@ public class Player {
     public Player(String playerID){
         this.profileName = playerID;
     }
+
+
 
 }

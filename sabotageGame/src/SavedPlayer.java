@@ -9,7 +9,7 @@ public class SavedPlayer {
     private double playerRating;
     private int storageIndex;
 
-    
+
     public void setGameWin(int wins){
         this.gameWin = wins;
     }
