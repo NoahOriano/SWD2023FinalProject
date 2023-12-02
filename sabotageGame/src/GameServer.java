@@ -18,15 +18,11 @@ public class GameServer extends JFrame{
     /**Maximum number of players which a game can run at once*/
     public static final int MAXPLAYERCOUNT = 10;
     /**List of ServerClientHandlers, generated to handle connections*/
-    ArrayList<ServerClientHandler> clientHandlers = new ArrayList<ServerClientHandler>();
+    private ArrayList<ServerClientHandler> clientHandlers = new ArrayList<ServerClientHandler>();
     /**Connection service which allows connection to clients to be retrieved*/
-    GameClientConnectionService connectionService;
+    private GameClientConnectionService connectionService;
     /**Text area used to display information to used*/
-    private JTextArea displayArea;
-    /**output stream to client*/
-    private ObjectOutputStream output;
-    /**input stream to client*/
-    private ObjectInputStream input;
+    private final JTextArea displayArea;
     /**Executor service used to handle threads*/
     private ExecutorService service;
     /**Connections to give to client handlers*/
@@ -56,8 +52,6 @@ public class GameServer extends JFrame{
     }
     /**Set up and run server*/
     public void runServer() {
-
-
         service = Executors.newFixedThreadPool(17);
         requests = new ArrayBlockingQueue<ServerRequest>(100);
         connectionService = new GameClientConnectionService(port, backlog, requests);

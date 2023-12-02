@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="TOP_LEFT" hgap="8.0" vgap="0.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SceneController">
+<GridPane alignment="TOP_LEFT" prefWidth="421.0" vgap="0.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SceneController">
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+   </rowConstraints>
+   <columnConstraints>
+      <ColumnConstraints maxWidth="72.0" minWidth="10.0" prefWidth="28.0" />
+      <ColumnConstraints maxWidth="140.0" minWidth="10.0" prefWidth="140.0" />
+      <ColumnConstraints maxWidth="120.0" minWidth="10.0" prefWidth="115.0" />
+      <ColumnConstraints maxWidth="166.0" minWidth="10.0" prefWidth="133.0" />
+      <ColumnConstraints maxWidth="72.0" minWidth="10.0" prefWidth="22.0" />
+   </columnConstraints>
+   <children>
+      <Button fx:id="joinServerButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="103.0" text="Join Server" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <Button fx:id="hostServerButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="110.0" text="Host Server" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+      <TextField fx:id="serverIPField" prefWidth="149.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+      <TextField editable="false" text="Server IP:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextField editable="false" text="Server port:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <TextField fx:id="serverPortField" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+      <TextField editable="false" text="Enter Server Information or Host Server" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+   </children>
 </GridPane>
