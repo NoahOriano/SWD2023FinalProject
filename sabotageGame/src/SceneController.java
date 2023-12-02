@@ -93,7 +93,15 @@ public class SceneController {
         joinServerButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-
+                try {
+                    connection = new Socket(serverIPField.getText(), Integer.parseInt(serverPortField.getText()));
+                    output = new ObjectOutputStream(connection.getOutputStream());
+                    input = new ObjectInputStream(connection.getInputStream());
+                    output.writeObject(new NetworkMessage(MessageValues.MESSAGE, "Client Connected", null));
+                    output.flush();
+                } catch (IOException e) {
+                    System.out.println("NOT CONNECTED");
+                }
             }
         });
     }

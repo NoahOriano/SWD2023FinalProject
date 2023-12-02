@@ -6,8 +6,10 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.Inet4Address;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
@@ -56,6 +58,11 @@ public class GameServer extends JFrame{
         requests = new ArrayBlockingQueue<ServerRequest>(100);
         connectionService = new GameClientConnectionService(port, backlog, requests);
         service.execute(connectionService);
+        try {
+            displayMessage("IP:"+ Inet4Address.getLocalHost().getHostAddress()+", PORT: "+port);
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
         while (true) {
             try {
                 ServerRequest request = requests.poll(1000, TimeUnit.MILLISECONDS);
@@ -83,7 +90,7 @@ public class GameServer extends JFrame{
      * @param connection connection to send to the client handler
      */
     public void sendConnectionToClientHandler(Socket connection){
-        servers[counter] = new ServerClientHandler(connection);
+        servers[counter] = new ServerClientHandler(connection, this.requests);
         service.execute(servers[counter]);
         counter++;
     }
@@ -102,7 +109,7 @@ public class GameServer extends JFrame{
      * @param messageToDisplay the message to display
      */
     private void displayMessage(final String messageToDisplay) {
-        displayArea.append(messageToDisplay);
+        displayArea.append("\n"+messageToDisplay);
     }
 
 }

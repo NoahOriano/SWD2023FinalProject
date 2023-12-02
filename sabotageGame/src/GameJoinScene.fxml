@@ -25,10 +25,10 @@
    <children>
       <Button fx:id="joinServerButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="103.0" text="Join Server" GridPane.columnIndex="2" GridPane.rowIndex="4" />
       <Button fx:id="hostServerButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="110.0" text="Host Server" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-      <TextField fx:id="serverIPField" prefWidth="149.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+      <TextField fx:id="serverIPField" prefWidth="149.0" text="128.255.17.153" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
       <TextField editable="false" text="Server IP:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <TextField editable="false" text="Server port:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <TextField fx:id="serverPortField" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+      <TextField fx:id="serverPortField" text="23791" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
       <TextField editable="false" text="Enter Server Information or Host Server" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" />
    </children>
 </GridPane>
