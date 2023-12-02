@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /**
  * Message over a network indicating something to either the server or client
  * @param identifier what type of message this is
@@ -5,5 +7,5 @@
  * @param additional in the case where two pieces of information are necessary, this is used
  * @see MessageValues
  */
-public record NetworkMessage(MessageValues identifier, String information, String additional){
+public record NetworkMessage(MessageValues identifier, String information, String additional) implements Serializable {
 }

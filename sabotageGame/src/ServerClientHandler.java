@@ -5,10 +5,15 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.concurrent.ArrayBlockingQueue;
 
 // Will be converted to a private class in GameServer eventually
 // Separate to allow easier editing
 public class ServerClientHandler implements Runnable{
+    /**
+     * Queue of requests sent to server to handle
+     */
+    private final ArrayBlockingQueue<ServerRequest> requests;
     /**
      * Connection to the client
      */
@@ -37,8 +42,9 @@ public class ServerClientHandler implements Runnable{
 
     private ArrayList<ServerPlayerRepresentation> players = new ArrayList<ServerPlayerRepresentation>();
 
-    ServerClientHandler(Socket connection){
+    ServerClientHandler(Socket connection, ArrayBlockingQueue<ServerRequest> requests){
         this.connection = connection;
+        this.requests = requests;
     }
     private void getStreams() throws IOException
     {
@@ -88,8 +94,8 @@ public class ServerClientHandler implements Runnable{
             try
             {
                 networkMessage = (NetworkMessage) input.readObject(); // read new message
-                if(networkMessage.identifier() == MessageValues.SEARCH){
-
+                if(networkMessage.identifier() == MessageValues.MESSAGE){
+                    sendRequestToServer(new MessageRequest(networkMessage.information()));
                 }
             }
             catch (ClassNotFoundException classNotFoundException)
@@ -114,6 +120,10 @@ public class ServerClientHandler implements Runnable{
         {
             //
         }
+    }
+
+    private void sendRequestToServer(ServerRequest request){
+        requests.add(request);
     }
 
     /**
