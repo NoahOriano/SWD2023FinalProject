@@ -42,8 +42,15 @@ public class Player {
      * @param playerID
      */
 
-    public Player(String playerID, int newPlayerNumber){
+    public Player(String playerID){
         this.profileName = playerID;
+        this.playerFiles = new ArrayList<>();
+    }
+
+    public void createPlayerFiles(ArrayList<Player> opponents, Player self){
+        for(int x =0; x< opponents.size();x++){
+            this.playerFiles.add(new EvidenceFile(opponents.get(x),self));
+        }
     }
 
     public int searchPlayerEvidence(Player lost){
@@ -72,6 +79,7 @@ public class Player {
     }
     public void steal(Player victim){
         SecureRandom gen = new SecureRandom();
+
 
 
     }
