@@ -8,7 +8,7 @@ public class Player {
     private boolean imposter;
     private String profileName;
     private int playerNumber;
-    private ArrayList<Evidence> otherPlayers;
+    private ArrayList<EvidenceFile> playerFiles;
 
     public boolean getImposter(){
         return this.imposter;
@@ -29,8 +29,8 @@ public class Player {
 
     public int findPlayerIndex(String name){
         int playerIndex = 0;
-        for(int x = 0; x< otherPlayers.size();x++){
-            if(name.equals(otherPlayers.get(x))){
+        for(int x = 0; x< playerFiles.size();x++){
+            if(name.equals(playerFiles.get(x))){
                 playerIndex = x;
             }
             else{

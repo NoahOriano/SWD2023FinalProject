@@ -82,7 +82,7 @@ public class ServerClientHandler {
 
         do // process messages sent from server
         {
-            try // read message and display it
+            try
             {
                 networkMessage = (NetworkMessage) input.readObject(); // read new message
                 if(networkMessage.identifier() == MessageValues.SEARCH){
