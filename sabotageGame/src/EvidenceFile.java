@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.security.SecureRandom;
 public class EvidenceFile {
     /**
      * Evidence class that holds the positive and negative values
@@ -6,7 +7,6 @@ public class EvidenceFile {
     private class Evidence {
         private Player inspector;
         boolean culprit;
-
         public Player getInspector() {
             return inspector;
         }
@@ -19,9 +19,9 @@ public class EvidenceFile {
             this.inspector = inspector;
         }
 
-        public Evidence(Player newCulprit, Player newInspector){
+        public Evidence(Player newInspector, boolean forged){
             this.inspector = newInspector;
-            this.culprit = newCulprit.getImposter();
+            this.culprit = forged;
         }
     }
 
@@ -87,36 +87,52 @@ public class EvidenceFile {
         }
     }
 
-    /**
+    /** Initial Creation method
      * Creates an EvidenceFile taking in a Player class to be the suspect of the evidence and a Player Class for the source
      * of evidence to pass down to the evidence that file creates
      * @param newSuspect
      * @param newSource
      */
-
     public EvidenceFile(Player newSuspect, Player newSource){
         this.suspect = newSuspect;
         this.good = 0;
         this.bad = 0;
         this.evidenceList = new ArrayList<>();
-        Evidence start = new Evidence(newSource,newSource);
+        Evidence start = new Evidence(newSource,newSource.getImposter());
         this.evidenceList.add(start);
         this.source = newSource;
     }
 
-
-    public Evidence createEvidence(Player defendant, Player prosecutor){
-        Evidence newInfo = new Evidence(defendant,prosecutor);
-        this.evidenceList.add(newInfo);
-        return newInfo;
+    /**
+     * Constructor utilized for createStolenEvidence
+     * @param temp
+     */
+    public EvidenceFile(Player temp){
+        this.suspect = temp;
+        this.good = 0;
+        this.bad = 0;
+        this.evidenceList = new ArrayList<>();
+        this.source = null;
     }
 
+    /**
+     * createEvidence method is for creating new Evidence during Player's investigate method or forge method
+     * @param truth
+     */
+    public void createEvidence(boolean truth){
+        Evidence newInfo = new Evidence(this.source, truth);
+        this.evidenceList.add(newInfo);
+        addPoints(truth);
+    }
+
+
+/*
     /**
      * addEvidence is used to add individual pieces of evidence and checks to see if they actually get added or not,
      * primarily used for the steal class
      * @param input
      * @return
-     */
+
     public Boolean addEvidence(Evidence input){
         boolean add = true;
         for(int x = 0; x< evidenceList.size();x++){
@@ -131,7 +147,20 @@ public class EvidenceFile {
         return add;
     }
 
-    
+ */
+
+    public  EvidenceFile createStolenEvidence(EvidenceFile information, Player suspect){
+                EvidenceFile stolen = new EvidenceFile(information.getSuspect());
+
+                SecureRandom gen = new SecureRandom();
+                int randomIndex = gen.nextInt(information.getMainFile().size());
+
+                Evidence temp = new Evidence(information.getMainFile().get(randomIndex).getInspector(),information.getMainFile().get(randomIndex).isDoubleAgent());
+                stolen.getMainFile().add(temp);
+                        return stolen;
+    }
+
+
     /**
      * addEvidence takes in an EvidenceFile to add into itself by navigating through itself to ensure that the evidence being
      * added doesn't come from the same source with the same information and also increases the values of good or bad
