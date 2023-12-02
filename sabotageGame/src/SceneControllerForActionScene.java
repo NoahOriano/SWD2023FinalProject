@@ -8,12 +8,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -29,7 +32,7 @@ public class SceneControllerForActionScene extends SceneController{
      * Text area for the chat log
      */
     @FXML
-    TextArea chatLog;
+    TextFlow chatLog;
 
     /**
      * Text field for the chat input
@@ -50,16 +53,34 @@ public class SceneControllerForActionScene extends SceneController{
     Button textSubmit;
 
     /**
-     * Input field for displaying port when on a server
+     * Text field for displaying port when on a server
      */
     @FXML
     TextField serverPortField;
 
     /**
-     * Input field for displaying IP when on a server
+     * Text field for displaying IP when on a server
      */
     @FXML
     TextField serverIPField;
+
+    @FXML
+    Canvas display;
+
+    @FXML
+    ImageIcon playerIcon;
+
+    @FXML
+    TextFlow evidenceField;
+
+    @FXML
+    Button actionSubmit;
+
+    @FXML
+    ComboBox<String> actionOptions;
+
+    @FXML
+    TextField selectedPlayerName;
 
     @FXML
     public void initialize(){
