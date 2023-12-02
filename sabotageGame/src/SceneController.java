@@ -99,6 +99,12 @@ public class SceneController {
                     input = new ObjectInputStream(connection.getInputStream());
                     output.writeObject(new NetworkMessage(MessageValues.MESSAGE, "Client Connected", null));
                     output.flush();
+                    try {
+                        setSignOnScreen(actionEvent);
+                    }
+                    catch(IOException e){
+                        System.out.println("Connected, but failed to switch screens");
+                    }
                 } catch (IOException e) {
                     System.out.println("NOT CONNECTED");
                 }
@@ -107,16 +113,21 @@ public class SceneController {
     }
 
     public void setGameJoinScene(ActionEvent event) throws IOException {
-        Parent root =
-                FXMLLoader.load(getClass().getResource("GameJoinScene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GameJoinScene.fxml"));
         Scene scene = new Scene(root);      // attach scene graph to scene
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);              // attach scene to stage
         stage.show();                       // display the stage
     }
     public void setGameActionScene(ActionEvent event) throws IOException {
-        Parent root =
-                FXMLLoader.load(getClass().getResource("ActionScene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("ActionScene.fxml"));
+        Scene scene = new Scene(root);      // attach scene graph to scene
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);              // attach scene to stage
+        stage.show();                       // display the stage
+    }
+    public void setSignOnScreen(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("SignOnScreen.fxml"));
         Scene scene = new Scene(root);      // attach scene graph to scene
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);              // attach scene to stage
