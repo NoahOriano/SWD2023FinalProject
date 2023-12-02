@@ -31,7 +31,7 @@ public class EvidenceFile {
      * ArrayList mainFile stores the individiual elements of Evidence for the suspect of the EvidenceFile that determine
      * his good or bad score
      */
-    private ArrayList<Evidence> mainFile;
+    private ArrayList<Evidence> evidenceList;
     /**
      * The Player who the EvidenceFile is about
      */
@@ -62,10 +62,10 @@ public class EvidenceFile {
     }
 
     public ArrayList<Evidence> getMainFile(){
-        return this.mainFile;
+        return this.evidenceList;
     }
     public void setMainFile(ArrayList<Evidence> newMain){
-        this.mainFile = newMain;
+        this.evidenceList = newMain;
     }
 
     public int getGood(){
@@ -88,7 +88,7 @@ public class EvidenceFile {
     }
 
     /**
-     * Creates an EvienceFile taking in a Player class to be the suspect of the evidence and a Player Class for the source
+     * Creates an EvidenceFile taking in a Player class to be the suspect of the evidence and a Player Class for the source
      * of evidence to pass down to the evidence that file creates
      * @param newSuspect
      * @param newSource
@@ -98,16 +98,16 @@ public class EvidenceFile {
         this.suspect = newSuspect;
         this.good = 0;
         this.bad = 0;
-        this.mainFile = new ArrayList<>();
+        this.evidenceList = new ArrayList<>();
         Evidence start = new Evidence(newSource,newSource);
-        this.mainFile.add(start);
+        this.evidenceList.add(start);
         this.source = newSource;
     }
 
 
-    public Evidence createEvidence(Player defendeant, Player prosecutor){
-        Evidence newInfo = new Evidence(defendeant,prosecutor);
-        this.mainFile.add(newInfo);
+    public Evidence createEvidence(Player defendant, Player prosecutor){
+        Evidence newInfo = new Evidence(defendant,prosecutor);
+        this.evidenceList.add(newInfo);
         return newInfo;
     }
 
@@ -119,13 +119,13 @@ public class EvidenceFile {
      */
     public Boolean addEvidence(Evidence input){
         boolean add = true;
-        for(int x = 0; x< mainFile.size();x++){
-            if(mainFile.get(x).getInspector().equals(input.getInspector()) && mainFile.get(x).isDoubleAgent() == input.isDoubleAgent()){
+        for(int x = 0; x< evidenceList.size();x++){
+            if(evidenceList.get(x).getInspector().equals(input.getInspector()) && evidenceList.get(x).isDoubleAgent() == input.isDoubleAgent()){
                 add = false;
             }
         }
         if(add){
-            mainFile.add(input);
+            evidenceList.add(input);
             addPoints(input.isDoubleAgent());
         }
         return add;
@@ -141,13 +141,13 @@ public class EvidenceFile {
         boolean preExists = true;
         for(int x = 0;x< file.getMainFile().size();x++){
 
-            for(int y = 0;y<mainFile.size();y++){
-                if(file.getMainFile().get(x).getInspector().equals(mainFile.get(y).getInspector()) && file.getMainFile().get(x).isDoubleAgent() == mainFile.get(y).isDoubleAgent()){
+            for(int y = 0;y<evidenceList.size();y++){
+                if(file.getMainFile().get(x).getInspector().equals(evidenceList.get(y).getInspector()) && file.getMainFile().get(x).isDoubleAgent() == evidenceList.get(y).isDoubleAgent()){
                     preExists = false;
                 }
             }
             if(preExists){
-                mainFile.add(file.getMainFile().get(x));
+                evidenceList.add(file.getMainFile().get(x));
                 addPoints(file.getMainFile().get(x).isDoubleAgent());
             }
 

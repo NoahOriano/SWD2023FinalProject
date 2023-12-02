@@ -7,4 +7,19 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <GridPane alignment="TOP_LEFT" prefWidth="421.0" vgap="0.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SceneController">
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+    </rowConstraints>
+    <columnConstraints>
+        <ColumnConstraints maxWidth="72.0" minWidth="10.0" prefWidth="28.0" />
+        <ColumnConstraints maxWidth="140.0" minWidth="10.0" prefWidth="140.0" />
+        <ColumnConstraints maxWidth="120.0" minWidth="10.0" prefWidth="115.0" />
+        <ColumnConstraints maxWidth="166.0" minWidth="10.0" prefWidth="133.0" />
+        <ColumnConstraints maxWidth="72.0" minWidth="10.0" prefWidth="22.0" />
+    </columnConstraints>
 </GridPane>

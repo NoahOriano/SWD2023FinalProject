@@ -124,7 +124,7 @@ while(x<3){
     int randomFile = gen.nextInt(victim.getPlayerFiles().size());
     int randomNum = gen.nextInt(victim.getPlayerFiles().get(randomFile).getMainFile().size());
     int randomIndex = searchPlayerEvidence(victim.getPlayerFiles().get(randomFile).getSuspect());
-    boolean added = playerFiles.get(randomIndex).addEvidence(victim.getPlayerFiles().get(randomFile).getMainFile().get(randomNum));
+    boolean added = true;// Replace with logic
     if(added){
         x++;
     }
