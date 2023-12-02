@@ -84,6 +84,12 @@ public class Player {
         int myIndex = searchPlayerEvidence(info);
         ally.getPlayerFiles().get(allyIndex).addEvidenceFile(getPlayerFiles().get(myIndex));
     }
+
+    /**
+     * steal method allows the player to take 3 random piecies of individual evidence from the victim and add it to their
+     * own files
+     * @param victim
+     */
     public void steal(Player victim){
         SecureRandom gen = new SecureRandom();
 int x = 0;
@@ -91,7 +97,10 @@ while(x<3){
     int randomFile = gen.nextInt(victim.getPlayerFiles().size());
     int randomNum = gen.nextInt(victim.getPlayerFiles().get(randomFile).getMainFile().size());
     int randomIndex = searchPlayerEvidence(victim.getPlayerFiles().get(randomFile).getSuspect());
-    //boolean added =
+    boolean added = playerFiles.get(randomIndex).addEvidence(victim.getPlayerFiles().get(randomFile).getMainFile().get(randomNum));
+    if(added){
+        x++;
+    }
 }
 
 

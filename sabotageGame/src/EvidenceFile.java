@@ -91,8 +91,25 @@ public class EvidenceFile {
         this.mainFile.add(newInfo);
         return newInfo;
     }
-    public Boolean addEvidence(){
-        return false;
+
+    /**
+     * addEvidence is used to add individual pieces of evidence and checks to see if they actually get added or not,
+     * primarily used for the steal class
+     * @param input
+     * @return
+     */
+    public Boolean addEvidence(Evidence input){
+        boolean add = true;
+        for(int x = 0; x< mainFile.size();x++){
+            if(mainFile.get(x).getInspector().equals(input.getInspector()) && mainFile.get(x).isDoubleAgent() == input.isDoubleAgent()){
+                add = false;
+            }
+        }
+        if(add){
+            mainFile.add(input);
+            addPoints(input.isDoubleAgent());
+        }
+        return add;
     }
 
 
