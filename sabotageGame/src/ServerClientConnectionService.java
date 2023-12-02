@@ -1,12 +1,10 @@
-import javax.swing.*;
 import java.io.EOFException;
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
-public class GameClientConnectionService implements Runnable{
+public class ServerClientConnectionService implements Runnable{
     /**Server socket for retrieving connections*/
     private ServerSocket server;
     /**Connection to client which will be passed to handler*/
@@ -25,7 +23,7 @@ public class GameClientConnectionService implements Runnable{
      * @param backlog size of backlog
      * @param connections queue to push connections to
      */
-    GameClientConnectionService(int port, int backlog, ArrayBlockingQueue<ServerRequest> connections){
+    ServerClientConnectionService(int port, int backlog, ArrayBlockingQueue<ServerRequest> connections){
         this.port = port;
         this.backlog = backlog;
         this.connections = connections;

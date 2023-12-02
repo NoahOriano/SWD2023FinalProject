@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
 
 public class SceneController {
     /**
@@ -32,6 +33,39 @@ public class SceneController {
      * IP address client is connected to
      */
     private String IP;
+
+    /**Username of the player*/
+    private String username;
+
+    /**GameClient runnable capable of handing incoming communications*/
+    private ClientMessageRelay client;
+
+    /**Executor service for running services*/
+    private ExecutorService service;
+
+    public ExecutorService getService() {
+        return service;
+    }
+
+    public void setService(ExecutorService service) {
+        this.service = service;
+    }
+
+    public ClientMessageRelay getClientRelay() {
+        return client;
+    }
+
+    public void setClientRelay(ClientMessageRelay client) {
+        this.client = client;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public int getPort() {
         return port;
@@ -77,6 +111,11 @@ public class SceneController {
         controller.connection = this.connection;
         controller.input = this.input;
         controller.output = this.output;
+        controller.client = this.client;
+        controller.IP = this.IP;
+        controller.port = this.port;
+        controller.service = this.service;
+        controller.username = this.username;
     }
 
     public void setGameJoinScene(ActionEvent event) throws IOException {
@@ -99,5 +138,9 @@ public class SceneController {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);              // attach scene to stage
         stage.show();                       // display the stage
+    }
+
+    public void sendMessage(NetworkMessage message){
+
     }
 }
