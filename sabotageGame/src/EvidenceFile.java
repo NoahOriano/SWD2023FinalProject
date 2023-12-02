@@ -25,14 +25,27 @@ public class EvidenceFile {
         }
     }
 
+    /**
+     * ArrayList mainFile stores the individiual elements of Evidence for the suspect of the EvidenceFile that determine
+     * his good or bad score
+     */
     private ArrayList<Evidence> mainFile;
+    /**
+     * The Player who's EvidenceFile
+     */
     private Player suspect;
+    /**
+     * The Player
+     */
     private Player source;
     private int good;
     private int bad;
 
     public Player getSuspect(){
         return this.suspect;
+    }
+    public Player getSource(){
+        return this.source;
     }
 
     private ArrayList<Evidence> getMainFile(){
@@ -55,6 +68,13 @@ public class EvidenceFile {
             this.bad = this.bad+1;
         }
     }
+
+    /**
+     * Creates an EvienceFile taking in a Player class to be the suspect of the evidence and a Player Class for the source
+     * of evidence to pass down to the evidence that file creates
+     * @param newSuspect
+     * @param newSource
+     */
 
     public EvidenceFile(Player newSuspect, Player newSource){
         this.suspect = newSuspect;

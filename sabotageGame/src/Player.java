@@ -6,9 +6,16 @@ import java.security.SecureRandom;
  */
 
 public class Player {
+    /**Boolean to determine traitor*/
     private boolean imposter;
+    /**String profileName for an identifier of Player*/
     private String profileName;
+    /**playerFiles is an ArrayList of EvidenceFile, each EvidenceFile a player has that's in the array, is linked to a player*/
     private ArrayList<EvidenceFile> playerFiles;
+    /**
+     * searchFiles is used to grab anotherplayer's playerFiles and allow them to be displayed for another player
+     * Well it could be I'm not sure on the implementation of how we should display search
+     */
     private ArrayList<EvidenceFile> searchFiles;
 
 

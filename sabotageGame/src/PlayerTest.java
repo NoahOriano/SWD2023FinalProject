@@ -24,5 +24,8 @@ public class PlayerTest {
         System.out.println(joey.getPlayerFiles().get(1).getSuspect().getProfileName());
         System.out.println(joey.getPlayerFiles().get(2).getSuspect().getProfileName());
         System.out.println(joey.getPlayerFiles().get(3).getSuspect().getProfileName());
+
+
+
     }
 }
