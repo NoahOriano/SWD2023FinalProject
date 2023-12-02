@@ -98,7 +98,7 @@ public class Player {
      *
      */
     public void investigate(Player suspect){
-
+int index = searchPlayerEvidence(suspect);
     }
 
     /** Main Action

@@ -149,6 +149,11 @@ public class EvidenceFile {
 
  */
 
+    /**
+     * creates the EvidenceFile that will
+     * @return
+     */
+
     public  EvidenceFile createStolenEvidence(){
                 EvidenceFile stolen = new EvidenceFile(this.suspect);
 
