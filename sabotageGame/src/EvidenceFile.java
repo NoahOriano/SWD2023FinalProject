@@ -4,15 +4,15 @@ public class EvidenceFile {
      * Evidence class that holds the positive and negative values
      */
     private class Evidence {
-        private String culprit;
+        private Player culprit;
         private boolean doubleAgent;
-        private String inspector;
+        private Player inspector;
 
-        public String getCulprit() {
+        public Player getCulprit() {
             return culprit;
         }
 
-        public String getInspector() {
+        public Player getInspector() {
             return inspector;
         }
 
@@ -20,7 +20,7 @@ public class EvidenceFile {
             return doubleAgent;
         }
 
-        public void setCulprit(String culprit) {
+        public void setCulprit(Player culprit) {
             this.culprit = culprit;
         }
 
@@ -28,7 +28,7 @@ public class EvidenceFile {
             this.doubleAgent = doubleAgent;
         }
 
-        public void setInspector(String inspector) {
+        public void setInspector(Player inspector) {
             this.inspector = inspector;
         }
     }
@@ -55,9 +55,18 @@ public class EvidenceFile {
             this.bad = this.bad+1;
         }
     }
-    private ArrayList<Evidence> grabFile(){
+    public ArrayList<Evidence> grabFile(){
         return this.mainFile;
     }
+
+
+    public EvidenceFile(Player newSuspect){
+        this.suspect = newSuspect;
+        this.good = 0;
+        this.bad = 0;
+        this.mainFile = new ArrayList<>();
+    }
+
 
     /**
      * addEvidence takes in an EvidenceFile to add into itself by navigating through itself to ensure that the evidence being

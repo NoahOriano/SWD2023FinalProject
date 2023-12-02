@@ -10,13 +10,20 @@ public class Player {
     private String profileName;
     private int playerNumber;
     private ArrayList<EvidenceFile> playerFiles;
+    private ArrayList<EvidenceFile> searchFiles;
 
+
+    /**
+     * Getters and Setter Below
+     * @return
+     */
     public boolean getImposter(){
         return this.imposter;
     }
     public void setImposter(boolean liar){
         this.imposter = liar;
     }
+
     public String getProfileName(){
         return this.profileName;
     }
@@ -28,17 +35,44 @@ public class Player {
         this.playerNumber = playerNumber;
     }
 
-    public Player(String playerID){
+    public ArrayList<EvidenceFile> getPlayerFiles() {
+        return playerFiles;
+    }
+    public void setPlayerFiles(ArrayList<EvidenceFile> playerFiles) {
+        this.playerFiles = playerFiles;
+    }
+    /**
+     * Default Constructor
+     * @param playerID
+     */
+
+    public Player(String playerID, int newPlayerNumber){
         this.profileName = playerID;
+        this.playerNumber=newPlayerNumber;
+    }
+
+    public void searchPlayerEvidence(Player lost){
+        for(int x = 0; x< playerFiles.size();x++){
+            
+        }
     }
 
 
-    
+    public void search(Player suspect){
 
+    }
+    public void pass(Player ally, Player info){
+
+    }
+    public void steal(Player victim){
+
+    }
+    public void forge(){
 
     }
 
 
 
+    }
 
-}
+

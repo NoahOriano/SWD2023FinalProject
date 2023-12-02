@@ -26,18 +26,7 @@ public class GameState {
         }
     }
 
-    public void search(){
 
-    }
-    public void pass(){
-
-    }
-    public void steal(){
-
-    }
-    public void forge(){
-
-    }
 
 
 }
