@@ -5,11 +5,21 @@ public class GameState {
      * String Identifier for the GameState class
      */
     private String username;
+
+    PlayerIdentifier identifier;
     private ArrayList<EvidenceList> playerFiles; // will contain file on yourself
+
+
 
     /**
      * Getters and Setters of the GameState Class
      */
+    public PlayerIdentifier getIdentifier() {
+        return identifier;
+    }
+    public void setIdentifier(PlayerIdentifier identifier) {
+        this.identifier = identifier;
+    }
     public String getUsername() {
         return username;
     }
@@ -51,7 +61,7 @@ public class GameState {
      * Generates a new EvidenceList for a newly joined player
      * @param newUser username of player who has joined lobby
 */
-    public void addUpPlayerFile(String newUser){
+    public void addPlayerFile(String newUser){
         playerFiles.add(new EvidenceList(newUser,username));
     }
 

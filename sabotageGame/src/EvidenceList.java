@@ -1,16 +1,33 @@
 import java.util.ArrayList;
 
 public class EvidenceList {
+    /**
+     * evidenceList is an ArrayList of Evidence that stores the evidence which dictates the cultistCount and innocentCount
+     */
     private ArrayList<Evidence> evidenceList;
-
+    /**
+     * String defense is the identifier of the suspect, the one who the cultist count and innocent count is linked to
+     */
     private String defense;
+    /**
+     * String prosecutor is the identifier of the owner of this evidence file or the user who's owns this set of information
+     */
     private String prosecutor;
-
+    /**
+     * CultistCount is responsible for storing the amount of evidence that leads to the suspect being a cultist
+     */
     private int cultistCount;
+    /**
+     * innocentCount is responsible for storing the amount of evidence that leads to the suspect being innocent
+     */
     private int innocentCount;
 
-
-
+    /**
+     * Getters and Setters of The EvidenceList class below
+     */
+    public ArrayList<Evidence> getEvidenceList() {
+        return evidenceList;
+    }
     public int getCultistCount(){
         return cultistCount;
     }
@@ -83,6 +100,12 @@ if(added){
 return added;
     }
 
+    /**
+     * Returns a piece of Evidence based on the name of the Investigator, has issues if the Investigator is the
+     * cultist due to the fact that they can create contradicting information
+     * @param name
+     * @return
+     */
     public Evidence getEvidenceByInvestigatorName(String name){
         Evidence evidenceByName = new Evidence(null, null);
 for(int x = 0; x<evidenceList.size();x++){
@@ -95,12 +118,10 @@ return evidenceByName;
 
             /*
 
-    public getEvidenceByIndex(){
+    public int getEvidenceIndex(){
 
     }
     */
 
-    public ArrayList<Evidence> getEvidenceList() {
-        return evidenceList;
-    }
+
 }
