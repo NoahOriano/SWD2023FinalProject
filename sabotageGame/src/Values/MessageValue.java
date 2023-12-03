@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Values for the identifiers used in a NetworkMessage
  */
 public enum MessageValue implements Serializable {
-    TERMINATE, VOTE, STEAL, FORGE, INVESTIGATE, PASS, MESSAGE, ROUNDOVER, GAMEOVER, CHAT, SIGNIN, EVIDENCE
+    TERMINATE, VOTE, STEAL, FORGE, INVESTIGATE, PASS, MESSAGE, ROUNDOVER, GAMEOVER, CHAT, SIGNIN, EVIDENCE, TIMER
     // Note that message sender is verified by server, field containing sender username is not necessary
     // Terminate message data fields: null, null, null
     // Vote message data fields: player being voted out, null, null
@@ -20,4 +20,5 @@ public enum MessageValue implements Serializable {
     // Chat data fields: text to display, recipient group or name of user, null
     // SignIN data fields: username, null, null *** Only time username is sent, will be saved in subserver
     // Evidence data fields: suspect, identifier, null  *** Inspector is hidden from client
+    // Timer data fields: null, null, null, null *** Used only by server side
 }
