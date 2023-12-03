@@ -28,7 +28,8 @@ public class EvidenceList {
     public ArrayList<Evidence> getEvidenceList() {
         return evidenceList;
     }
-    public int getCultistCount(){
+
+    public int getCultistCount() {
         return cultistCount;
     }
 
@@ -64,57 +65,62 @@ public class EvidenceList {
         this.prosecutor = prosecutor;
     }
 
-    public EvidenceList(String defense, String prosecutor){
-        this.defense=defense;
-        this.prosecutor=prosecutor;
-        cultistCount=0;
-        innocentCount=0;
+    public EvidenceList(String defense, String prosecutor) {
+        this.defense = defense;
+        this.prosecutor = prosecutor;
+        cultistCount = 0;
+        innocentCount = 0;
         ArrayList<Evidence> evidenceList = new ArrayList<>();
     }
 
-    /**Client End Method
+    /**
+     * Client End Method
      * Add the evidence given to the file, used for player end
+     *
      * @param identifier
      * @return
      */
-    public boolean addEvidence(PlayerIdentifier identifier){
+    public boolean addEvidence(PlayerIdentifier identifier) {
         evidenceList.add(new Evidence(defense, identifier));
         return true;
-        }
+    }
 
-    /**Server End Method
+    /**
+     * Server End Method
      * Add the evidence given to the file, used for server end since it must store inspector
+     *
      * @param identifier
      * @return
      */
-    public boolean addEvidence(PlayerIdentifier identifier, String inspector){
+    public boolean addEvidence(PlayerIdentifier identifier, String inspector) {
         boolean added = true;
-for(int x = 0; x< evidenceList.size();x++){
-    if(evidenceList.get(x).getInvestigator().equals(inspector)&&evidenceList.get(x).getIdentifier().equals(identifier)){
-        added = false;
-    }
-}
-if(added){
-    evidenceList.add(new Evidence(this.defense,identifier,this.prosecutor));
-}
-return added;
+        for (int x = 0; x < evidenceList.size(); x++) {
+            if (evidenceList.get(x).getInvestigator().equals(inspector) && evidenceList.get(x).getIdentifier().equals(identifier)) {
+                added = false;
+            }
+        }
+        if (added) {
+            evidenceList.add(new Evidence(this.defense, identifier, this.prosecutor));
+        }
+        return added;
     }
 
-    
+
     /**
      * Returns a piece of Evidence based on the name of the Investigator, has issues if the Investigator is the
      * cultist due to the fact that they can create contradicting information
+     *
      * @param name
      * @return
      */
-    public Evidence getEvidenceByInvestigatorName(String name){
+    public Evidence getEvidenceByInvestigatorName(String name) {
         Evidence evidenceByName = new Evidence(null, null);
-for(int x = 0; x<evidenceList.size();x++){
-    if(evidenceList.get(x).getInvestigator().equals(name)){
-        evidenceByName = evidenceList.get(x);
-    }
-}
-return evidenceByName;
+        for (int x = 0; x < evidenceList.size(); x++) {
+            if (evidenceList.get(x).getInvestigator().equals(name)) {
+                evidenceByName = evidenceList.get(x);
+            }
+        }
+        return evidenceByName;
     }
 
             /*
