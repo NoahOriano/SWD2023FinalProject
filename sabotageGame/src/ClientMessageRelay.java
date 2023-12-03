@@ -1,3 +1,4 @@
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -32,7 +33,7 @@ public class ClientMessageRelay implements Runnable{
     /**
      * Processes connection to client, handling incoming information
      */
-    private void processConnection() throws IOException
+    private void processConnection()
     {
         NetworkMessage networkMessage = null;
         do // process messages sent from server
@@ -49,14 +50,16 @@ public class ClientMessageRelay implements Runnable{
                 }
                 else if(controller.getClass() == SceneControllerForSignOn.class){
                     SceneControllerForSignOn control = (SceneControllerForSignOn)controller;
-                    if(networkMessage.identifier()==MessageValues.SIGNIN);
-                    if(master.getStage()==null)master.collectStage();
-                    controller.setGameActionScene(master.getStage());
+                    if(networkMessage.identifier()==MessageValues.SIGNIN) {
+                        System.out.println("Client relay received signin");
+                        control.usernameInput.setText("Sign On Accepted, click submit again");
+                        control.signedIn = true;
+                    }
                 }
             }
-            catch (ClassNotFoundException classNotFoundException)
+            catch (ClassNotFoundException | IOException e)
             {
-
+                e.printStackTrace();
             }
         } while (networkMessage != null && networkMessage.identifier() != MessageValues.TERMINATE);
     }
@@ -83,7 +86,13 @@ public class ClientMessageRelay implements Runnable{
     @Override
     public void run() {
         while(true){
-
+            try // connect to server, get streams, process connection
+            {
+                processConnection(); // process connection
+            } finally
+            {
+                closeConnection(); // close connection
+            }
         }
     }
 }
