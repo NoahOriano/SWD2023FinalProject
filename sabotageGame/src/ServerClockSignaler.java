@@ -5,8 +5,9 @@ public class ServerClockSignaler implements Runnable{
 
     private int delay;
 
-    public ServerClockSignaler(int delay){
+    public ServerClockSignaler(int delay, ArrayBlockingQueue<ServerRequest> requests){
         this.delay = delay;
+        this.requests = requests;
     }
 
     @Override
@@ -15,7 +16,7 @@ public class ServerClockSignaler implements Runnable{
             try {
                 Thread.sleep(delay);
                 try {
-                    requests.put(new ActionRequest(MessageValue.TIMER, null, null, null, null));
+                    requests.put(new ActionRequest(MessageValue.TIMER, null, null, null, null, null));
                 } catch (InterruptedException e) {
                     //Ignore lol
                 }
