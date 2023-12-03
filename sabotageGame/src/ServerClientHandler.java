@@ -42,6 +42,11 @@ public class ServerClientHandler implements Runnable{
 
     private ArrayList<ServerPlayerRepresentation> players = new ArrayList<ServerPlayerRepresentation>();
 
+    /**
+     * Username of connected client
+     */
+    String username;
+
     ServerClientHandler(Socket connection, ArrayBlockingQueue<ServerRequest> requests){
         this.connection = connection;
         this.requests = requests;
@@ -97,6 +102,9 @@ public class ServerClientHandler implements Runnable{
                 if(networkMessage.identifier() == MessageValues.MESSAGE){
                     sendRequestToServer(new MessageRequest(networkMessage.information()));
                 }
+                else if(networkMessage.identifier() == MessageValues.SIGNIN){
+                    sendRequestToServer(new MessageRequest(networkMessage.information()));
+                }
             }
             catch (ClassNotFoundException classNotFoundException)
             {
@@ -129,7 +137,7 @@ public class ServerClientHandler implements Runnable{
     /**
      * Sends information to the client
      */
-    private void sendInformation(NetworkMessage message){
+    private synchronized void sendInformation(NetworkMessage message){
         try {
             output.writeObject(message);
             output.flush(); // flush data to output

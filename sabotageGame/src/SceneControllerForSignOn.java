@@ -44,18 +44,6 @@ public class SceneControllerForSignOn extends SceneController{
     Button submit;
 
     /**
-     * Host server button for game start scene
-     */
-    @FXML
-    Button hostServerButton;
-
-    /**
-     * Join server button for game start scene
-     */
-    @FXML
-    Button joinServerButton;
-
-    /**
      * Input field for server port when joining a server
      */
     @FXML
@@ -69,7 +57,15 @@ public class SceneControllerForSignOn extends SceneController{
 
     @FXML
     public void initialize(){
-
+        password.setText("IGNORED");
+        serverIPField.setText(getIP());
+        serverPortField.setText(String.valueOf(getPort()));
+        submit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                sendMessage(new NetworkMessage(MessageValues.SIGNIN, usernameInput.getText(), null));
+            }
+        });
     }
 
     // Need to include a way to select and do actions, but that is more complicated
