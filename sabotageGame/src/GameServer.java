@@ -1,13 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.EOFException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Inet4Address;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -23,7 +16,7 @@ public class GameServer extends JFrame{
     /**List of ServerClientHandlers, generated to handle connections*/
     private ArrayList<ServerClientHandler> clientHandlers = new ArrayList<ServerClientHandler>();
     /**Connection service which allows connection to clients to be retrieved*/
-    private GameClientConnectionService connectionService;
+    private ServerClientConnectionService connectionService;
     /**Text area used to display information to used*/
     private final JTextArea displayArea;
     /**Executor service used to handle threads*/
@@ -57,7 +50,7 @@ public class GameServer extends JFrame{
     public void runServer() {
         service = Executors.newFixedThreadPool(17);
         requests = new ArrayBlockingQueue<ServerRequest>(100);
-        connectionService = new GameClientConnectionService(port, backlog, requests);
+        connectionService = new ServerClientConnectionService(port, backlog, requests);
         service.execute(connectionService);
         try {
             displayMessage("IP:"+ Inet4Address.getLocalHost().getHostAddress()+", PORT: "+port);

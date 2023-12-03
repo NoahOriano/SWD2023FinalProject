@@ -149,13 +149,18 @@ public class EvidenceFile {
 
  */
 
-    public  EvidenceFile createStolenEvidence(EvidenceFile information, Player suspect){
-                EvidenceFile stolen = new EvidenceFile(information.getSuspect());
+    /**
+     * creates the EvidenceFile that will
+     * @return
+     */
+
+    public  EvidenceFile createStolenEvidence(){
+                EvidenceFile stolen = new EvidenceFile(this.suspect);
 
                 SecureRandom gen = new SecureRandom();
-                int randomIndex = gen.nextInt(information.getMainFile().size());
+                int randomIndex = gen.nextInt(this.evidenceList.size());
 
-                Evidence temp = new Evidence(information.getMainFile().get(randomIndex).getInspector(),information.getMainFile().get(randomIndex).isDoubleAgent());
+                Evidence temp = new Evidence(this.evidenceList.get(randomIndex).getInspector(),this.evidenceList.get(randomIndex).isDoubleAgent());
                 stolen.getMainFile().add(temp);
                         return stolen;
     }

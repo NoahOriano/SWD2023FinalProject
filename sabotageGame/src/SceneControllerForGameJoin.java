@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 
 /**
@@ -52,6 +54,8 @@ public class SceneControllerForGameJoin extends SceneController{
     TextField serverIPField;
     @FXML
     public void initialize(){
+        setClientRelay(new ClientMessageRelay(new SceneMaster(this)));
+        setService(Executors.newFixedThreadPool(3));
 
             joinServerButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -67,6 +71,8 @@ public class SceneControllerForGameJoin extends SceneController{
                         // Connection was successful so save IP and Port info
                         setPort(port);
                         setIP(IP);
+                        getService().execute(getClientRelay());
+                        getClientRelay().connect(getConnection(), getOutput(), getInput());
                         try {
                             setSignOnScreen(actionEvent);
                         } catch (IOException e) {

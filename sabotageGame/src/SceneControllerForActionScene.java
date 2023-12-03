@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
@@ -84,6 +85,32 @@ public class SceneControllerForActionScene extends SceneController{
 
     @FXML
     public void initialize(){
+        actionSubmit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if(actionOptions.getValue().equals("Steal")){
+                    sendMessage(new NetworkMessage(MessageValues.STEAL, getUsername(), selectedPlayerName.getText()));
+                }
+                if(actionOptions.getValue().equals("Forge")){
+                    sendMessage(new NetworkMessage(MessageValues.FORGE, getUsername(), selectedPlayerName.getText()));
+                }
+                if(actionOptions.getValue().equals("Investigate")){
+                    sendMessage(new NetworkMessage(MessageValues.INVESTIGATE, getUsername(), selectedPlayerName.getText()));
+                }
+            }
+        });
+        textSubmit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                sendMessage(new NetworkMessage(MessageValues.CHAT, chat.getText(), chatSelector.getValue()));
+            }
+        });
+        display.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+            }
+        });
 
     }
 
