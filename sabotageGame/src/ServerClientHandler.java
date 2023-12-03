@@ -2,7 +2,6 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -100,10 +99,10 @@ public class ServerClientHandler implements Runnable{
             {
                 networkMessage = (NetworkMessage) input.readObject(); // read new message
                 if(networkMessage.identifier() == MessageValues.MESSAGE){
-                    sendRequestToServer(new MessageRequest(networkMessage.information()));
+                    sendRequestToServer(new MessageRequest(networkMessage.dataA()));
                 }
                 else if(networkMessage.identifier() == MessageValues.SIGNIN){
-                    sendRequestToServer(new ActionRequest(MessageValues.SIGNIN, networkMessage.information(), null, null, this));
+                    sendRequestToServer(new ActionRequest(MessageValues.SIGNIN, networkMessage.dataA(), null, null, this));
                 }
             }
             catch (ClassNotFoundException classNotFoundException)

@@ -99,8 +99,6 @@ public class EvidenceFile {
         this.good = 0;
         this.bad = 0;
         this.evidenceList = new ArrayList<>();
-        Evidence start = new Evidence(newSource,newSource.getImposter());
-        this.evidenceList.add(start);
         this.source = newSource;
     }
 
@@ -121,7 +119,7 @@ public class EvidenceFile {
      * @param truth
      */
     public void createEvidence(boolean truth){
-        Evidence newInfo = new Evidence(this.source, truth);
+        Evidence newInfo = new Evidence(this.source, truth, suspect);
         this.evidenceList.add(newInfo);
         addPoints(truth);
     }
@@ -136,8 +134,9 @@ public class EvidenceFile {
                 SecureRandom gen = new SecureRandom();
                 int randomIndex = gen.nextInt(this.evidenceList.size());
 
-                Evidence temp = new Evidence(this.evidenceList.get(randomIndex).getInspector(),this.evidenceList.get(randomIndex).isDoubleAgent());
-                stolen.getMainFile().add(temp);
+                Evidence evidence = this.evidenceList.get(randomIndex).copy();
+
+                stolen.getMainFile().add(evidence);
                         return stolen;
     }
 

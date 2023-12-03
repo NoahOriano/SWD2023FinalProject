@@ -4,15 +4,7 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 import javafx.scene.control.Button;
 
@@ -21,7 +13,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 
@@ -70,7 +61,7 @@ public class SceneControllerForGameJoin extends SceneController{
                         setConnection( new Socket(IP, port));
                         setOutput( new ObjectOutputStream(getConnection().getOutputStream()));
                         setInput( new ObjectInputStream(getConnection().getInputStream()));
-                        getOutput().writeObject(new NetworkMessage(MessageValues.MESSAGE, "Client Connected", null));
+                        getOutput().writeObject(new NetworkMessage(MessageValues.MESSAGE, "Client Connected", null, null));
                         getOutput().flush();
                         // Connection was successful so save IP and Port info
                         setPort(port);

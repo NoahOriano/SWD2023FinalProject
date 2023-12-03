@@ -31,6 +31,14 @@ public class GameState {
         numPlayers = listOfPlayers.size();
     }
 
+    public GameState(){
+        listOfPlayers = new ArrayList<>();
+    }
+
+    public void generatePlayerFile(String name){
+        listOfPlayers.add(new Player(name));
+    }
+
 
     public  int identifyPlayer(Player id){
         int playerID = 0;
@@ -42,11 +50,19 @@ public class GameState {
         return playerID;
     }
 
-
     public void makeMove(Player user, Player victim, int choice){
         int userID = identifyPlayer(user);
         int victimID = identifyPlayer(victim);
 
+    }
+
+    public Player getPlayerByName(String name){
+        for(int i = 0; i < listOfPlayers.size(); i++){
+            if(listOfPlayers.get(i).getProfileName().equals(name)){
+                return listOfPlayers.get(i);
+            }
+        }
+        return null;
     }
 
     }
