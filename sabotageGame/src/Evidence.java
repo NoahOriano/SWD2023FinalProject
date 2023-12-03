@@ -3,13 +3,14 @@ import Values.PlayerIdentifier;
 public class Evidence {
     private String target;
     PlayerIdentifier identifier;
-
     private String investigator; // only used in server end;
 
     public PlayerIdentifier getIdentifier() {
         return identifier;
     }
-
+    public String getInvestigator(){
+        return investigator;
+    }
     public String getTarget() {
         return target;
     }
@@ -20,6 +21,9 @@ public class Evidence {
 
     public void setIdentifier(PlayerIdentifier identifier) {
         this.identifier = identifier;
+    }
+    public void setInvestigator(String investigator){
+        this.investigator=investigator;
     }
     public Evidence(String target, PlayerIdentifier identifier){
         this.target = target;
