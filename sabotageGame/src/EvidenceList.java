@@ -47,6 +47,14 @@ public class EvidenceList {
         this.prosecutor = prosecutor;
     }
 
+    public EvidenceList(String defense, String prosecutor){
+        this.defense=defense;
+        this.prosecutor=prosecutor;
+        cultistCount=0;
+        innocentCount=0;
+        ArrayList<Evidence> evidenceList = new ArrayList<>();
+    }
+
     /**Client End Method
      * Add the evidence given to the file, used for player end
      * @param identifier
