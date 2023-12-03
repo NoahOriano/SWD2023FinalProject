@@ -1,10 +1,10 @@
 First: Try to run game through file manager or manually generate run configuration for Game class main
 Add the following VM options: --module-path /usr/share/openjfx/lib --add-modules javafx.controls,javafx.fxml
 
-If the project SDK is not setup: Set project SDK to Java version "17.0.8"
+If the project SDK is not setup: Set project SDK to Java version 17.0.9 (ideally), at least 16
 
 If javaFX required component do not load, add them as a dependency through the project structure
 
 If classes are having trouble accessing each-other, RepairIDE through file tab and click Rescan Project Indexes
 
-If java language level does not match: set
+If java language level does not match: set language level to 16, records are used in project

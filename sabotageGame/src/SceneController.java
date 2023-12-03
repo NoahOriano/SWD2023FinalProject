@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -14,11 +15,6 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 
 public class SceneController {
-    /**
-     * GridPane used by all scenes, able to retrieve stage through it
-     */
-    @FXML
-    GridPane pane;
     /**
      * Connection to the server
      */
@@ -155,21 +151,10 @@ public class SceneController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SignOnScreen.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        loadScene(loader, root, stage);
-    }
-    public void setGameJoinScene(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameJoinScene.fxml"));
-        Parent root = loader.load();
-        loadScene(loader, root, stage);
-    }
-    public void setSignOnScreen(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("SignOnScreen.fxml"));
-        Parent root = loader.load();
-        loadScene(loader, root, stage);
-    }
-    public void setGameActionScene(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ActionScene.fxml"));
-        Parent root = loader.load();
+        ((SceneControllerForSignOn)loader.getController()).imageView.setImage(
+                new Image(String.valueOf(getClass().getResource("townBackground.png"))));
+        ((SceneControllerForSignOn)loader.getController()).serverPortField.setText(String.valueOf(this.port));
+        ((SceneControllerForSignOn)loader.getController()).serverIPField.setText(this.IP);
         loadScene(loader, root, stage);
     }
 

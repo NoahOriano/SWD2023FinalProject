@@ -52,7 +52,8 @@ public class ClientMessageRelay implements Runnable{
                     SceneControllerForSignOn control = (SceneControllerForSignOn)controller;
                     if(networkMessage.identifier()== MessageValue.SIGNIN) {
                         System.out.println("Client relay received signin");
-                        control.usernameInput.setText("Sign On Accepted, click submit again");
+                        control.usernameInput.setText("Accepted, submit again");
+                        control.usernameInput.setPrefColumnCount(2);
                         control.signedIn = true;
                     }
                 }
