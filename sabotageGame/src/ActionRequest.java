@@ -1,3 +1,29 @@
 public class ActionRequest extends ServerRequest{
+    private MessageValues requestType;
+    private String data1;
+    private String data2;
+    private String requesterName;
 
+    ActionRequest(MessageValues requestType, String data1, String data2, String requesterName){
+        this.requestType = requestType;
+        this.data1 = data1;
+        this.data2 = data2;
+        this.requesterName = requesterName;
+    }
+
+    public String getData1() {
+        return data1;
+    }
+
+    public MessageValues getRequestType() {
+        return requestType;
+    }
+
+    public String getData2() {
+        return data2;
+    }
+
+    public String getRequesterName() {
+        return requesterName;
+    }
 }

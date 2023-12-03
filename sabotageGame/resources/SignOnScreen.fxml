@@ -6,23 +6,39 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="TOP_LEFT" prefWidth="421.0" vgap="0.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SceneControllerForSignOn">
+<GridPane alignment="TOP_LEFT" prefHeight="411.0" prefWidth="583.0" vgap="0.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SceneControllerForSignOn">
     <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
     </rowConstraints>
     <columnConstraints>
         <ColumnConstraints maxWidth="72.0" minWidth="10.0" prefWidth="28.0" />
-        <ColumnConstraints maxWidth="140.0" minWidth="10.0" prefWidth="140.0" />
-        <ColumnConstraints maxWidth="120.0" minWidth="10.0" prefWidth="115.0" />
-        <ColumnConstraints maxWidth="166.0" minWidth="10.0" prefWidth="133.0" />
-        <ColumnConstraints maxWidth="72.0" minWidth="10.0" prefWidth="22.0" />
+        <ColumnConstraints maxWidth="166.0" minWidth="10.0" prefWidth="164.0" />
+        <ColumnConstraints maxWidth="177.0" minWidth="10.0" prefWidth="177.0" />
+        <ColumnConstraints maxWidth="166.0" minWidth="10.0" prefWidth="122.0" />
+        <ColumnConstraints maxWidth="72.0" minWidth="0.0" prefWidth="57.0" />
+      <ColumnConstraints maxWidth="100.0" minWidth="1.0" prefWidth="35.0" />
     </columnConstraints>
-    <children>
-
-    </children>
+   <children>
+      <Button fx:id="submit" mnemonicParsing="false" text="Submit" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+      <TextField fx:id="usernameInput" prefHeight="26.0" prefWidth="300.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+      <TextField fx:id="password" prefHeight="26.0" prefWidth="228.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="6" />
+      <TextField editable="false" text="Username:" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <TextField editable="false" text="Password:" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <TextField fx:id="serverPortField" editable="false" prefHeight="26.0" prefWidth="180.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+      <TextField fx:id="serverIPField" editable="false" prefHeight="26.0" prefWidth="228.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <TextField editable="false" prefHeight="25.0" prefWidth="155.0" text="IP and Port of Server:" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+   </children>
 </GridPane>
