@@ -107,6 +107,7 @@ public class GameServer extends JFrame{
      */
     public void handleActionRequest(ActionRequest request){
         if(request.getRequestType() == MessageValues.SIGNIN){
+            displayMessage("Username Request Accepted");
             if(usernameIsAvailable(request.getData1())){
                 request.getSender().sendInformation(new NetworkMessage(MessageValues.SIGNIN, null, null));
             }

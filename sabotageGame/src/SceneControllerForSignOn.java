@@ -58,6 +58,7 @@ public class SceneControllerForSignOn extends SceneController{
             @Override
             public void handle(ActionEvent actionEvent) {
                 sendMessage(new NetworkMessage(MessageValues.SIGNIN, usernameInput.getText(), null));
+                System.out.println("Sign on attempted");
             }
         });
     }
