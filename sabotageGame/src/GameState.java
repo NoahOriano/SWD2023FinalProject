@@ -46,7 +46,7 @@ public class GameState {
     public void makeMove(Player user, Player victim, int choice){
         int userID = identifyPlayer(user);
         int victimID = identifyPlayer(victim);
-        
+
     }
 
     }
