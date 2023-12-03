@@ -28,11 +28,14 @@ public class GameServer extends JFrame{
 
     private ServerClockSignaler roundTimer;
 
+    private ArrayList<String> names;
 
     private class SubServer{
         private ServerClientHandler handler; // ServerClientHandler connected to client
         private String username; // Username of connected player, null identifies a player not signed in
         private boolean hasActed; // Whether the connected player has acted this turn
+
+        private GameState gameState;
         public SubServer(ServerClientHandler handler, String username, boolean hasActed){
             this.handler = handler;
             this.username = username;
@@ -109,7 +112,13 @@ public class GameServer extends JFrame{
         if(request.getRequestType() == MessageValues.SIGNIN){
             displayMessage("Username Request Accepted");
             if(usernameIsAvailable(request.getData1())){
-                request.getSender().sendInformation(new NetworkMessage(MessageValues.SIGNIN, null, null));
+                for(int i = 0; i < subServers.size(); i++){
+                    if(subServers.get(i).handler == request.getSender()){
+                        subServers.get(i).username = request.getData1();
+                        names.add(request.getData1());
+                    }
+                }
+                request.getSender().sendInformation(new NetworkMessage(MessageValues.SIGNIN, null, null, null));
             }
         }
     }
