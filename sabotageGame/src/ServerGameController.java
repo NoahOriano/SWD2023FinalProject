@@ -6,7 +6,7 @@ import java.security.SecureRandom;
 
 public class ServerGameController {
     /**
-     *
+     * playerStates hold all the different GameStates present within the overall game
      */
     public ArrayList<GameState> playerStates;
 

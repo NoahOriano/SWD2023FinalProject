@@ -1,8 +1,21 @@
 public class Evidence {
+    /**
+     * target is the person who teh evidence is about
+     */
     private String target;
+    /**
+     * identifier determines if the player is cultist or innocent
+     */
     PlayerIdentifier identifier;
+    /**
+     * investigator is the person who originally generated the information
+     */
     private String investigator; // only used in server end;
 
+    /**
+     * Getter and Setters Below
+     * @return
+     */
     public PlayerIdentifier getIdentifier() {
         return identifier;
     }

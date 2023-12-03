@@ -100,6 +100,7 @@ if(added){
 return added;
     }
 
+    
     /**
      * Returns a piece of Evidence based on the name of the Investigator, has issues if the Investigator is the
      * cultist due to the fact that they can create contradicting information
