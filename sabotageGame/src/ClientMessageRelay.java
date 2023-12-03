@@ -49,6 +49,9 @@ public class ClientMessageRelay implements Runnable{
                 }
                 else if(controller.getClass() == SceneControllerForSignOn.class){
                     SceneControllerForSignOn control = (SceneControllerForSignOn)controller;
+                    if(networkMessage.identifier()==MessageValues.SIGNIN);
+                    if(master.getStage()==null)master.collectStage();
+                    controller.setGameActionScene(master.getStage());
                 }
             }
             catch (ClassNotFoundException classNotFoundException)

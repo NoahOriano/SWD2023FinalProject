@@ -13,8 +13,8 @@ import java.util.concurrent.TimeUnit;
 public class GameServer extends JFrame{
     /**Maximum number of players which a game can run at once*/
     public static final int MAXPLAYERCOUNT = 10;
-    /**List of ServerClientHandlers, generated to handle connections*/
-    private ArrayList<ServerClientHandler> clientHandlers = new ArrayList<ServerClientHandler>();
+    /**List of sub servers, generated to handle connections*/
+    private ArrayList<SubServer> subServers = new ArrayList<SubServer>();
     /**Connection service which allows connection to clients to be retrieved*/
     private ServerClientConnectionService connectionService;
     /**Text area used to display information to used*/
@@ -25,9 +25,20 @@ public class GameServer extends JFrame{
     private ArrayBlockingQueue<ServerRequest> requests;
     /**Counter of number of connections*/
     private int counter = 1;
-    /**List of client handlers*/
-    private final ServerClientHandler[] servers = new ServerClientHandler[MAXPLAYERCOUNT];
 
+    private ServerClockSignaler roundTimer;
+
+
+    private class SubServer{
+        private ServerClientHandler handler; // ServerClientHandler connected to client
+        private String username; // Username of connected player, null identifies a player not signed in
+        private boolean hasActed; // Whether the connected player has acted this turn
+        public SubServer(ServerClientHandler handler, String username, boolean hasActed){
+            this.handler = handler;
+            this.username = username;
+            this.hasActed = hasActed;
+        }
+    }
     private int port;
     private int backlog;
 
@@ -84,9 +95,9 @@ public class GameServer extends JFrame{
      * @param connection connection to send to the client handler
      */
     public void sendConnectionToClientHandler(Socket connection){
-        servers[counter] = new ServerClientHandler(connection, this.requests);
-        service.execute(servers[counter]);
-        counter++;
+        SubServer newServer = new SubServer(new ServerClientHandler(connection, this.requests), null, false);
+        subServers.add( newServer);
+        service.execute(newServer.handler);
     }
 
     /**
@@ -95,7 +106,24 @@ public class GameServer extends JFrame{
      * @param request Action request to handle all the data fom
      */
     public void handleActionRequest(ActionRequest request){
-        // Make this
+        if(request.getRequestType() == MessageValues.SIGNIN){
+            displayMessage("Username Request Accepted");
+            if(usernameIsAvailable(request.getData1())){
+                request.getSender().sendInformation(new NetworkMessage(MessageValues.SIGNIN, null, null));
+            }
+        }
+    }
+
+    private boolean usernameIsAvailable(String data1) {
+        if(data1 == null) return false;
+        for(int i = 0; i < subServers.size(); i++){
+            if(subServers.get(i).username!= null){
+                if(data1.equals(subServers.get(i).username)){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**

@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import javafx.scene.control.Button;
@@ -54,7 +55,7 @@ public class SceneControllerForGameJoin extends SceneController{
     TextField serverIPField;
     @FXML
     public void initialize(){
-        setClientRelay(new ClientMessageRelay(new SceneMaster(this)));
+        setClientRelay(new ClientMessageRelay(new SceneMaster(this, pane)));
         setService(Executors.newFixedThreadPool(3));
 
             joinServerButton.setOnAction(new EventHandler<ActionEvent>() {
