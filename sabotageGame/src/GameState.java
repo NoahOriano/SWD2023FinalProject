@@ -31,6 +31,7 @@ public class GameState {
         numPlayers = listOfPlayers.size();
     }
 
+
     public  int identifyPlayer(Player id){
         int playerID = 0;
         for(int x = 0; x <listOfPlayers.size();x++){
@@ -43,7 +44,9 @@ public class GameState {
 
 
     public void makeMove(Player user, Player victim, int choice){
-
+        int userID = identifyPlayer(user);
+        int victimID = identifyPlayer(victim);
+        
     }
 
     }
