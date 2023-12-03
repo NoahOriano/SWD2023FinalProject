@@ -5,12 +5,49 @@ import java.util.ArrayList;
 public class EvidenceList {
     private ArrayList<Evidence> evidenceList;
 
-    private int cultistCount;
+    private String defense;
+    private String prosecutor;
 
+    private int cultistCount;
     private int innocentCount;
 
-    private String prosecutor;
-    private String defense;
+
+
+    public int getCultistCount(){
+        return cultistCount;
+    }
+
+    public int getInnocentCount() {
+        return innocentCount;
+    }
+
+    public String getDefense() {
+        return defense;
+    }
+
+    public String getProsecutor() {
+        return prosecutor;
+    }
+
+    public void setEvidenceList(ArrayList<Evidence> evidenceList) {
+        this.evidenceList = evidenceList;
+    }
+
+    public void setCultistCount(int cultistCount) {
+        this.cultistCount = cultistCount;
+    }
+
+    public void setDefense(String defense) {
+        this.defense = defense;
+    }
+
+    public void setInnocentCount(int innocentCount) {
+        this.innocentCount = innocentCount;
+    }
+
+    public void setProsecutor(String prosecutor) {
+        this.prosecutor = prosecutor;
+    }
 
     /**Client End Method
      * Add the evidence given to the file, used for player end
@@ -49,6 +86,7 @@ for(int x = 0; x<evidenceList.size();x++){
 }
 return evidenceByName;
     }
+
             /*
 
     public getEvidenceByIndex(){
