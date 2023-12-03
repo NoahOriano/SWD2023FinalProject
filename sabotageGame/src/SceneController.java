@@ -1,8 +1,10 @@
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -12,6 +14,11 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 
 public class SceneController {
+    /**
+     * GridPane used by all scenes, able to retrieve stage through it
+     */
+    @FXML
+    GridPane pane;
     /**
      * Connection to the server
      */
@@ -139,8 +146,33 @@ public class SceneController {
         stage.setScene(scene);              // attach scene to stage
         stage.show();                       // display the stage
     }
+    public void setGameJoinScene(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("GameJoinScene.fxml"));
+        Scene scene = new Scene(root);      // attach scene graph to scene
+        stage.setScene(scene);              // attach scene to stage
+        stage.show();                       // display the stage
+    }
+    public void setSignOnScreen(Stage stage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SignOnScreen.fxml"));
+        Scene scene = new Scene(loader.load());      // attach scene graph to scene
+        stage.setScene(scene);              // attach scene to stage
+        stage.show();                       // display the stage
+    }
+    public void setGameActionScene(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("ActionScene.fxml"));
+        Scene scene = new Scene(root);      // attach scene graph to scene
+        stage.setScene(scene);              // attach scene to stage
+        stage.show();                       // display the stage
+    }
 
     public void sendMessage(NetworkMessage message){
+        try {
+            output.writeObject(message);
+            output.flush();
+        }
+        catch (IOException e){
+            // Unsure how to handle exceptions here, don't throw them!! Usually player can just resubmit
+        }
 
     }
 }

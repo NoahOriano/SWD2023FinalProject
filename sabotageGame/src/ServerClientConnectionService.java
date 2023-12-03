@@ -38,7 +38,7 @@ public class ServerClientConnectionService implements Runnable{
             while (true) {
                 try {
                     waitForConnection(); // wait for a connection
-                    sendConnectionToGameServer(); // give connection to sockServer
+                    sendConnectionToGameServer(); // give connection to sub server
                 } catch (EOFException eofException) {
                 }
             }

@@ -31,11 +31,6 @@ public class SceneControllerForSignOn extends SceneController{
      */
     @FXML
     TextField usernameInput;
-    /**
-     * Text field for the password input
-     */
-    @FXML
-    TextField password;
 
     /**
      * Submit button for the username and password
@@ -57,7 +52,6 @@ public class SceneControllerForSignOn extends SceneController{
 
     @FXML
     public void initialize(){
-        password.setText("IGNORED");
         serverIPField.setText(getIP());
         serverPortField.setText(String.valueOf(getPort()));
         submit.setOnAction(new EventHandler<ActionEvent>() {

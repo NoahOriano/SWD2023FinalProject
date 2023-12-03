@@ -103,7 +103,7 @@ public class ServerClientHandler implements Runnable{
                     sendRequestToServer(new MessageRequest(networkMessage.information()));
                 }
                 else if(networkMessage.identifier() == MessageValues.SIGNIN){
-                    sendRequestToServer(new MessageRequest(networkMessage.information()));
+                    sendRequestToServer(new ActionRequest(MessageValues.SIGNIN, networkMessage.information(), null, null, this));
                 }
             }
             catch (ClassNotFoundException classNotFoundException)
@@ -137,7 +137,7 @@ public class ServerClientHandler implements Runnable{
     /**
      * Sends information to the client
      */
-    private synchronized void sendInformation(NetworkMessage message){
+    public synchronized void sendInformation(NetworkMessage message){
         try {
             output.writeObject(message);
             output.flush(); // flush data to output
