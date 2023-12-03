@@ -44,6 +44,26 @@ public class ClientMessageRelay implements Runnable{
                 SceneController controller = master.getController();
                 if(controller.getClass() == SceneControllerForActionScene.class){
                     SceneControllerForActionScene control = (SceneControllerForActionScene)controller;
+                    if(networkMessage.identifier() == MessageValue.GAMEOVER){
+                        //@TODO gameover logic nad setup for scene switching
+                        //@TODO voting again should bring the player back to signin scene
+                    }
+                    if(networkMessage.identifier() == MessageValue.EVIDENCE){
+                        //@TODO logic for handling evidence and adding information to gamestate
+                    }
+                    if(networkMessage.identifier() == MessageValue.ROUNDOVER){
+                        //@TODO logic for roundover
+                    }
+                    if(networkMessage.identifier() == MessageValue.VOTE){
+                        //@TODO logic for setting game state to voting
+                    }
+                    if(networkMessage.identifier() == MessageValue.CHAT){
+                        //@TODO logic for adding chat to log
+                    }
+                    if(networkMessage.identifier() == MessageValue.INVESTIGATE){
+                        //REuse of message type
+                        //@TODO logic for setting game state to action state
+                    }
                 }
                 else if(controller.getClass() == SceneControllerForGameJoin.class){
                     SceneControllerForGameJoin control = (SceneControllerForGameJoin)controller;

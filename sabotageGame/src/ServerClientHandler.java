@@ -44,7 +44,15 @@ public class ServerClientHandler implements Runnable{
     /**
      * Username of connected client
      */
-    String username;
+    private String username;
+    
+    public String getUsername(){
+        return username;
+    }
+    
+    public void setUsername(String username){
+        this.username = username;
+    }
 
     ServerClientHandler(Socket connection, ArrayBlockingQueue<ServerRequest> requests){
         this.connection = connection;
