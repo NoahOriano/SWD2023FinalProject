@@ -59,15 +59,19 @@ public class ServerGameController {
 
         ArrayList<Evidence> collector = new ArrayList<>();
 
-        for (int i = 0; i < victimFile.getPlayerFiles().size();i++){
-            for(int j = 0; i < victimFile.getPlayerFiles().get(i).getEvidenceList().size();j++){
+        for (int i = 0; i < victimFile.getPlayerFiles().size(); i++) {
+            for (int j = 0; i < victimFile.getPlayerFiles().get(i).getEvidenceList().size(); j++) {
                 collector.add(victimFile.getPlayerFiles().get(i).getEvidenceList().get(j));
             }
         }
 
-        while(counter < 3 && !collector.isEmpty()){
-            int rand =(int) (Math.random()*collector.size());
+        while (counter < 3 && !collector.isEmpty()) {
+            int rand = (int) (Math.random() * collector.size());
             Evidence evidence = collector.remove(rand);
+            if (thiefFile.getPlayerFiles().get(getListIndex(evidence.getTarget(),
+                    getIndex(thief))).addEvidence(evidence.getIdentifier(), evidence.getInvestigator())) {
+
+            }
         }
     }
 

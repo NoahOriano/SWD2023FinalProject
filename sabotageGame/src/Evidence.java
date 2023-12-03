@@ -6,7 +6,7 @@ public class Evidence {
     /**
      * identifier determines if the player is cultist or innocent
      */
-    PlayerIdentifier identifier;
+    private PlayerIdentifier identifier;
     /**
      * investigator is the person who originally generated the information
      */

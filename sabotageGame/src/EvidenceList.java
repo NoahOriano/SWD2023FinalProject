@@ -93,16 +93,13 @@ public class EvidenceList {
      * @return
      */
     public boolean addEvidence(PlayerIdentifier identifier, String inspector) {
-        boolean added = true;
         for (int x = 0; x < evidenceList.size(); x++) {
             if (evidenceList.get(x).getInvestigator().equals(inspector) && evidenceList.get(x).getIdentifier().equals(identifier)) {
-                added = false;
+                return false;
             }
         }
-        if (added) {
-            evidenceList.add(new Evidence(this.defense, identifier, this.prosecutor));
-        }
-        return added;
+        evidenceList.add(new Evidence(this.defense, identifier, this.prosecutor));
+        return true;
     }
 
 
