@@ -16,6 +16,7 @@ public enum MessageValue implements Serializable {
     // Round-over data fields: player name voted out, special event when implemented, rounds left
     // Game-over data fields: game end identifier such as win or loss, null, null
     // Chat data fields: text to display, recipient group or name of user, null
+    // Chat data fields FROM SERVER: text to display, sender of chat, null
     // SignIN data fields: username, null, null *** Only time username is sent, will be saved in subserver
     // Evidence data fields: suspect, identifier, null  *** Inspector is hidden from client
     // Timer data fields: null, null, null, null *** Used only by server side

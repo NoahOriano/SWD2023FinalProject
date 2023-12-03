@@ -29,7 +29,7 @@ public class ServerClientHandler implements Runnable{
     /**
      * Whether the ServerClientHandler has a connection still
      */
-    private boolean hasConnection = true;
+    private boolean hasConnection;
     /**
      * Whether the Client has performed their action or vote for this turn
      */
@@ -66,7 +66,9 @@ public class ServerClientHandler implements Runnable{
     @Override
     public void run()
     {
-        this.hasConnection = true;
+        username = null;
+        clientHasActed = false;
+        hasConnection = true;
         try // connect to server, get streams, process connection
         {
             getStreams(); // get the input and output streams
@@ -102,7 +104,25 @@ public class ServerClientHandler implements Runnable{
                     sendRequestToServer(new MessageRequest(networkMessage.dataA()));
                 }
                 else if(networkMessage.identifier() == MessageValue.SIGNIN){
-                    sendRequestToServer(new ActionRequest(MessageValue.SIGNIN, networkMessage.dataA(), null, null, this));
+                    sendRequestToServer(new ActionRequest(MessageValue.SIGNIN, networkMessage.dataA(), null, null, username, this));
+                }
+                else if(networkMessage.identifier() == MessageValue.VOTE){
+                    sendRequestToServer(new ActionRequest(MessageValue.VOTE, networkMessage.dataA(), null, null, username, this));
+                }
+                else if(networkMessage.identifier() == MessageValue.STEAL){
+                    sendRequestToServer(new ActionRequest(MessageValue.STEAL, networkMessage.dataA(), null, null, username, this));
+                }
+                else if(networkMessage.identifier() == MessageValue.FORGE){
+                    sendRequestToServer(new ActionRequest(MessageValue.FORGE, networkMessage.dataA(), networkMessage.dataB(), null, username, this));
+                }
+                else if(networkMessage.identifier() == MessageValue.PASS){
+                    sendRequestToServer(new ActionRequest(MessageValue.PASS, networkMessage.dataA(), networkMessage.dataB(), null, username, this));
+                }
+                else if(networkMessage.identifier() == MessageValue.INVESTIGATE){
+                    sendRequestToServer(new ActionRequest(MessageValue.INVESTIGATE, networkMessage.dataA(), networkMessage.dataB(), null, username, this));
+                }
+                else if(networkMessage.identifier() == MessageValue.CHAT){
+                    sendRequestToServer(new ActionRequest(MessageValue.CHAT, networkMessage.dataA(), networkMessage.dataB(), null, username, this));
                 }
             }
             catch (ClassNotFoundException classNotFoundException)
@@ -122,11 +142,19 @@ public class ServerClientHandler implements Runnable{
             output.close(); // close output stream
             input.close(); // close input stream
             connection.close(); // close socket
+            hasConnection = false;
         }
         catch (IOException ioException)
         {
             //
         }
+    }
+    public boolean isConnected(){
+        return hasConnection;
+    }
+
+    public boolean hasActed(){
+        return clientHasActed;
     }
 
     private void sendRequestToServer(ServerRequest request){
