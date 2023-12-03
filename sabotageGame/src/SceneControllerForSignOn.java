@@ -1,7 +1,6 @@
 // To do list
 // - Generate element IDS
 
-import Values.MessageValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

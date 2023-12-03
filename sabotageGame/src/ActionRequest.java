@@ -1,5 +1,3 @@
-import Values.MessageValue;
-
 public class ActionRequest extends ServerRequest{
     private MessageValue requestType;
     private String data1;

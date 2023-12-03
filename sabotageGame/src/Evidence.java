@@ -1,5 +1,3 @@
-import Values.PlayerIdentifier;
-
 public class Evidence {
     private String target;
     PlayerIdentifier identifier;

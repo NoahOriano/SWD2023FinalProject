@@ -1,5 +1,3 @@
-import Values.PlayerIdentifier;
-
 import java.util.ArrayList;
 
 public class EvidenceList {

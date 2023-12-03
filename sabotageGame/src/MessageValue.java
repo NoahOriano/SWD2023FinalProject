@@ -1,5 +1,3 @@
-package Values;
-
 import java.io.Serializable;
 
 /**
