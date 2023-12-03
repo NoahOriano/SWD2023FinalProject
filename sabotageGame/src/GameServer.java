@@ -62,6 +62,7 @@ public class GameServer extends JFrame{
     }
     /**Set up and run server*/
     public void runServer() {
+        names = new ArrayList<>();
         service = Executors.newFixedThreadPool(17);
         requests = new ArrayBlockingQueue<ServerRequest>(100);
         connectionService = new ServerClientConnectionService(port, backlog, requests);
@@ -116,6 +117,7 @@ public class GameServer extends JFrame{
                     if(subServers.get(i).handler == request.getSender()){
                         subServers.get(i).username = request.getData1();
                         names.add(request.getData1());
+                        System.out.println(subServers.get(i).username);
                     }
                 }
                 request.getSender().sendInformation(new NetworkMessage(MessageValues.SIGNIN, null, null, null));
