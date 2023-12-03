@@ -40,25 +40,48 @@ public class GameServer extends JFrame {
      */
     private int playerCounter;
 
+    /**
+     * ServerClockSignaler used to periodically signal to the server as a way of keeping time in an event based way
+     */
     private ServerClockSignaler roundTimer;
 
+    /**
+     * List of names of players currently connected to the lobby or game
+     */
     private ArrayList<String> names;
 
+    /**
+     * Sub server class, handles communications between each individual client
+     */
     private class SubServer {
-        private ServerClientHandler handler; // ServerClientHandler connected to client
-        private String username; // Username of connected player, null identifies a player not signed in
-        private boolean hasActed; // Whether the connected player has acted this turn
+        /**
+         * Handler responsible for incoming communications from client and holding Socket and IO
+         */
+        ServerClientHandler handler; // ServerClientHandler connected to client
+        /**
+         * Username of connected client
+         */
+        String username; // Username of connected player, null identifies a player not signed in
 
-        private GameState gameState;
+        GameState gameState;
 
-        public SubServer(ServerClientHandler handler, String username, boolean hasActed) {
+        public SubServer(ServerClientHandler handler) {
             this.handler = handler;
-            this.username = username;
-            this.hasActed = hasActed;
+        }
+        public void init(String name){
+            this.username = name;
+            handler.setUsername(name);
+            this.gameState = new GameState(name);
         }
     }
 
+    /**
+     * Port server is hosted on
+     */
     private int port;
+    /**
+     * Size of server backlog
+     */
     private int backlog;
 
     private ServerGameController controller;
@@ -98,12 +121,14 @@ public class GameServer extends JFrame {
      */
     public static final int DEFAULTROUNDS = 10;
 
+
+    /**
+     * Whether the game is currently active, otherwise, it is in lobby
+     */
+    public boolean gameActive;
     /**
      * Constructor, which sets up a GUI
      */
-
-    public boolean gameActive;
-
     public GameServer(int port, int backlog) {
         super("Server");
         displayArea = new JTextArea();
@@ -165,11 +190,10 @@ public class GameServer extends JFrame {
 
     /**
      * Sends a connection to a sub-server
-     *
      * @param connection connection to send to the client handler
      */
     public void sendConnectionToClientHandler(Socket connection) {
-        SubServer newServer = new SubServer(new ServerClientHandler(connection, this.requests), null, false);
+        SubServer newServer = new SubServer(new ServerClientHandler(connection, this.requests));
         subServers.add(newServer);
         service.execute(newServer.handler);
     }
@@ -186,21 +210,19 @@ public class GameServer extends JFrame {
 
     /**
      * Handles the given action request, if the request is not valid, it will be ignored, for example, a player
-     * Tries acting twice. Also sends data back to the client handler to send to the client on action completion
-     *
+     * Tries acting twice. Also sends data back to the client on action completion when necessary
      * @param request Action request to handle all the data fom
      */
     public void handleActionRequest(ActionRequest request) {
         if (!gameActive) { // If the game is not active
             if (request.getRequestType() == MessageValue.SIGNIN) {
-                displayMessage("Username Request Accepted");
                 if (usernameIsAvailable(request.getData1())) {
                     for (int i = 0; i < subServers.size(); i++) {
                         if (subServers.get(i).handler == request.getSender()) {
                             playerCounter++;
-                            subServers.get(i).username = request.getData1();
-                            names.add(request.getData1());
+                            subServers.get(i).init(request.getData1());
                             System.out.println(subServers.get(i).username);
+                            displayMessage("User Connected:"+request.getData1());
                         }
                     }
                     request.getSender().sendInformation(new NetworkMessage(MessageValue.SIGNIN, null, null, null));
@@ -240,12 +262,12 @@ public class GameServer extends JFrame {
             }
             else if (request.getRequestType() == MessageValue.PASS){
                 if(!isVoting){
-                    // @TODO handle incoming steal request
+                    // @TODO handle incoming pass request
                 }
             }
             else if (request.getRequestType() == MessageValue.INVESTIGATE){
                 if(!isVoting){
-                    // @TODO handle incoming steal request
+                    // @TODO handle incoming investigate request
                 }
             }
             else if (request.getRequestType()== MessageValue.FORGE){
