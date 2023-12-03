@@ -4,7 +4,7 @@ public class EvidenceFile {
     /**
      * Evidence class that holds the positive and negative values
      */
-    private class Evidence {
+    /*private class Evidence {
         private Player inspector;
         boolean culprit;
         public Player getInspector() {
@@ -24,6 +24,8 @@ public class EvidenceFile {
             this.culprit = forged;
         }
     }
+
+     */
 
 
 
