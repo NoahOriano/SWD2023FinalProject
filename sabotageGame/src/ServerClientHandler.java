@@ -103,6 +103,7 @@ public class ServerClientHandler implements Runnable{
                     sendRequestToServer(new MessageRequest(networkMessage.information()));
                 }
                 else if(networkMessage.identifier() == MessageValues.SIGNIN){
+                    sendRequestToServer(new MessageRequest("Attempted SignIN sent from client"));
                     sendRequestToServer(new ActionRequest(MessageValues.SIGNIN, networkMessage.information(), null, null, this));
                 }
             }

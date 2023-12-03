@@ -126,40 +126,42 @@ public class SceneController {
     }
 
     public void setGameJoinScene(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("GameJoinScene.fxml"));
-        Scene scene = new Scene(root);      // attach scene graph to scene
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameJoinScene.fxml"));
+        Parent root = loader.load();
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(scene);              // attach scene to stage
-        stage.show();                       // display the stage
+        loadScene(loader, root, stage);
     }
     public void setGameActionScene(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("ActionScene.fxml"));
-        Scene scene = new Scene(root);      // attach scene graph to scene
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ActionScene.fxml"));
+        Parent root = loader.load();
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(scene);              // attach scene to stage
-        stage.show();                       // display the stage
+        loadScene(loader, root, stage);
+
     }
     public void setSignOnScreen(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SignOnScreen.fxml"));
-        Scene scene = new Scene(loader.load());      // attach scene graph to scene
+        Parent root = loader.load();
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(scene);              // attach scene to stage
-        stage.show();                       // display the stage
+        loadScene(loader, root, stage);
     }
     public void setGameJoinScene(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("GameJoinScene.fxml"));
-        Scene scene = new Scene(root);      // attach scene graph to scene
-        stage.setScene(scene);              // attach scene to stage
-        stage.show();                       // display the stage
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameJoinScene.fxml"));
+        Parent root = loader.load();
+        loadScene(loader, root, stage);
     }
     public void setSignOnScreen(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SignOnScreen.fxml"));
-        Scene scene = new Scene(loader.load());      // attach scene graph to scene
-        stage.setScene(scene);              // attach scene to stage
-        stage.show();                       // display the stage
+        Parent root = loader.load();
+        loadScene(loader, root, stage);
     }
     public void setGameActionScene(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("ActionScene.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ActionScene.fxml"));
+        Parent root = loader.load();
+        loadScene(loader, root, stage);
+    }
+
+    public void loadScene(FXMLLoader loader, Parent root, Stage stage){
+        this.passConnection(loader.getController());
         Scene scene = new Scene(root);      // attach scene graph to scene
         stage.setScene(scene);              // attach scene to stage
         stage.show();                       // display the stage

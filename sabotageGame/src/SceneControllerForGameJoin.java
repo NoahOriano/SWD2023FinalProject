@@ -55,7 +55,7 @@ public class SceneControllerForGameJoin extends SceneController{
     TextField serverIPField;
     @FXML
     public void initialize(){
-        setClientRelay(new ClientMessageRelay(new SceneMaster(this, (Stage)pane.getScene().getWindow())));
+        setClientRelay(new ClientMessageRelay(new SceneMaster(this, pane)));
         setService(Executors.newFixedThreadPool(3));
 
             joinServerButton.setOnAction(new EventHandler<ActionEvent>() {
