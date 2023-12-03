@@ -1,15 +1,15 @@
 Sabotage Game Concept //////////////////////////////////////////////////////////////////////////////////////////////////
 
-Social deduction game where players are members of a secret agency
-Within a certain number of rounds, all double agents must be found and voted out to win
-If the rounds run out and double agents remain, game is won for double agents
-Also, if the double agents make themselves a majority, game is won for double agents
-Idea is that an important mission is about to be launched determining the outcome of a war
-If double agents remain in the agency by the time of the mission, they will sabotage it
+Social deduction game where players are members of a small town in Old Europe
+Within a certain number of rounds, all cultists must be found and voted out to win
+If the rounds run out and cultists remain, game is won for the cultists
+Also, if the cultists make themselves a majority, game is won for the cultists
+Idea is that the cultists have killed the town leader and in a few days their ritual will be complete and the world will end
+If cultists remain in the town by the time their ritual is complete, everyone will die
 Players must gather evidence, whether by discovering it, stealing it, or transferring it to other players
-This evidence is then used to determine who is a double agent or not
-The only issue is that only the double agents know who each-other is,
-and the double agents are capable of forging evidence against other players
+This evidence is then used to determine who is a cultist or not
+The only issue is that only the cultists know who each-other is,
+and the cultists are capable of forging evidence against other players
 
 Best for rather large groups of players, as small parties will make the game easier for the non-double agents
 Larger groups require lots of communication and transfer of information
@@ -20,9 +20,9 @@ Double agents have the option to send a message to all other double agents
 Gameplay ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Each round, every player makes one action. These actions are as follows:
-- Search for evidence: determines whether another player is a double agent or not, the evidence gathered this way
-is only known to you until another action reveals it to another player or copies it
-- Pass evidence: give another player a copy of the evidence you have on another player
+- Investigate: Investigate one other player in the game to generate Evidence on that player giving the player accurate
+information on the other player's role (1 piece of evidence generated)
+- Pass evidence: give another player a copy of the evidence you have on another player (CHOPPING BLOCK) (1 evidence file sent)
 - Steal evidence: take copies of up to three random pieces of evidence another player has
 
 - Forge evidence: generates evidence on another player, but only available to double agents,
@@ -54,7 +54,7 @@ For voting phase:
 - Information about evidence on each player
 - Chat
 
-Evidence stack could be represented as green and red numbers representing number of evidence for and against player
+Evidence stacks are represented as green and red numbers representing number of evidence for and against player
 
 Random Events //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
