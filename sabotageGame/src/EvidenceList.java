@@ -49,10 +49,12 @@ for(int x = 0; x<evidenceList.size();x++){
 }
 return evidenceByName;
     }
+            /*
 
     public getEvidenceByIndex(){
 
     }
+    */
 
     public ArrayList<Evidence> getEvidenceList() {
         return evidenceList;
