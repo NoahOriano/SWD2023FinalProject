@@ -1,12 +1,14 @@
+import Values.MessageValue;
+
 public class ActionRequest extends ServerRequest{
-    private MessageValues requestType;
+    private MessageValue requestType;
     private String data1;
     private String data2;
     private String requesterName;
 
     private ServerClientHandler sender;
 
-    ActionRequest(MessageValues requestType, String data1, String data2, String requesterName, ServerClientHandler sender){
+    ActionRequest(MessageValue requestType, String data1, String data2, String requesterName, ServerClientHandler sender){
         this.requestType = requestType;
         this.data1 = data1;
         this.data2 = data2;
@@ -18,7 +20,7 @@ public class ActionRequest extends ServerRequest{
         return data1;
     }
 
-    public MessageValues getRequestType() {
+    public MessageValue getRequestType() {
         return requestType;
     }
 

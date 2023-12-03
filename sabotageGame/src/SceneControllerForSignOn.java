@@ -1,6 +1,7 @@
 // To do list
 // - Generate element IDS
 
+import Values.MessageValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -52,7 +53,7 @@ public class SceneControllerForSignOn extends SceneController{
             @Override
             public void handle(ActionEvent actionEvent) {
                 if(!signedIn) {
-                    sendMessage(new NetworkMessage(MessageValues.SIGNIN, usernameInput.getText(), null, null));
+                    sendMessage(new NetworkMessage(MessageValue.SIGNIN, usernameInput.getText(), null, null));
                     setUsername(usernameInput.getText());
                     System.out.println("Sign on attempted");
                 }
