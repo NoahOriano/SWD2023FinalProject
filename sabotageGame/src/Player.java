@@ -99,7 +99,8 @@ public class Player {
      */
     public void investigate(Player suspect){
 int index = searchPlayerEvidence(suspect);
-
+int suspectIndex = suspect.searchPlayerEvidence(suspect);
+playerFiles.get(index).createEvidence(suspect.getImposter());
     }
 
     /** Main Action
@@ -137,8 +138,10 @@ while(x<3){
     /** Imposter Action
      * forge method allows the imposter to make fradulent evidence and information about players
      */
-    public void forge(){
+    public void forge(Player hacked){
         if(!imposter){
+
+        }else{
 
         }
 

@@ -27,8 +27,6 @@ public class EvidenceFile {
 
      */
 
-
-
     /**
      * ArrayList mainFile stores the individiual elements of Evidence for the suspect of the EvidenceFile that determine
      * his good or bad score
@@ -76,6 +74,7 @@ public class EvidenceFile {
     public int getBad() {
         return this.bad;
     }
+
 
     /**
      * addPoints is used to add the good and bad points for the suspect
@@ -127,30 +126,6 @@ public class EvidenceFile {
         addPoints(truth);
     }
 
-
-/*
-    /**
-     * addEvidence is used to add individual pieces of evidence and checks to see if they actually get added or not,
-     * primarily used for the steal class
-     * @param input
-     * @return
-
-    public Boolean addEvidence(Evidence input){
-        boolean add = true;
-        for(int x = 0; x< evidenceList.size();x++){
-            if(evidenceList.get(x).getInspector().equals(input.getInspector()) && evidenceList.get(x).isDoubleAgent() == input.isDoubleAgent()){
-                add = false;
-            }
-        }
-        if(add){
-            evidenceList.add(input);
-            addPoints(input.isDoubleAgent());
-        }
-        return add;
-    }
-
- */
-
     /**
      * creates the EvidenceFile that will
      * @return
@@ -184,10 +159,31 @@ public class EvidenceFile {
                 evidenceList.add(file.getMainFile().get(x));
                 addPoints(file.getMainFile().get(x).isDoubleAgent());
             }
-
         }
-
     }
+
+    /*
+    /**
+     * addEvidence is used to add individual pieces of evidence and checks to see if they actually get added or not,
+     * primarily used for the steal class
+     * @param input
+     * @return
+
+    public Boolean addEvidence(Evidence input){
+        boolean add = true;
+        for(int x = 0; x< evidenceList.size();x++){
+            if(evidenceList.get(x).getInspector().equals(input.getInspector()) && evidenceList.get(x).isDoubleAgent() == input.isDoubleAgent()){
+                add = false;
+            }
+        }
+        if(add){
+            evidenceList.add(input);
+            addPoints(input.isDoubleAgent());
+        }
+        return add;
+    }
+
+ */
 
 
 }
