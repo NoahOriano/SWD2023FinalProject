@@ -4,7 +4,7 @@ public class EvidenceFile {
     /**
      * Evidence class that holds the positive and negative values
      */
-    private class Evidence {
+    /*private class Evidence {
         private Player inspector;
         boolean culprit;
         public Player getInspector() {
@@ -25,7 +25,7 @@ public class EvidenceFile {
         }
     }
 
-
+     */
 
     /**
      * ArrayList mainFile stores the individiual elements of Evidence for the suspect of the EvidenceFile that determine
@@ -74,6 +74,7 @@ public class EvidenceFile {
     public int getBad() {
         return this.bad;
     }
+
 
     /**
      * addPoints is used to add the good and bad points for the suspect
@@ -125,8 +126,43 @@ public class EvidenceFile {
         addPoints(truth);
     }
 
+    /**
+     * creates the EvidenceFile that will
+     * @return
+     */
+    public  EvidenceFile createStolenEvidence(){
+                EvidenceFile stolen = new EvidenceFile(this.suspect);
 
-/*
+                SecureRandom gen = new SecureRandom();
+                int randomIndex = gen.nextInt(this.evidenceList.size());
+
+                Evidence temp = new Evidence(this.evidenceList.get(randomIndex).getInspector(),this.evidenceList.get(randomIndex).isDoubleAgent());
+                stolen.getMainFile().add(temp);
+                        return stolen;
+    }
+
+    /**
+     * addEvidence takes in an EvidenceFile to add into itself by navigating through itself to ensure that the evidence being
+     * added doesn't come from the same source with the same information and also increases the values of good or bad
+     * @param file
+     */
+    public void addEvidenceFile(EvidenceFile file){
+        boolean preExists = true;
+        for(int x = 0;x< file.getMainFile().size();x++){
+
+            for(int y = 0;y<evidenceList.size();y++){
+                if(file.getMainFile().get(x).getInspector().equals(evidenceList.get(y).getInspector()) && file.getMainFile().get(x).isDoubleAgent() == evidenceList.get(y).isDoubleAgent()){
+                    preExists = false;
+                }
+            }
+            if(preExists){
+                evidenceList.add(file.getMainFile().get(x));
+                addPoints(file.getMainFile().get(x).isDoubleAgent());
+            }
+        }
+    }
+
+    /*
     /**
      * addEvidence is used to add individual pieces of evidence and checks to see if they actually get added or not,
      * primarily used for the steal class
@@ -148,46 +184,6 @@ public class EvidenceFile {
     }
 
  */
-
-    /**
-     * creates the EvidenceFile that will
-     * @return
-     */
-
-    public  EvidenceFile createStolenEvidence(){
-                EvidenceFile stolen = new EvidenceFile(this.suspect);
-
-                SecureRandom gen = new SecureRandom();
-                int randomIndex = gen.nextInt(this.evidenceList.size());
-
-                Evidence temp = new Evidence(this.evidenceList.get(randomIndex).getInspector(),this.evidenceList.get(randomIndex).isDoubleAgent());
-                stolen.getMainFile().add(temp);
-                        return stolen;
-    }
-
-
-    /**
-     * addEvidence takes in an EvidenceFile to add into itself by navigating through itself to ensure that the evidence being
-     * added doesn't come from the same source with the same information and also increases the values of good or bad
-     * @param file
-     */
-    public void addEvidenceFile(EvidenceFile file){
-        boolean preExists = true;
-        for(int x = 0;x< file.getMainFile().size();x++){
-
-            for(int y = 0;y<evidenceList.size();y++){
-                if(file.getMainFile().get(x).getInspector().equals(evidenceList.get(y).getInspector()) && file.getMainFile().get(x).isDoubleAgent() == evidenceList.get(y).isDoubleAgent()){
-                    preExists = false;
-                }
-            }
-            if(preExists){
-                evidenceList.add(file.getMainFile().get(x));
-                addPoints(file.getMainFile().get(x).isDoubleAgent());
-            }
-
-        }
-
-    }
 
 
 }
