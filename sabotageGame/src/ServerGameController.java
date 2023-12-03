@@ -60,14 +60,27 @@ public class ServerGameController {
     }
 
     public void pass(String user, String infoAbout, String recipient){
-int userIndex = getIndex(user);
-int recipientIndex = getIndex(recipient);
+        int userIndex = getIndex(user);
+        int recipientIndex = getIndex(recipient);
 
+        int infoIndex = getListIndex(infoAbout,userIndex);
+        int infoRecipientIndex = getListIndex(infoAbout, recipientIndex);
+        EvidenceList userList = playerStates.get(userIndex).getPlayerFiles().get(infoIndex);
 
+        for(int x =0; x<playerStates.get(userIndex).getPlayerFiles().size();x++){
+            PlayerIdentifier inputIdentifier = userList.getEvidenceList().get(x).getIdentifier();
+            String inspector = userList.getEvidenceList().get(x).getInvestigator();
+            playerStates.get(recipientIndex).getPlayerFiles().get(infoRecipientIndex).addEvidence(inputIdentifier,inspector);
+        }
     }
 
     public void investigate(String detective, String suspect){
+int detectiveIndex = getIndex(detective);
+int suspectIndex = getIndex(suspect);
 
+int detectiveListIndex = getListIndex(suspect,detectiveIndex);
+
+playerStates.get(detectiveIndex).getPlayerFiles().get(detectiveListIndex).addEvidence(playerStates.get(suspectIndex).getIdentifier(),detective);
     }
 
     public void forge(String cultist, String victim){
