@@ -153,7 +153,6 @@ public class EvidenceFile {
      * creates the EvidenceFile that will
      * @return
      */
-
     public  EvidenceFile createStolenEvidence(){
                 EvidenceFile stolen = new EvidenceFile(this.suspect);
 
@@ -164,7 +163,6 @@ public class EvidenceFile {
                 stolen.getMainFile().add(temp);
                         return stolen;
     }
-
 
     /**
      * addEvidence takes in an EvidenceFile to add into itself by navigating through itself to ensure that the evidence being
