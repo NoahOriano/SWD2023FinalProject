@@ -1,3 +1,5 @@
+import Values.MessageValue;
+
 import javax.swing.*;
 import java.awt.*;
 import java.net.Inet4Address;
@@ -110,7 +112,7 @@ public class GameServer extends JFrame{
      * @param request Action request to handle all the data fom
      */
     public void handleActionRequest(ActionRequest request){
-        if(request.getRequestType() == MessageValues.SIGNIN){
+        if(request.getRequestType() == MessageValue.SIGNIN){
             displayMessage("Username Request Accepted");
             if(usernameIsAvailable(request.getData1())){
                 for(int i = 0; i < subServers.size(); i++){
@@ -120,7 +122,7 @@ public class GameServer extends JFrame{
                         System.out.println(subServers.get(i).username);
                     }
                 }
-                request.getSender().sendInformation(new NetworkMessage(MessageValues.SIGNIN, null, null, null));
+                request.getSender().sendInformation(new NetworkMessage(MessageValue.SIGNIN, null, null, null));
             }
         }
     }

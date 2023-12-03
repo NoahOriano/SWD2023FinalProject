@@ -1,6 +1,7 @@
 // To do list
 // - Generate element IDS
 
+import Values.MessageValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -61,7 +62,7 @@ public class SceneControllerForGameJoin extends SceneController{
                         setConnection( new Socket(IP, port));
                         setOutput( new ObjectOutputStream(getConnection().getOutputStream()));
                         setInput( new ObjectInputStream(getConnection().getInputStream()));
-                        getOutput().writeObject(new NetworkMessage(MessageValues.MESSAGE, "Client Connected", null, null));
+                        getOutput().writeObject(new NetworkMessage(MessageValue.MESSAGE, "Client Connected", null, null));
                         getOutput().flush();
                         // Connection was successful so save IP and Port info
                         setPort(port);

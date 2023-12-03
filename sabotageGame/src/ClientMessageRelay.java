@@ -1,4 +1,5 @@
-import java.io.EOFException;
+import Values.MessageValue;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -51,7 +52,7 @@ public class ClientMessageRelay implements Runnable{
                 }
                 else if(controller.getClass() == SceneControllerForSignOn.class){
                     SceneControllerForSignOn control = (SceneControllerForSignOn)controller;
-                    if(networkMessage.identifier()==MessageValues.SIGNIN) {
+                    if(networkMessage.identifier()== MessageValue.SIGNIN) {
                         System.out.println("Client relay received signin");
                         control.usernameInput.setText("Sign On Accepted, click submit again");
                         control.signedIn = true;
@@ -62,7 +63,7 @@ public class ClientMessageRelay implements Runnable{
             {
                 e.printStackTrace();
             }
-        } while (networkMessage != null && networkMessage.identifier() != MessageValues.TERMINATE);
+        } while (networkMessage != null && networkMessage.identifier() != MessageValue.TERMINATE);
     }
 
     /**

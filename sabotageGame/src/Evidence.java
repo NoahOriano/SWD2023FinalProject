@@ -1,37 +1,39 @@
+import Values.PlayerIdentifier;
+
 public class Evidence {
-    private Player inspector;
-    boolean culprit;
-    private Player target;
-    public Player getInspector() {
-        return inspector;
+    private String target;
+    PlayerIdentifier identifier;
+
+    private String investigator; // only used in server end;
+
+    public PlayerIdentifier getIdentifier() {
+        return identifier;
     }
 
-    public boolean isDoubleAgent() {
-        return culprit;
-    }
-
-    public void setInspector(Player inspector) {
-        this.inspector = inspector;
-    }
-
-    public Evidence(Player newInspector, boolean culprit, Player target){
-        this.inspector = newInspector;
-        this.culprit = culprit;
-    }
-
-    public Player getTarget() {
+    public String getTarget() {
         return target;
     }
 
-    public void setTarget(Player target) {
+    public void setTarget(String target) {
         this.target = target;
     }
 
-    public void setCulprit(boolean culprit) {
-        this.culprit = culprit;
+    public void setIdentifier(PlayerIdentifier identifier) {
+        this.identifier = identifier;
+    }
+    public Evidence(String target, PlayerIdentifier identifier){
+        this.target = target;
+        this.identifier = identifier;
     }
 
-    public Evidence copy(){
-        return new Evidence(this.inspector, this.culprit, this.target);
+    /**
+     * For server end, investigator never sent over network
+     * @param target
+     * @param identifier
+     */
+    public Evidence(String target, PlayerIdentifier identifier, String investigator){
+        this.target = target;
+        this.identifier = identifier;
+        this.investigator = investigator;
     }
 }

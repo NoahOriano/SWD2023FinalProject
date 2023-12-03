@@ -1,3 +1,5 @@
+import Values.MessageValue;
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -98,18 +100,18 @@ public class ServerClientHandler implements Runnable{
             try
             {
                 networkMessage = (NetworkMessage) input.readObject(); // read new message
-                if(networkMessage.identifier() == MessageValues.MESSAGE){
+                if(networkMessage.identifier() == MessageValue.MESSAGE){
                     sendRequestToServer(new MessageRequest(networkMessage.dataA()));
                 }
-                else if(networkMessage.identifier() == MessageValues.SIGNIN){
-                    sendRequestToServer(new ActionRequest(MessageValues.SIGNIN, networkMessage.dataA(), null, null, this));
+                else if(networkMessage.identifier() == MessageValue.SIGNIN){
+                    sendRequestToServer(new ActionRequest(MessageValue.SIGNIN, networkMessage.dataA(), null, null, this));
                 }
             }
             catch (ClassNotFoundException classNotFoundException)
             {
 
             }
-        } while (networkMessage != null && networkMessage.identifier() != MessageValues.TERMINATE);
+        } while (networkMessage != null && networkMessage.identifier() != MessageValue.TERMINATE);
     }
 
     /**

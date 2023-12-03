@@ -1,6 +1,7 @@
 // To do list
 // - Generate element IDS
 
+import Values.MessageValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -79,20 +80,20 @@ public class SceneControllerForActionScene extends SceneController{
             @Override
             public void handle(ActionEvent actionEvent) {
                 if(actionOptions.getValue().equals("Steal")){
-                    sendMessage(new NetworkMessage(MessageValues.STEAL, getUsername(), selectedPlayerName.getText(), null));
+                    sendMessage(new NetworkMessage(MessageValue.STEAL, getUsername(), selectedPlayerName.getText(), null));
                 }
                 if(actionOptions.getValue().equals("Forge")){
-                    sendMessage(new NetworkMessage(MessageValues.FORGE, getUsername(), selectedPlayerName.getText(), null));
+                    sendMessage(new NetworkMessage(MessageValue.FORGE, getUsername(), selectedPlayerName.getText(), null));
                 }
                 if(actionOptions.getValue().equals("Investigate")){
-                    sendMessage(new NetworkMessage(MessageValues.INVESTIGATE, getUsername(), selectedPlayerName.getText(), null));
+                    sendMessage(new NetworkMessage(MessageValue.INVESTIGATE, getUsername(), selectedPlayerName.getText(), null));
                 }
             }
         });
         textSubmit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                sendMessage(new NetworkMessage(MessageValues.CHAT, chat.getText(), chatSelector.getValue(), null));
+                sendMessage(new NetworkMessage(MessageValue.CHAT, chat.getText(), chatSelector.getValue(), null));
             }
         });
         display.setOnMouseClicked(new EventHandler<MouseEvent>() {
