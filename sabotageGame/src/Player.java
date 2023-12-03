@@ -140,7 +140,6 @@ while(x<3){
      */
     public void forge(Player hacked){
         if(!imposter){
-
         }else{
 
         }
