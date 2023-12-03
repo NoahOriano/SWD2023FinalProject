@@ -1,16 +1,29 @@
+import Values.MessageValue;
+
 import java.util.concurrent.ArrayBlockingQueue;
 
-public class ServerClockSignaler {
+public class ServerClockSignaler implements Runnable{
     ArrayBlockingQueue<ServerRequest> requests;
-    public ServerClockSignaler(ArrayBlockingQueue<ServerRequest> requests){
-        this.requests = requests;
+
+    private int delay;
+
+    public ServerClockSignaler(int delay){
+        this.delay = delay;
     }
 
-    public void setRoundTimer(int seconds){
-
-    }
-
-    public void sendMessage(){
-
+    @Override
+    public void run() {
+        while(true){
+            try {
+                Thread.sleep(delay);
+                try {
+                    requests.put(new ActionRequest(MessageValue.TIMER, null, null, null, null));
+                } catch (InterruptedException e) {
+                    //Ignore lol
+                }
+            } catch (InterruptedException e) {
+                //Ignore lol
+            }
+        }
     }
 }
