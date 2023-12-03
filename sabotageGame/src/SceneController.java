@@ -50,6 +50,17 @@ public class SceneController {
     /**Executor service for running services*/
     private ExecutorService service;
 
+    /**SceneMaster*/
+    private SceneMaster master;
+
+    public void setMaster(SceneMaster master) {
+        this.master = master;
+    }
+
+    public SceneMaster getMaster() {
+        return master;
+    }
+
     public ExecutorService getService() {
         return service;
     }
@@ -123,6 +134,8 @@ public class SceneController {
         controller.port = this.port;
         controller.service = this.service;
         controller.username = this.username;
+        controller.master = this.master;
+        this.master.setController(controller);
     }
 
     public void setGameJoinScene(ActionEvent event) throws IOException {

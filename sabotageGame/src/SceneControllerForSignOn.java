@@ -50,6 +50,10 @@ public class SceneControllerForSignOn extends SceneController{
     @FXML
     TextField serverIPField;
 
+    /**
+     * Whether the user has signed in or not
+     */
+    boolean signedIn = false;
     @FXML
     public void initialize(){
         serverIPField.setText(getIP());
@@ -57,8 +61,18 @@ public class SceneControllerForSignOn extends SceneController{
         submit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                sendMessage(new NetworkMessage(MessageValues.SIGNIN, usernameInput.getText(), null));
-                System.out.println("Sign on attempted");
+                if(!signedIn) {
+                    sendMessage(new NetworkMessage(MessageValues.SIGNIN, usernameInput.getText(), null));
+                    setUsername(usernameInput.getText());
+                    System.out.println("Sign on attempted");
+                }
+                else{
+                    try {
+                        setGameActionScene(actionEvent);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
         });
     }
