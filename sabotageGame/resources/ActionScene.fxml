@@ -202,7 +202,7 @@
                               <Font name="TenaliRamakrishna Regular" size="24.0" />
                            </font>
                         </Label>
-                        <Label layoutX="194.0" layoutY="36.0" style="-fx-text-fill: d6900f;" text="Username:" textFill="#d6900f">
+                        <Label layoutX="194.0" layoutY="20.0" style="-fx-text-fill: d6900f;" text="Username:" textFill="#d6900f">
                            <font>
                               <Font name="TenaliRamakrishna Regular" size="24.0" />
                            </font>

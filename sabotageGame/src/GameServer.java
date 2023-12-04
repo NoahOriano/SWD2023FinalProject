@@ -294,7 +294,7 @@ public class GameServer extends JFrame {
                         if (subServers.get(i).handler == request.getSender() && !subServers.get(i).hasActed) {
                             subServers.get(i).hasActed = true;
                             votes++;
-                            if (votes > playerCounter / 2 && votes>3) {
+                            if (votes > playerCounter / 2) {
                                 startGame();
                             }
                             sendMessageToAll(new NetworkMessage(MessageValue.CHAT, request.getRequesterName() + " has voted to start game", "Server", null));
@@ -319,6 +319,7 @@ public class GameServer extends JFrame {
                             endRound();
                         }
                     } else if ((roundTime / timerDelay )- roundCounter == 3) {
+                        roundCounter--;
                         sendTimeWarning();
                     }
                 } else if (request.getRequesterName() != null && getSubServerByName(request.getRequesterName()) != null) {
@@ -367,6 +368,7 @@ public class GameServer extends JFrame {
                             }
                         }
                         if(totalActions == playerCounter){
+                            roundCounter--;
                             if(roundCounter <= 0){
                                 endGame();
                             }
@@ -457,7 +459,7 @@ public class GameServer extends JFrame {
             sendMessageToAll(new NetworkMessage(MessageValue.CHAT, playerVotedOut+" was life deleted", "Server",null));
         }
         resetActionsAndVotes();
-        sendMessageToAll(new NetworkMessage(MessageValue.ROUNDOVER, playerVotedOut, String.valueOf(roundCounter), null));
+        sendMessageToAll(new NetworkMessage(MessageValue.ROUNDOVER, playerVotedOut, String.valueOf(10 - roundCounter), null));
         if (isVoting) {
             sendMessageToAll(new NetworkMessage(MessageValue.INVESTIGATE, null, null, null));
             isVoting = !isVoting;
