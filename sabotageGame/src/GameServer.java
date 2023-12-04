@@ -428,7 +428,7 @@ public class GameServer extends JFrame {
         displayMessage("Starting Game");
         ArrayList<SubServer> servers = new ArrayList<>();
         for (int i = 0; i < subServers.size(); i++) {
-            if(servers.get(i).isInGame) servers.add(subServers.get(i));
+            if(subServers.get(i).isInGame) servers.add(subServers.get(i));
         }
         for (int i = 0; i < playerCounter / 3; i++) {
             int rand = (int) (Math.random() * servers.size());
@@ -455,12 +455,12 @@ public class GameServer extends JFrame {
     private void endRound() {
         displayMessage("Ending Round");
         sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "ENDING ROUND", "Server", null));
-        totalActions = 0;
-        roundCounter--;
-        timerCounter = 0;
         String playerVotedOut = getPlayerVotedOut();
         removePlayerByName(playerVotedOut);
         resetActionsAndVotes();
+        totalActions = 0;
+        roundCounter--;
+        timerCounter = 0;
         if (playerVotedOut == null) {
             sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "Voting skipped", "Server", null));
         } else {
