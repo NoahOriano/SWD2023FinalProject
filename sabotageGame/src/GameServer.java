@@ -327,6 +327,7 @@ public class GameServer extends JFrame {
                     if (sub.isInGame && sub.isAlive && !sub.hasActed) {
                         sub.hasActed = true;
                         totalActions++;
+                        sendMessageToAll(new NetworkMessage(MessageValue.CHAT, sub.username+"has submitted their action", "Server", null));
                         if (request.getRequestType() == MessageValue.VOTE) {
                             if (isVoting) {
                                 boolean flag = true;
@@ -409,11 +410,15 @@ public class GameServer extends JFrame {
                 } else {
                     subServers.get(i).handler.sendInformation(new NetworkMessage(MessageValue.GAMEOVER, "GAME WON", null, null));
                 }
+                subServers.get(i).username = null;
+                subServers.get(i).isInGame = false;
+                subServers.get(i).isAlive = false;
             } else {
                 subServers.remove(i);
                 i--; // Shift index again since subServer indexes have shifted
             }
         }
+        sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "Game is finished, submit chat or action to return to sign on and start new game", "Server", null));
         resetSubServers(); // Reset all subServers
     }
 
@@ -422,6 +427,7 @@ public class GameServer extends JFrame {
      */
     private void startGame() {
         gameActive = true;
+        votes = 0;
         resetActionsAndVotes();
         displayMessage("Starting Game");
         ArrayList<SubServer> servers = new ArrayList<>();
@@ -449,8 +455,10 @@ public class GameServer extends JFrame {
         sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "ENDING ROUND", "Server", null));
         totalActions = 0;
         roundCounter--;
+        timerCounter = 0;
         String playerVotedOut = getPlayerVotedOut();
         removePlayerByName(playerVotedOut);
+        resetActionsAndVotes();
         if (playerVotedOut == null) {
             sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "Voting skipped", "Server", null));
         } else {
