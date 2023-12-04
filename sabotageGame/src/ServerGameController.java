@@ -8,6 +8,11 @@ import java.util.ArrayList;
  * ArrayList of all the GameStates
  */
 public class ServerGameController {
+
+    public ServerGameController(){
+        playerStates = new ArrayList<>();
+    }
+
     /**playerStates hold all the different GameStates present within the overall game*/
     public ArrayList<GameState> playerStates;
 
