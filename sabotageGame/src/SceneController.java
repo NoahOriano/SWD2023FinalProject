@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -14,6 +15,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageProducer;
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 
 public class SceneController {
@@ -177,11 +179,11 @@ public class SceneController {
         ((SceneControllerForActionScene)loader.getController()).mapIcon14.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
         ((SceneControllerForActionScene)loader.getController()).mapIcon15.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
         ((SceneControllerForActionScene)loader.getController()).mapIcon16.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-        ArrayList<>
-        for(int a=0; a<GameState.getPlayerFiles().getLength(); a++){
-            ((SceneControllerForActionScene)loader.getController()).
 
-        }
+//        for(int a=0; a<GameState.getPlayerFiles().getLength(); a++){
+//            ((SceneControllerForActionScene)loader.getController()).
+//
+//        }
 
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         loadScene(loader, root, stage);
