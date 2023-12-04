@@ -240,14 +240,16 @@ public class GameServer extends JFrame {
         if (getSubServerByName(request.getRequesterName()) != null && getSubServerByName(request.getRequesterName()).isInGame) {
             if (request.getRequestType() == MessageValue.CHAT) {
                 displayMessage("Chat Request Received from "+request.getRequesterName()+" to "+request.getData2());
-                if (request.getData2().equals("Global"))
+                if (request.getData2()==null || request.getData2().equals("Global")) {
                     sendMessageToAll(new NetworkMessage(MessageValue.CHAT, request.getData1(), request.getRequesterName(), null));
-                if (request.getData2().equals("Cult"))
+                }
+                else if (request.getData2().equals("Cult")) {
                     for (int i = 0; i < subServers.size(); i++) {
                         if (subServers.get(i).gameState != null && subServers.get(i).gameState.getIdentifier() == PlayerIdentifier.CULTIST) {
                             subServers.get(i).handler.sendInformation(new NetworkMessage(MessageValue.CHAT, request.getData1(), request.getRequesterName(), null));
                         }
                     }
+                }
             }
         }
         if (!gameActive) { // If the game is not active
@@ -257,12 +259,15 @@ public class GameServer extends JFrame {
                         if (subServers.get(i).handler == request.getSender()) {
                             playerCounter++;
                             subServers.get(i).init(request.getData1());
-                            System.out.println(subServers.get(i).username);
                             displayMessage("User Connected:" + request.getData1());
                         }
                     }
                     request.getSender().sendInformation(new NetworkMessage(MessageValue.SIGNIN, null, null, null));
                 }
+            }
+            if (request.getRequestType() == MessageValue.JOIN){
+                getSubServerByName(request.getRequesterName()).isInGame = true;
+                sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "Player Joined", "Server",null));
             }
             if (request.getRequestType() == MessageValue.VOTE) {
                 for (int i = 0; i < subServers.size(); i++) {
@@ -277,6 +282,11 @@ public class GameServer extends JFrame {
             }
         } else { // If the game is active
             if (request.getRequestType() == MessageValue.TIMER) {
+                for(int i = 0; i < subServers.size();i++){
+                    SubServer sub = subServers.get(i);
+                    sub.handler.sendInformation(new NetworkMessage(MessageValue.CHAT, "Tick Tock", "Server", "Server"));
+                    displayMessage("The Clock Is Ticking");
+                }
                 timerCounter++;
                 if (timerCounter > roundTime / timerDelay) {
                     if (roundCounter <= 0) {
