@@ -461,7 +461,7 @@ public class GameServer extends JFrame {
             sendMessageToAll(new NetworkMessage(MessageValue.CHAT, playerVotedOut+" was life deleted", "Server",null));
         }
         resetActionsAndVotes();
-        sendMessageToAll(new NetworkMessage(MessageValue.ROUNDOVER, playerVotedOut, String.valueOf(10 - roundCounter), null));
+        sendMessageToAll(new NetworkMessage(MessageValue.ROUNDOVER, playerVotedOut, String.valueOf(DEFAULTROUNDS - roundCounter), null));
         if (isVoting) {
             sendMessageToAll(new NetworkMessage(MessageValue.INVESTIGATE, null, null, null));
             isVoting = !isVoting;
