@@ -306,12 +306,62 @@
                </font>
             </Button>
             <Label layoutX="35.0" layoutY="172.0" />
-            <Label layoutX="32.0" layoutY="157.0" style="-fx-text-fill: d6900f;" text="Actions:" textFill="#d6900f">
+            <Label layoutX="32.0" layoutY="157.0" style="-fx-text-fill: d6900f;" text="Profile:" textFill="#d6900f">
                <font>
                   <Font name="TenaliRamakrishna Regular" size="36.0" />
                </font>
             </Label>
-            <Pane layoutX="30.0" layoutY="215.0" prefHeight="200.0" prefWidth="200.0" />
+            <Pane layoutX="30.0" layoutY="215.0" prefHeight="497.0" prefWidth="414.0" style="-fx-background-color: d6900f;">
+               <children>
+                  <Pane layoutX="7.0" layoutY="8.0" prefHeight="480.0" prefWidth="400.0" style="-fx-background-color: black;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="192.0" style="-fx-text-fill: d6900f;" text="Character:" textFill="#d6900f">
+                           <font>
+                              <Font name="TenaliRamakrishna Regular" size="24.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox layoutX="13.0" layoutY="248.0" prefHeight="26.0" prefWidth="176.0" style="-fx-background-color: gray;" />
+                        <ChoiceBox layoutX="209.0" layoutY="248.0" prefHeight="26.0" prefWidth="177.0" style="-fx-background-color: gray;" />
+                        <Label layoutX="209.0" layoutY="192.0" style="-fx-text-fill: d6900f;" text="Action:" textFill="#d6900f">
+                           <font>
+                              <Font name="TenaliRamakrishna Regular" size="24.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="14.0" layoutY="289.0" mnemonicParsing="false" prefWidth="372.0" style="-fx-background-color: d6900f;" text="Submit" />
+                        <TextField layoutX="12.0" layoutY="367.0" prefHeight="92.0" prefWidth="374.0" style="-fx-background-color: white;" />
+                        <Label layoutX="14.0" layoutY="319.0" style="-fx-text-fill: d6900f;" text="Result:" textFill="#d6900f">
+                           <font>
+                              <Font name="TenaliRamakrishna Regular" size="24.0" />
+                           </font>
+                        </Label>
+                        <Avatar layoutX="14.0" layoutY="36.0" radius="75.0" style="-fx-background-color: d6900f;">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Label layoutX="194.0" layoutY="36.0" style="-fx-text-fill: d6900f;" text="Username:" textFill="#d6900f">
+                           <font>
+                              <Font name="TenaliRamakrishna Regular" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="194.0" layoutY="69.0" prefHeight="31.0" prefWidth="216.0" style="-fx-text-fill: d6900f;" text="place name here" textFill="#d6900f">
+                           <font>
+                              <Font name="TenaliRamakrishna Regular" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="194.0" layoutY="103.0" prefHeight="31.0" prefWidth="216.0" style="-fx-text-fill: d6900f;" text="Status:" textFill="#d6900f">
+                           <font>
+                              <Font name="TenaliRamakrishna Regular" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="194.0" layoutY="138.0" prefHeight="31.0" prefWidth="216.0" style="-fx-text-fill: d6900f;" text="Dead or Alive" textFill="#d6900f">
+                           <font>
+                              <Font name="TenaliRamakrishna Regular" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children></Pane>
          </children></AnchorPane>
   </content>
 </TitledPane>
