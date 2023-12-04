@@ -253,6 +253,9 @@ public class GameServer extends JFrame {
             }
         } else {
             if (!gameActive) { // If the game is not active
+                if (request.getRequestType() == MessageValue.TIMER) {
+                    sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "The Clock Is Ticking", "Server", null));
+                }
                 if (request.getRequestType() == MessageValue.SIGNIN) {
                     if (usernameIsAvailable(request.getData1())) {
                         for (int i = 0; i < subServers.size(); i++) {
@@ -266,7 +269,10 @@ public class GameServer extends JFrame {
                     }
                 }
                 if (request.getRequestType() == MessageValue.JOIN) {
+                    displayMessage("Join Requested");
                     getSubServerByName(request.getRequesterName()).isInGame = true;
+                    getSubServerByName(request.getRequesterName()).isAlive = true;
+                    getSubServerByName(request.getRequesterName()).gameState = new GameState(request.getRequesterName());
                     controller.addPlayerState(getSubServerByName(request.getRequesterName()).gameState);
                     request.getSender().sendInformation(new NetworkMessage(MessageValue.JOIN, null, null, null));
                     sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "Player Joined", "Server", null));
@@ -289,6 +295,7 @@ public class GameServer extends JFrame {
                         SubServer sub = subServers.get(i);
                         sub.handler.sendInformation(new NetworkMessage(MessageValue.CHAT, "Tick Tock", "Server", "Server"));
                         displayMessage("The Clock Is Ticking");
+                        sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "The Clock Is Ticking", "Server", null));
                     }
                     timerCounter++;
                     if (timerCounter > roundTime / timerDelay) {
