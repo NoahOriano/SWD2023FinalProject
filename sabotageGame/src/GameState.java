@@ -5,8 +5,13 @@ public class GameState {
      * String Identifier for the GameState class
      */
     private String username;
-
-    PlayerIdentifier identifier;
+    /**
+     * PlayerIdentifier identifier determines the role of the player as cultist or innocent
+     */
+    private PlayerIdentifier identifier;
+    /**
+     * ArrayList<EvidenceList> playerFiles contatins an evidence on every player in the game including yourself
+     */
     private ArrayList<EvidenceList> playerFiles; // will contain file on yourself
 
 
@@ -35,7 +40,7 @@ public class GameState {
 
     /**
      * Constructor for the GameState class, taking in the username of the player
-     * @param username
+     * @param username is the input for the identifying String of the player
      */
     public GameState(String username){
         this.username = username;

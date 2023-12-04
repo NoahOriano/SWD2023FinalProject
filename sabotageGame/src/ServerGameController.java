@@ -10,58 +10,56 @@ public class ServerGameController {
 
     /**
      * getIndex methods is a helper method to get the Index of a player in playerStates
-     * @param playerID
-     * @return
+     * @param playerID is the input for the identify String of a player
+     * @return the Index of a player in playerStates
      */
     public int getIndex(String playerID) {
         int index = -1;
         for (int x = 0; x < playerStates.size(); x++) {
-            if (playerStates.get(x).getUsername().equals(playerID)) {
-                index = x;
+            if (playerStates.get(x).getUsername().equals(playerID)) { //Checks to see which index has the same matching userName
+                index = x; //Sets the output to that index
             }
         }
-        return index;
+        return index; //Returns the index of the playerID in playerStates
     }
 
     /**
      * getListIndex is a helper method to get the Index of playerID in playerStates.get(playerStatesIndex) playerFiles
-     *
-     * @param playerID
-     * @param playerStatesIndex
-     * @return
+     * @param playerID is the input for the String that identifies which player the evidence file is about
+     * @param playerStatesIndex is the input for the location of a GameState in playerStates which holds the evidenceFiles
+     * @return the index that the playerID can be found at
      */
     public int getListIndex(String playerID, int playerStatesIndex) {
-        int listIndex = 0;
+        int listIndex = -1;
         for (int x = 0; x < playerStates.get(playerStatesIndex).getPlayerFiles().size(); x++) {
-            if (playerStates.get(playerStatesIndex).getPlayerFiles().get(x).getDefense().equals(playerID)) {
-                listIndex = x;
+            if (playerStates.get(playerStatesIndex).getPlayerFiles().get(x).getDefense().equals(playerID)) { //Checks to see which index has the same matching userName
+                listIndex = x; //Sets the output to that index
             }
         }
-        return listIndex;
+        return listIndex; //Returns the index of the playerID in the playerFiles
     }
 
 
     /**
-     * Steal method allows thief to steal 3 pieces of evidence from a victim, however does not have an exception if a victim
-     * does not have 3 pieces of evidence to be stolen
+     * Steal method allows thief to steal up to 3 pieces of evidence from a victim
      *
-     * @param thief
-     * @param victim
+     * @param thief is the input for the user who is stealing the data
+     * @param victim is the input for the use who's data is being stolen
      */
     public void steal(String thief, String victim) {
-        GameState victimFile = playerStates.get(getIndex(victim));
-        GameState thiefFile = playerStates.get(getIndex(thief));
+        GameState victimFile = playerStates.get(getIndex(victim)); //Finds the gameState of the player being stolen
+        GameState thiefFile = playerStates.get(getIndex(thief)); //Finds the gameState of the player stealing
         int counter = 0;
 
         ArrayList<Evidence> collector = new ArrayList<>();
 
         for (int i = 0; i < victimFile.getPlayerFiles().size(); i++) {
             for (int j = 0; i < victimFile.getPlayerFiles().get(i).getEvidenceList().size(); j++) {
-                collector.add(victimFile.getPlayerFiles().get(i).getEvidenceList().get(j));
+                collector.add(victimFile.getPlayerFiles().get(i).getEvidenceList().get(j)); //Adds all the victim's evidence to a new ArrayList of Evidence
             }
         }
 
-        while (counter < 3 && !collector.isEmpty()) {
+        while (counter < 3 && !collector.isEmpty()) {  //
             int rand = (int) (Math.random() * collector.size());
             Evidence evidence = collector.remove(rand);
             if (thiefFile.getPlayerFiles().get(getListIndex(evidence.getTarget(),
@@ -73,10 +71,9 @@ public class ServerGameController {
 
     /**
      * Allows user to pass all their available evidence on infoAbout to recipient
-     *
-     * @param user
-     * @param infoAbout
-     * @param recipient
+     * @param user is the input of the user who wants to pass the data to another player
+     * @param infoAbout is the input of the player who the evidenceFile is about
+     * @param recipient is the input for the player who is recieving the evidenceFile
      */
     public void pass(String user, String infoAbout, String recipient) {
         int userIndex = getIndex(user);
@@ -95,9 +92,8 @@ public class ServerGameController {
 
     /**
      * Allows the detective to view the truth about another player or suspect
-     *
-     * @param detective
-     * @param suspect
+     * @param detective is the input of the player making the investigative move
+     * @param suspect is the input of the player who is being investigated
      */
     public void investigate(String detective, String suspect) {
         int detectiveIndex = getIndex(detective);
@@ -110,9 +106,8 @@ public class ServerGameController {
 
     /**
      * forge allows a cultist to create false information about players
-     *
-     * @param cultist
-     * @param victim
+     * @param cultist is the input of the cultist who is making the false evidence
+     * @param victim is the input of the player who is having false evidence made about them
      */
     public void forge(String cultist, String victim) {
         int cultistIndex = getIndex(cultist);
