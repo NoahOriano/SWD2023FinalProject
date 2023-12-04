@@ -55,6 +55,8 @@ public class SceneController {
     /**SceneMaster*/
     private SceneMaster master;
 
+    /** The setters and getters **/
+
     public void setMaster(SceneMaster master) {
         this.master = master;
     }
@@ -127,6 +129,7 @@ public class SceneController {
         this.output = output;
     }
 
+    /** A class that initializes various variables based on the SceneController that is passed in.**/
     private void passConnection(SceneController controller){
         controller.connection = this.connection;
         controller.input = this.input;
@@ -163,33 +166,12 @@ public class SceneController {
         controller.chatSelector.getItems().add("Global");
         ((SceneControllerForActionScene)loader.getController()).mapPane.setImage(new Image(String.valueOf(getClass().getResource("mapFinal.png"))));
         ((SceneControllerForActionScene)loader.getController()).profPic.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon1.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon2.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon3.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon4.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon5.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon6.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon7.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon8.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon9.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon10.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon11.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon12.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon13.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon14.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon15.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon16.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-
-        //((SceneControllerForActionScene)loader.getController()).mapIcon16.setVisible(true);
-//        for(int a=0; a<GameState.getPlayerFiles().getLength(); a++){
-//            ((SceneControllerForActionScene)loader.getController()).
-//
-//        }
 
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         loadScene(loader, root, stage);
 
     }
+    /** The setter ofr the sign on screen of the game where the user enters a username and joins the game.**/
     public void setSignOnScreen(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SignOnScreen.fxml"));
         Parent root = loader.load();
