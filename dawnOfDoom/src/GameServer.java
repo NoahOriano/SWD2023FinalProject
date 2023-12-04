@@ -304,64 +304,64 @@ public class GameServer extends JFrame {
                         totalActions++; //tracks actions of all players
                         sendMessageToAll(new NetworkMessage(MessageValue.CHAT, sub.username + " has submitted their action", "Server", null)); //Sends a notification
                         if (request.getRequestType() == MessageValue.VOTE) {
-                            if (isVoting) {
+                            if (isVoting) { //Checks to see that voting is happening
                                 boolean flag = true;
                                 for (int i = 0; i < subServers.size(); i++) {
                                     if (subServers.get(i).username != null && subServers.get(i).username.equals(request.getData1())) {
-                                        subServers.get(i).votesAgainst++;
+                                        subServers.get(i).votesAgainst++; //Increments the votesAgainst a player
                                         flag = false;
                                     }
                                 }
                                 if (flag) votes++;
                             }
-                        } else if (request.getRequestType() == MessageValue.STEAL) {
-                            if (!isVoting) {
+                        } else if (request.getRequestType() == MessageValue.STEAL) { //Checks to see if message indicates steal Action
+                            if (!isVoting) { //Checks to see it's not voting round
                                 for (NetworkMessage message : controller.steal(request.getRequesterName(), request.getData1())) {
-                                    sub.handler.sendInformation(message);
+                                    sub.handler.sendInformation(message); //Sends the stolen evidence
                                 }
                             }
-                        } else if (request.getRequestType() == MessageValue.PASS) {
-                            if (!isVoting) {
+                        } else if (request.getRequestType() == MessageValue.PASS) { //Checks to see if message indicates pass Action
+                            if (!isVoting) { //Checks to see it's not voting round
                                 for (NetworkMessage passMessage : controller.steal(request.getData1(), request.getRequesterName())){
                                     sub.handler.sendInformation(passMessage);
                                 }
                             }
-                        } else if (request.getRequestType() == MessageValue.INVESTIGATE) {
-                            if (!isVoting) {
+                        } else if (request.getRequestType() == MessageValue.INVESTIGATE) { //Checks to see if message indicates investigate Action
+                            if (!isVoting) { //Checks to see it's not voting round
                                 Evidence evidence = controller.investigate(request.getRequesterName(), request.getData1());
                                 if (evidence != null) {
-                                    sendEvidence(sub, evidence);
+                                    sendEvidence(sub, evidence); //Sends newly generated evidence
                                 } else {
                                     displayMessage("Investigate returned null uh oh");
                                 }
                             }
-                        } else if (request.getRequestType() == MessageValue.FORGE) {
+                        } else if (request.getRequestType() == MessageValue.FORGE) { //Checks to see if messages indicates Forge Action
                             Evidence evidence = controller.forge(request.getRequesterName(), request.getData1());
                             if (evidence != null) {
-                                sendEvidence(sub, evidence);
+                                sendEvidence(sub, evidence); //Sends newly generated Evidence
                             } else {
                                 displayMessage("Investigate returned null uh oh");
                             }
                         }
-                        if (totalActions == playerCounter) {
+                        if (totalActions == playerCounter) { //If all players make their actions
                             roundCounter--;
-                            if (roundCounter <= 0) {
+                            if (roundCounter <= 0) { //Checks to see if all rounds have been completed
                                 endGame();
                             } else {
                                 endRound();
                                 boolean hasImposters = false;
                                 boolean hasInnocent = false;
                                 for(int i = 0; i < subServers.size(); i++){
-                                    if(subServers.get(i).gameState!=null &&
+                                    if(subServers.get(i).gameState!=null && //Determines if Imposters are still in game
                                             subServers.get(i).gameState.getIdentifier() == PlayerIdentifier.CULTIST){
                                         hasImposters = true;
                                     }
-                                    if(subServers.get(i).gameState!=null &&
+                                    if(subServers.get(i).gameState!=null && //Deterimines if Innocents are still in game
                                             subServers.get(i).gameState.getIdentifier() == PlayerIdentifier.INNOCENT){
                                         hasInnocent = true;
                                     }
                                 }
-                                if(!hasImposters)endGame();
+                                if(!hasImposters)endGame(); //If imposters are still in the game they win
                                 if(!hasInnocent)endGame();
                             }
                         }
@@ -449,11 +449,11 @@ public class GameServer extends JFrame {
      */
     private void endRound() {
         displayMessage("Ending Round");
-        sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "ENDING ROUND", "Server", null));
+        sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "ENDING ROUND", "Server", null)); //Sends ending message to chat box
         String playerVotedOut = getPlayerVotedOut();
         removePlayerByName(playerVotedOut);
         resetActionsAndVotes();
-        totalActions = 0;
+        totalActions = 0; //Resets Values
         roundCounter--;
         timerCounter = 0;
         if(isVoting) {
