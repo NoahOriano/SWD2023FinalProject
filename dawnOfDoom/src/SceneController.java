@@ -155,7 +155,7 @@ public class SceneController {
         Parent root = loader.load();
         this.passConnection(loader.getController());
         SceneControllerForActionScene controller = loader.getController();
-        controller.roundsLeft.setText("10");
+        controller.roundsLeft.setText("4");
         controller.chatLog.appendText("Server>>> click join as action and submit To join game");
         controller.statusField.setText("Alive");
         controller.actionOptions.getItems().add("Join");
