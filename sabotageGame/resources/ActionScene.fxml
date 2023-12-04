@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -42,6 +43,86 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
+                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="1">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="3">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.rowIndex="6">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="3" GridPane.rowIndex="6">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="5" GridPane.rowIndex="6">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="5">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </GridPane>
                </children>
@@ -128,7 +209,7 @@
                         </Label>
                         <TextField fx:id="usernameField" layoutX="194.0" layoutY="76.0" prefHeight="25.0" prefWidth="180.0" style="-fx-text-fill: d6900f; -fx-background-color: black;" text="place name here">
                            <font>
-                              <Font name="TenaliRamakrishna Regular" size="12.0" />
+                              <Font name="TenaliRamakrishna Regular" size="18.0" />
                            </font>
                         </TextField>
                         <Label layoutX="194.0" layoutY="103.0" prefHeight="31.0" prefWidth="216.0" style="-fx-text-fill: d6900f;" text="Status:" textFill="#d6900f">
@@ -138,10 +219,15 @@
                         </Label>
                         <TextField fx:id="statusField" layoutX="194.0" layoutY="138.0" prefHeight="25.0" prefWidth="180.0" style="-fx-text-fill: d6900f; -fx-background-color: black;" text="Dead or Alive">
                            <font>
-                              <Font name="TenaliRamakrishna Regular" size="12.0" />
+                              <Font name="TenaliRamakrishna Regular" size="18.0" />
                            </font>
                         </TextField>
                         <Circle fill="#d6900f" layoutX="101.0" layoutY="103.0" radius="75.0" stroke="BLACK" strokeType="INSIDE" />
+                        <ImageView fitHeight="167.0" fitWidth="200.0" layoutX="1.0" layoutY="20.0">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </Pane>
                </children></Pane>

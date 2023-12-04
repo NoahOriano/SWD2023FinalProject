@@ -267,6 +267,7 @@ public class GameServer extends JFrame {
             }
             if (request.getRequestType() == MessageValue.JOIN){
                 getSubServerByName(request.getRequesterName()).isInGame = true;
+                request.getSender().sendInformation(new NetworkMessage(MessageValue.JOIN, null,null,null));
                 sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "Player Joined", "Server",null));
             }
             if (request.getRequestType() == MessageValue.VOTE) {
@@ -277,6 +278,7 @@ public class GameServer extends JFrame {
                         if (votes > playerCounter / 2) {
                             startGame();
                         }
+                        sendMessageToAll(new NetworkMessage(MessageValue.CHAT, request.getRequesterName()+" has voted to start game", "Server", null));
                     }
                 }
             }
