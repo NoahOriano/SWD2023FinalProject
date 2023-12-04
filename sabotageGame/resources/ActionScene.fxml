@@ -12,10 +12,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="789.0" prefWidth="1150.0" style="-fx-background-color: black;" text="Dawn of Doom" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21">
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="789.0" prefWidth="1150.0" style="-fx-background-color: black;" text="Dawn of Doom" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: black;">
          <children>
@@ -45,22 +46,225 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Avatar />
+                        <Avatar GridPane.columnIndex="3" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image></Avatar>
+                        <Avatar GridPane.columnIndex="2">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="1">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar style="-fx-background-color: d6900f;" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="5" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="4" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="5">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="4">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="3">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="2" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="5" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="4" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.rowIndex="5">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="5" GridPane.rowIndex="4">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="4" GridPane.rowIndex="4">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="3" GridPane.rowIndex="4">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="2" GridPane.rowIndex="4">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.rowIndex="4">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="5" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="4" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="3" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="5" GridPane.rowIndex="5">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="4" GridPane.rowIndex="5">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="3" GridPane.rowIndex="5">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="2" GridPane.rowIndex="5">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="3" GridPane.rowIndex="6">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="2" GridPane.rowIndex="6">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="1" GridPane.rowIndex="6">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.rowIndex="6">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar GridPane.columnIndex="4" GridPane.rowIndex="6">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
+                        <Avatar style="-fx-background-color: d6900f;">
+                           <image>
+                              <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
+                           </image>
+                        </Avatar>
                      </children>
                   </GridPane>
                </children>
             </AnchorPane>
-            <Label layoutX="38.0" layoutY="38.0" text="Port: " textFill="#d6900f">
+            <Label layoutX="38.0" layoutY="38.0" style="-fx-text-fill: d6900f;" text="Port: " textFill="#d6900f">
                <font>
                   <Font name="TenaliRamakrishna Regular" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="38.0" layoutY="75.0" text="IP Address: " textFill="#d6900f">
+            <Label layoutX="38.0" layoutY="75.0" style="-fx-text-fill: d6900f;" text="IP Address: " textFill="#d6900f">
                <font>
                   <Font name="TenaliRamakrishna Regular" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="35.0" layoutY="110.0" text="Rounds Left:" textFill="#d6900f">
+            <Label layoutX="35.0" layoutY="110.0" style="-fx-text-fill: d6900f;" text="Rounds Left:" textFill="#d6900f">
                <font>
                   <Font name="TenaliRamakrishna Regular" size="24.0" />
                </font>
@@ -85,18 +289,29 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
               </content>
             </ScrollPane>
-            <TextField layoutX="505.0" layoutY="647.0" prefHeight="60.0" prefWidth="438.0" promptText="Enter a Chat">
+            <TextField layoutX="505.0" layoutY="647.0" prefHeight="60.0" prefWidth="438.0" promptText="Enter a Chat" style="-fx-background-color: white;">
                <font>
                   <Font name="TenaliRamakrishna Regular" size="18.0" />
                </font>
             </TextField>
             <ChoiceBox layoutX="953.0" layoutY="647.0" prefWidth="150.0" style="-fx-background-color: Gray;" />
-            <Button layoutX="953.0" layoutY="683.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="152.0" style="-fx-background-color: #d6900f;" text="Submit" />
-            <Label layoutX="505.0" layoutY="397.0" text="Log:" textFill="#d6900f">
+            <Label layoutX="505.0" layoutY="397.0" style="-fx-text-fill: d6900f;" text="Log:" textFill="#d6900f">
                <font>
                   <Font name="TenaliRamakrishna Regular" size="36.0" />
                </font>
             </Label>
+            <Button layoutX="953.0" layoutY="677.0" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: d6900f;" text="Submit">
+               <font>
+                  <Font name="TenaliRamakrishna Regular" size="13.0" />
+               </font>
+            </Button>
+            <Label layoutX="35.0" layoutY="172.0" />
+            <Label layoutX="32.0" layoutY="157.0" style="-fx-text-fill: d6900f;" text="Actions:" textFill="#d6900f">
+               <font>
+                  <Font name="TenaliRamakrishna Regular" size="36.0" />
+               </font>
+            </Label>
+            <Pane layoutX="30.0" layoutY="215.0" prefHeight="200.0" prefWidth="200.0" />
          </children></AnchorPane>
   </content>
 </TitledPane>
