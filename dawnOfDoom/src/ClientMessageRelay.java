@@ -62,7 +62,7 @@ public class ClientMessageRelay implements Runnable{
                     }
                     // If the system receives a message stating that the round is over, change the number of rounds left accordingly and get the game state.
                     if(networkMessage.identifier() == MessageValue.ROUNDOVER){
-                        control.roundsLeft.setText("Rounds Left: "+networkMessage.dataB());
+                        control.roundsLeft.setText(networkMessage.dataB());
                         GameState state = master.getGameState();
                         for(int i = 0; i < state.getPlayerFiles().size(); i++){
                             if(state.getPlayerFiles().get(i).getDefense().equals(networkMessage.dataA())){
