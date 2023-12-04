@@ -7,6 +7,7 @@ import java.net.Socket;
  * Runnable for handling incoming information on connection
  */
 public class ClientMessageRelay implements Runnable{
+
     /**SceneMaster which contains a SceneController which changes with scene changes*/
     SceneMaster master;
     /**
@@ -45,24 +46,47 @@ public class ClientMessageRelay implements Runnable{
                 if(controller.getClass() == SceneControllerForActionScene.class){
                     SceneControllerForActionScene control = (SceneControllerForActionScene)controller;
                     if(networkMessage.identifier() == MessageValue.GAMEOVER){
-                        //@TODO gameover logic nad setup for scene switching
-                        //@TODO voting again should bring the player back to signin scene
+                        control.setGameOver(true);
+                        control.chatLog.appendText("Server>>> "+networkMessage.dataA());
                     }
                     if(networkMessage.identifier() == MessageValue.EVIDENCE){
                         //@TODO logic for handling evidence and adding information to gamestate
                     }
                     if(networkMessage.identifier() == MessageValue.ROUNDOVER){
-                        //@TODO logic for roundover
+                        control.roundsLeft.setText("Rounds Left: "+networkMessage.dataB());
+                        GameState state = master.getGameState();
+                        for(int i = 0; i < state.getPlayerFiles().size(); i++){
+                            if(state.getPlayerFiles().get(i).getDefense().equals(networkMessage.dataA())){
+                                // This is the file on the player who was voted out
+                                state.getPlayerFiles().get(i).setLife(false);
+                            }
+                        }
+                    }
+                    if(networkMessage.identifier() == MessageValue.INNOCENT){
+                        master.getGameState().setIdentifier(  PlayerIdentifier.INNOCENT);
+                    }
+                    if(networkMessage.identifier() == MessageValue.CULTIST){
+                        master.getGameState().setIdentifier( PlayerIdentifier.CULTIST);
                     }
                     if(networkMessage.identifier() == MessageValue.VOTE){
-                        //@TODO logic for setting game state to voting
+                        control.actionOptions.getItems().clear();
+                        control.actionOptions.getItems().add("Vote");
                     }
                     if(networkMessage.identifier() == MessageValue.CHAT){
-                        //@TODO logic for adding chat to log
+                        control.chatLog.appendText(networkMessage.dataB()+">>> "+networkMessage.dataA());
                     }
                     if(networkMessage.identifier() == MessageValue.INVESTIGATE){
-                        //REuse of message type
-                        //@TODO logic for setting game state to action state
+                        control.actionOptions.getItems().clear();
+                        if(master.getGameState().getIdentifier() == PlayerIdentifier.INNOCENT){
+                            control.actionOptions.getItems().add("Steal");
+                            control.actionOptions.getItems().add("Pass");
+                            control.actionOptions.getItems().add("Investigate");
+                        }else{
+                            control.actionOptions.getItems().add("Steal");
+                            control.actionOptions.getItems().add("Pass");
+                            control.actionOptions.getItems().add("Investigate");
+                            control.actionOptions.getItems().add("Forge");
+                        }
                     }
                 }
                 else if(controller.getClass() == SceneControllerForGameJoin.class){
