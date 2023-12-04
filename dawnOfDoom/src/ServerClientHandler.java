@@ -51,11 +51,20 @@ public class ServerClientHandler implements Runnable{
         this.username = username;
     }
 
+    /**
+     * Constructor for a server client handler on the given connection which will push request to the give Queue
+     * @param connection connection to client
+     * @param requests
+     */
     ServerClientHandler(Socket connection, ArrayBlockingQueue<ServerRequest> requests){
         this.connection = connection;
         this.requests = requests;
     }
-    
+
+    /**
+     * Retrieves streams from connection
+     * @throws IOException
+     */
     private void getStreams() throws IOException
     {
         // set up output stream for NetworkMessages
