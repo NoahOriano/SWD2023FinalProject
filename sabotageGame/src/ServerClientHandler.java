@@ -36,12 +36,6 @@ public class ServerClientHandler implements Runnable{
     private boolean clientHasActed;
 
     /**
-     * Gets streams to send and receive data to and from connected client
-     */
-
-    private ArrayList<ServerPlayerRepresentation> players = new ArrayList<ServerPlayerRepresentation>();
-
-    /**
      * Username of connected client
      */
     private String username;
