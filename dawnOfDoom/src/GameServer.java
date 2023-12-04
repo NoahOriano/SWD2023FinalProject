@@ -177,13 +177,13 @@ public class GameServer extends JFrame {
      * Set up and run server
      */
     public void runServer() {
-        subServers = new ArrayList<>();
+        subServers = new ArrayList<>(); //Initializes the array of subServers
         playerCounter = 0;
         gameActive = false;
         controller = new ServerGameController();
         roundCounter = DEFAULTROUNDS;
         names = new ArrayList<>();
-        service = Executors.newFixedThreadPool(17);
+        service = Executors.newFixedThreadPool(17); //Initializes a fixed thread pool of 17
         requests = new ArrayBlockingQueue<ServerRequest>(100);
         connectionService = new ServerClientConnectionService(port, backlog, requests);
         service.execute(connectionService);
@@ -243,12 +243,12 @@ public class GameServer extends JFrame {
      * @param request Action request to handle all the data fom
      */
     public void handleActionRequest(ActionRequest request) {
-        if (request.getRequestType() == MessageValue.CHAT) {
-            if (getSubServerByName(request.getRequesterName()) != null && getSubServerByName(request.getRequesterName()).isInGame) {
-                displayMessage("Chat Request Received from " + request.getRequesterName() + " to " + request.getData2());
-                if (request.getData2() == null || request.getData2().equals("Global")) {
-                    sendMessageToAll(new NetworkMessage(MessageValue.CHAT, request.getData1(), request.getRequesterName(), null));
-                } else if (request.getData2().equals("Cult")) {
+        if (request.getRequestType() == MessageValue.CHAT) { //Checks the value of the message to see if it's a chat
+            if (getSubServerByName(request.getRequesterName()) != null && getSubServerByName(request.getRequesterName()).isInGame) { //Checks to see that the person sending the message is real and also in the game
+                displayMessage("Chat Request Received from " + request.getRequesterName() + " to " + request.getData2()); //Displays message to the Chat Log
+                if (request.getData2() == null || request.getData2().equals("Global")) { //Checks to see that the Chat is supposed to go to global chat or defaults to global chat
+                    sendMessageToAll(new NetworkMessage(MessageValue.CHAT, request.getData1(), request.getRequesterName(), null)); //Sends message for everyone connected to the game to see
+                } else if (request.getData2().equals("Cult")) { //Implementation of a Cult chat that could not be fully implemented
                     for (int i = 0; i < subServers.size(); i++) {
                         if (subServers.get(i).gameState != null && subServers.get(i).gameState.getIdentifier() == PlayerIdentifier.CULTIST) {
                             subServers.get(i).handler.sendInformation(new NetworkMessage(MessageValue.CHAT, request.getData1(), request.getRequesterName(), null));
@@ -258,42 +258,42 @@ public class GameServer extends JFrame {
             }
         } else {
             if (!gameActive) { // If the game is not active
-                if (request.getRequestType() == MessageValue.SIGNIN) {
-                    if (usernameIsAvailable(request.getData1())) {
-                        for (int i = 0; i < subServers.size(); i++) {
-                            if (subServers.get(i).handler == request.getSender()) {
-                                playerCounter++;
+                if (request.getRequestType() == MessageValue.SIGNIN) { //Checks to see if message reveals if a player is singing in
+                    if (usernameIsAvailable(request.getData1())) { //If so grabs the userName to set a String Identifier to the player
+                        for (int i = 0; i < subServers.size(); i++) { //Loops through the subServers
+                            if (subServers.get(i).handler == request.getSender()) { //Checks which subServer the request is from
+                                playerCounter++; //Increases overall playerCount
                                 subServers.get(i).init(request.getData1());
-                                displayMessage("User Connected:" + request.getData1());
+                                displayMessage("User Connected:" + request.getData1()); //Displays message of the User Connectingg
                             }
                         }
-                        request.getSender().sendInformation(new NetworkMessage(MessageValue.SIGNIN, null, null, null));
+                        request.getSender().sendInformation(new NetworkMessage(MessageValue.SIGNIN, null, null, null)); //Sets message out to the Client
                     }
                 }
-                if (request.getRequestType() == MessageValue.JOIN) {
+                if (request.getRequestType() == MessageValue.JOIN) { //Checks to see if message revealse if a player is joing
                     displayMessage("Join Requested");
-                    getSubServerByName(request.getRequesterName()).isInGame = true;
+                    getSubServerByName(request.getRequesterName()).isInGame = true; //Initializes booleans to true to shower player is active
                     getSubServerByName(request.getRequesterName()).isAlive = true;
-                    getSubServerByName(request.getRequesterName()).gameState = new GameState(request.getRequesterName());
-                    controller.addPlayerState(getSubServerByName(request.getRequesterName()).gameState);
-                    request.getSender().sendInformation(new NetworkMessage(MessageValue.JOIN, null, null, null));
-                    sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "Player Joined", "Server", null));
+                    getSubServerByName(request.getRequesterName()).gameState = new GameState(request.getRequesterName()); //Initializes a new GameState for the player
+                    controller.addPlayerState(getSubServerByName(request.getRequesterName()).gameState); //Adds the player to the list of GameStates
+                    request.getSender().sendInformation(new NetworkMessage(MessageValue.JOIN, null, null, null)); //Sends the join information back to the clien
+                    sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "Player Joined", "Server", null)); //Notifies the chat of a player joined
                     for (int i = 0; i < subServers.size(); i++) {
                         if (subServers.get(i).isInGame) {
-                            sendMessageToAll(new NetworkMessage(MessageValue.NEWPLAYER, subServers.get(i).username, null, null));
+                            sendMessageToAll(new NetworkMessage(MessageValue.NEWPLAYER, subServers.get(i).username, null, null)); //Notifies all subservers of the new player
                         }
                     }
                 }
-                if (request.getRequestType() == MessageValue.VOTE) {
-                    for (int i = 0; i < subServers.size(); i++) {
-                        if (subServers.get(i).handler == request.getSender() && !subServers.get(i).hasActed) {
-                            subServers.get(i).hasActed = true;
-                            votes++;
+                if (request.getRequestType() == MessageValue.VOTE) { //Checks to see if message reveals if the player is voting to start
+                    for (int i = 0; i < subServers.size(); i++) { //Navigates through all the subservers
+                        if (subServers.get(i).handler == request.getSender() && !subServers.get(i).hasActed) { //Checks to see that requester is in that subServer and that player has not acted
+                            subServers.get(i).hasActed = true; //Sets acted to true for no double voting
+                            votes++; //Increases vote counters
                             if (votes > playerCounter / 2) {
-                                startGame();
+                                startGame(); //starts game once more than half of player vote to start
                             }
                             sendMessageToAll(new NetworkMessage(MessageValue.CHAT, request.getRequesterName() + " has voted to start game", "Server", null));
-                        }
+                        } //Notifies the Chat that a player has voted to start their game
                     }
                 }
             } else { // If the game is active
@@ -302,7 +302,7 @@ public class GameServer extends JFrame {
                     if (sub.isInGame && sub.isAlive && !sub.hasActed) {
                         sub.hasActed = true;
                         totalActions++;
-                        sendMessageToAll(new NetworkMessage(MessageValue.CHAT, sub.username + "has submitted their action", "Server", null));
+                        sendMessageToAll(new NetworkMessage(MessageValue.CHAT, sub.username + " has submitted their action", "Server", null));
                         if (request.getRequestType() == MessageValue.VOTE) {
                             if (isVoting) {
                                 boolean flag = true;
