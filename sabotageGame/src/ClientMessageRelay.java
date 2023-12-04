@@ -73,6 +73,7 @@ public class ClientMessageRelay implements Runnable{
                         control.actionOptions.getItems().add("Vote");
                     }
                     if(networkMessage.identifier() == MessageValue.JOIN){
+                        master.setGameState(new GameState(control.getUsername()));
                         control.actionOptions.getItems().clear();
                         control.actionOptions.getItems().add("Vote");
                     }
