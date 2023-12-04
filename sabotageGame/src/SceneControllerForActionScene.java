@@ -137,8 +137,10 @@ public class SceneControllerForActionScene extends SceneController{
         playerOptions.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                EvidenceList list = getMaster().getGameState().getPlayerFileByName(playerOptions.getValue());
-                statusField.setText("For: "+list.getInnocentCount()+", Against: "+list.getCultistCount());
+                if(getMaster().getGameState()!=null) {
+                    EvidenceList list = getMaster().getGameState().getPlayerFileByName(playerOptions.getValue());
+                    statusField.setText("For: " + list.getInnocentCount() + ", Against: " + list.getCultistCount());
+                }
             }
         });
     }
