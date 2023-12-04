@@ -77,8 +77,16 @@ public class ClientMessageRelay implements Runnable{
                     }
                     if(networkMessage.identifier() == MessageValue.JOIN){
                         master.setGameState(new GameState(control.getUsername()));
+                        master.getGameState().addPlayerFile(control.getUsername());
                         control.actionOptions.getItems().clear();
                         control.actionOptions.getItems().add("Vote");
+                    }
+                    if(networkMessage.identifier() == MessageValue.NEWPLAYER){
+                        if(master.getGameState()!=null){
+                            if(master.getGameState().addPlayerFile(networkMessage.dataA())){
+                                control.playerOptions.getItems().add(networkMessage.dataA());
+                            }
+                        }
                     }
                     if(networkMessage.identifier() == MessageValue.CHAT){
                         control.chatLog.appendText("\n"+networkMessage.dataB()+">>> "+networkMessage.dataA());

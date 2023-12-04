@@ -4,7 +4,7 @@ import java.io.Serializable;
  * Values for the identifiers used in a NetworkMessage and ActionRequest
  */
 public enum MessageValue implements Serializable {
-    TERMINATE, VOTE, STEAL, FORGE, INVESTIGATE, PASS, MESSAGE, ROUNDOVER, GAMEOVER, CHAT, SIGNIN, EVIDENCE, TIMER, CULTIST, INNOCENT, JOIN
+    TERMINATE, VOTE, STEAL, FORGE, INVESTIGATE, PASS, MESSAGE, ROUNDOVER, GAMEOVER, CHAT, SIGNIN, EVIDENCE, TIMER, CULTIST, INNOCENT, NEWPLAYER, JOIN
     // Note that message sender is verified by server, field containing sender username is not necessary
 
     // Terminate message data fields: null, null, null

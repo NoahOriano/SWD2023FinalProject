@@ -276,6 +276,11 @@ public class GameServer extends JFrame {
                     controller.addPlayerState(getSubServerByName(request.getRequesterName()).gameState);
                     request.getSender().sendInformation(new NetworkMessage(MessageValue.JOIN, null, null, null));
                     sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "Player Joined", "Server", null));
+                    for(int i = 0; i < subServers.size();i++){
+                        if(subServers.get(i).isInGame){
+                            sendMessageToAll(new NetworkMessage(MessageValue.NEWPLAYER, subServers.get(i).username, null, null));
+                        }
+                    }
                 }
                 if (request.getRequestType() == MessageValue.VOTE) {
                     for (int i = 0; i < subServers.size(); i++) {
