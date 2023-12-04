@@ -26,7 +26,7 @@ public class ServerGameController {
      * @return the Index of a player in playerStates
      */
     public int getIndex(String playerID) {
-        int index = -1;
+        int index = 0;
         for (int x = 0; x < playerStates.size(); x++) {
             if (playerStates.get(x).getUsername().equals(playerID)) { //Checks to see which index has the same matching userName
                 index = x; //Sets the output to that index
