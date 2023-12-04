@@ -424,6 +424,7 @@ public class GameServer extends JFrame {
         for (int i = 0; i < subServers.size(); i++) {
             if (subServers.get(i).isInGame) servers.add(subServers.get(i));
         }
+        //Determines who's innocent and who's imposter
         for (int i = 0; i < playerCounter / 3; i++) {
             int rand = (int) (Math.random() * servers.size());
             servers.get(rand).gameState.setIdentifier(PlayerIdentifier.CULTIST);
@@ -441,7 +442,7 @@ public class GameServer extends JFrame {
             }
         }
         sendMessageToAll(new NetworkMessage(MessageValue.INVESTIGATE, null, null, null));
-        sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "Game Started", "Server", null));
+        sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "Game Started", "Server", null)); //Sends GameStart message to the chat board
     }
 
     /**
