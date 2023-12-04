@@ -125,7 +125,4 @@ public class EvidenceList {
         }
         return evidenceByName;
     }
-
-
-
 }

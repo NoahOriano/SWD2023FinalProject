@@ -129,7 +129,7 @@ public class ServerGameController {
         //Adds the evidence discovered by the investigation
         if(playerStates.get(detectiveIndex).getPlayerFiles().get(detectiveListIndex).addEvidence(playerStates.get(suspectIndex).getIdentifier(), detective)){
             return playerStates.get(detectiveIndex).getPlayerFiles().get(detectiveListIndex).getEvidenceList().get(
-                    playerStates.get(detectiveIndex).getPlayerFiles().get(detectiveListIndex).getEvidenceList().size());
+                    playerStates.get(detectiveIndex).getPlayerFiles().get(detectiveListIndex).getEvidenceList().size()-1);
         }
         return null;
     }
@@ -148,15 +148,15 @@ public class ServerGameController {
             if (playerStates.get(victimIndex).getIdentifier().equals(PlayerIdentifier.INNOCENT)) { //If victim is innocent generates cultist evidence
                 //Evidence gets added to the cultist's evidenceFiles
                 if(playerStates.get(cultistIndex).getPlayerFiles().get(cultistListIndex).addEvidence(PlayerIdentifier.CULTIST, cultist)){
-                    return playerStates.get(cultistIndex).getPlayerFiles().get(victimIndex).getEvidenceList().get(
-                            playerStates.get(cultistIndex).getPlayerFiles().get(victimIndex).getEvidenceList().size());
+                    return playerStates.get(cultistIndex).getPlayerFiles().get(cultistListIndex).getEvidenceList().get(
+                            playerStates.get(cultistIndex).getPlayerFiles().get(cultistListIndex).getEvidenceList().size()-1);
                 };
             }
             else if (playerStates.get(cultistIndex).getIdentifier().equals(PlayerIdentifier.CULTIST)) { //If victim is cultist generate cultist evidence
                 //Evidence gets added to the cultist's evidenceFiles
                 if(playerStates.get(cultistIndex).getPlayerFiles().get(cultistListIndex).addEvidence(PlayerIdentifier.INNOCENT, cultist)){
-                    return playerStates.get(cultistIndex).getPlayerFiles().get(victimIndex).getEvidenceList().get(
-                            playerStates.get(cultistIndex).getPlayerFiles().get(victimIndex).getEvidenceList().size());
+                    return playerStates.get(cultistIndex).getPlayerFiles().get(cultistListIndex).getEvidenceList().get(
+                            playerStates.get(cultistIndex).getPlayerFiles().get(cultistListIndex).getEvidenceList().size()-1);
                 };
             }
             return null;
