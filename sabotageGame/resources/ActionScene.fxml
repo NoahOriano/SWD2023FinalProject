@@ -22,7 +22,7 @@
          <children>
             <AnchorPane layoutX="505.0" layoutY="38.0" prefHeight="377.0" prefWidth="594.0" style="-fx-background-color: white;">
                <children>
-                  <ImageView fitHeight="379.0" fitWidth="599.0" layoutX="-2.0" layoutY="-2.0">
+                  <ImageView fx:id="mapPane" fitHeight="379.0" fitWidth="599.0" layoutX="-2.0" layoutY="-2.0">
                   </ImageView>
                   <GridPane layoutX="2.0" layoutY="-1.0" prefHeight="378.0" prefWidth="592.0">
                     <columnConstraints>
@@ -43,82 +43,82 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.rowIndex="1">
+                        <ImageView fx:id="mapIcon1" fitHeight="56.0" fitWidth="69.0" GridPane.rowIndex="1">
                            <image>
                               <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                        <ImageView fx:id="mapIcon13" fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                            <image>
                               <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="1">
+                        <ImageView fx:id="mapIcon2" fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="1">
                            <image>
                               <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <ImageView fx:id="mapIcon12" fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <image>
                               <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.rowIndex="3">
+                        <ImageView fx:id="mapIcon3" fitHeight="56.0" fitWidth="69.0" GridPane.rowIndex="3">
                            <image>
                               <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="3">
+                        <ImageView fx:id="mapIcon7" fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="3">
                            <image>
                               <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.rowIndex="6">
+                        <ImageView fx:id="mapIcon4" fitHeight="56.0" fitWidth="69.0" GridPane.rowIndex="6">
                            <image>
                               <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                        <ImageView fx:id="mapIcon6" fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
                            <image>
                               <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                        <ImageView fx:id="mapIcon14" fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
                            <image>
                               <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="3" GridPane.rowIndex="6">
+                        <ImageView fx:id="mapIcon10" fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="3" GridPane.rowIndex="6">
                            <image>
                               <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                        <ImageView fx:id="mapIcon9" fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
                            <image>
                               <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="5" GridPane.rowIndex="6">
+                        <ImageView fx:id="mapIcon11" fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="5" GridPane.rowIndex="6">
                            <image>
                               <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="5">
+                        <ImageView fx:id="mapIcon8" fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="5">
                            <image>
                               <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                        <ImageView fx:id="mapicon16" fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
                            <image>
                               <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <ImageView fx:id="mapIcon5" fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <image>
                               <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                        <ImageView fx:id="mapIcon15" fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
                            <image>
                               <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
                            </image>
@@ -223,7 +223,7 @@
                            </font>
                         </TextField>
                         <Circle fill="#d6900f" layoutX="101.0" layoutY="103.0" radius="75.0" stroke="BLACK" strokeType="INSIDE" />
-                        <ImageView fitHeight="167.0" fitWidth="200.0" layoutX="1.0" layoutY="20.0">
+                        <ImageView fx:id="profPic" fitHeight="167.0" fitWidth="200.0" layoutX="1.0" layoutY="20.0">
                            <image>
                               <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
                            </image>
