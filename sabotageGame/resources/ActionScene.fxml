@@ -108,7 +108,7 @@
                               <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="mapicon16" fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                        <ImageView fx:id="mapIcon16" fitHeight="56.0" fitWidth="69.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
                            <image>
                               <Image url="@../../../../../Pictures/Screenshots/profPicFinal.png" />
                            </image>
