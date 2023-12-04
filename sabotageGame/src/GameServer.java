@@ -428,11 +428,12 @@ public class GameServer extends JFrame {
         displayMessage("Starting Game");
         ArrayList<SubServer> servers = new ArrayList<>();
         for (int i = 0; i < subServers.size(); i++) {
-            servers.add(subServers.get(i));
+            if(servers.get(i).isInGame) servers.add(subServers.get(i));
         }
         for (int i = 0; i < playerCounter / 3; i++) {
-            servers.get(i).gameState.setIdentifier(PlayerIdentifier.CULTIST);
-            servers.remove((int) (Math.random() * servers.size())).handler.sendInformation(
+            int rand = (int) (Math.random() * servers.size());
+            servers.get(rand).gameState.setIdentifier(PlayerIdentifier.CULTIST);
+            servers.remove(rand).handler.sendInformation(
                     new NetworkMessage(MessageValue.CULTIST, null, null, null));
         }
         while (!servers.isEmpty()) {
@@ -440,12 +441,12 @@ public class GameServer extends JFrame {
             servers.remove(0).handler.sendInformation(
                     new NetworkMessage(MessageValue.INNOCENT, null, null, null));
         }
-        sendMessageToAll(new NetworkMessage(MessageValue.INVESTIGATE, null, null, null));
         for (int i = 0; i < controller.playerStates.size(); i++) {
             for (int j = 0; j < controller.playerStates.size(); j++) {
                 controller.playerStates.get(i).addPlayerFile(controller.playerStates.get(j).getUsername());
             }
         }
+        sendMessageToAll(new NetworkMessage(MessageValue.INVESTIGATE, null, null, null));
     }
 
     /**
