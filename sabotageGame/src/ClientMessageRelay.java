@@ -63,7 +63,7 @@ public class ClientMessageRelay implements Runnable{
                                 // This is the file on the player who was voted out
                                 state.getPlayerFiles().get(i).setLife(false);
                                 if(networkMessage.dataA().equals(master.getGameState().getUsername())){
-                                    control.usernameField.setText(control.usernameField.getText()+" DEAD");
+                                    control.statusField.setText("You are dead");
                                 }
                             }
                         }

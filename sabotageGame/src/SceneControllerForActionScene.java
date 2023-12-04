@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 
 
 import javax.swing.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -22,7 +23,7 @@ import java.util.Arrays;
  * Contains all different window elements and handling for all three scenes
  * This is done to allow sharing of elements, such as chat, between scenes
  */
-public class SceneControllerForActionScene extends SceneController{
+public class SceneControllerForActionScene extends SceneController {
 
     @FXML
     TextField roundsLeft;
@@ -88,25 +89,35 @@ public class SceneControllerForActionScene extends SceneController{
     @FXML
     boolean gameOver;
 
-    /** A variable that controls the image of the map in scene builder.**/
+    /**
+     * A variable that controls the image of the map in scene builder.
+     **/
     @FXML
     ImageView mapPane;
 
-    /** A variable that controls the user's profile picture.**/
+    /**
+     * A variable that controls the user's profile picture.
+     **/
     @FXML
     ImageView profPic;
 
-    /** A series of variable that hold the images of the icons on the map.**/
+    /**
+     * A series of variable that hold the images of the icons on the map.
+     **/
     @FXML
     ImageView mapIcon1, mapIcon2, mapIcon3, mapIcon4, mapIcon5,
-    mapIcon6, mapIcon7, mapIcon8, mapIcon9, mapIcon10, mapIcon11,
-    mapIcon12, mapIcon13, mapIcon14, mapIcon15, mapIcon16;
+            mapIcon6, mapIcon7, mapIcon8, mapIcon9, mapIcon10, mapIcon11,
+            mapIcon12, mapIcon13, mapIcon14, mapIcon15, mapIcon16;
 
-    /** A private ArrayList of ImageViews that holds the map icons.**/
+    /**
+     * A private ArrayList of ImageViews that holds the map icons.
+     **/
     private ArrayList<ImageView> mapIcons = new ArrayList<>();
 
-    /** The getter for the ArrayList of ImageViews that hold the player icons on the map.**/
-    public ArrayList<ImageView> getMapIcons(){
+    /**
+     * The getter for the ArrayList of ImageViews that hold the player icons on the map.
+     **/
+    public ArrayList<ImageView> getMapIcons() {
         this.mapIcons.add(mapIcon1);
         this.mapIcons.add(mapIcon2);
         this.mapIcons.add(mapIcon3);
@@ -126,25 +137,29 @@ public class SceneControllerForActionScene extends SceneController{
     }
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         gameOver = false;
         actionSubmit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                if(actionOptions.getValue().equals("Steal")){
-                    sendMessage(new NetworkMessage(MessageValue.STEAL, playerOptions.getValue(), null, null));
-                }
-                else if(actionOptions.getValue().equals("Forge")){
-                    sendMessage(new NetworkMessage(MessageValue.FORGE, playerOptions.getValue(), null, null));
-                }
-                else if(actionOptions.getValue().equals("Investigate")){
-                    sendMessage(new NetworkMessage(MessageValue.INVESTIGATE, playerOptions.getValue(), null, null));
-                }
-                else if(actionOptions.getValue().equals("Vote")){
-                    sendMessage(new NetworkMessage(MessageValue.VOTE, playerOptions.getValue(), null, null));
-                }
-                else if(actionOptions.getValue().equals("Join")){
-                    sendMessage(new NetworkMessage(MessageValue.JOIN, playerOptions.getValue(), null, null));
+                if (!gameOver) {
+                    if (actionOptions.getValue().equals("Steal")) {
+                        sendMessage(new NetworkMessage(MessageValue.STEAL, playerOptions.getValue(), null, null));
+                    } else if (actionOptions.getValue().equals("Forge")) {
+                        sendMessage(new NetworkMessage(MessageValue.FORGE, playerOptions.getValue(), null, null));
+                    } else if (actionOptions.getValue().equals("Investigate")) {
+                        sendMessage(new NetworkMessage(MessageValue.INVESTIGATE, playerOptions.getValue(), null, null));
+                    } else if (actionOptions.getValue().equals("Vote")) {
+                        sendMessage(new NetworkMessage(MessageValue.VOTE, playerOptions.getValue(), null, null));
+                    } else if (actionOptions.getValue().equals("Join")) {
+                        sendMessage(new NetworkMessage(MessageValue.JOIN, playerOptions.getValue(), null, null));
+                    }
+                } else {
+                    try {
+                        setSignOnScreen(actionEvent);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         });
@@ -157,9 +172,19 @@ public class SceneControllerForActionScene extends SceneController{
         playerOptions.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                if(getMaster().getGameState()!=null) {
-                    EvidenceList list = getMaster().getGameState().getPlayerFileByName(playerOptions.getValue());
-                    evidenceField.setText("For: " + list.getInnocentCount() + ", Against: " + list.getCultistCount());
+                if (!gameOver) {
+                    if (getMaster().getGameState() != null) {
+                        EvidenceList list = getMaster().getGameState().getPlayerFileByName(playerOptions.getValue());
+                        String life = "true";
+                        if (!list.isLife()) life = "false";
+                        evidenceField.setText("For: " + list.getInnocentCount() + ", Against: " + list.getCultistCount() + ", Is Alive: " + life);
+                    }
+                } else {
+                    try {
+                        setSignOnScreen(actionEvent);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         });
