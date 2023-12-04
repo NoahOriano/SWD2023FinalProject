@@ -14,8 +14,6 @@ public class Evidence {
 
     /**
      * Getter and Setters Below
-     *
-     * @return
      */
     public PlayerIdentifier getIdentifier() {
         return identifier;
@@ -44,8 +42,8 @@ public class Evidence {
 
     /**
      * For client end, to not allow investigator to be sent over
-     * @param target
-     * @param identifier
+     * @param target is input for the person who the evidence is about
+     * @param identifier is the input that determines Cultist or Innocent
      */
     public Evidence(String target, PlayerIdentifier identifier) {
         this.target = target;
@@ -54,8 +52,8 @@ public class Evidence {
 
     /**
      * For server end, investigator never sent over network
-     * @param target
-     * @param identifier
+     * @param target is input for the person who the evidence is about
+     * @param identifier is the input that determines Cultist or Innocent
      */
     public Evidence(String target, PlayerIdentifier identifier, String investigator) {
         this.target = target;
