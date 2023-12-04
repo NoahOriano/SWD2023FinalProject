@@ -441,6 +441,7 @@ public class GameServer extends JFrame {
             }
         }
         sendMessageToAll(new NetworkMessage(MessageValue.INVESTIGATE, null, null, null));
+        sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "Game Started", "Server", null));
     }
 
     /**
