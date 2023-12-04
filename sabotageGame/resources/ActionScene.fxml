@@ -142,7 +142,7 @@
                   <Font name="TenaliRamakrishna Regular" size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="serverPortField" alignment="TOP_LEFT" editable="false" layoutX="75.0" layoutY="40.0" prefHeight="49.0" prefWidth="372.0" style="-fx-text-fill: d6900f; -fx-background-color: black;">
+            <TextField fx:id="serverPortField" alignment="TOP_LEFT" editable="false" layoutX="75.0" layoutY="38.0" prefHeight="49.0" prefWidth="372.0" style="-fx-text-fill: d6900f; -fx-background-color: black;">
                <font>
                   <Font name="TenaliRamakrishna Regular" size="24.0" />
                </font>
@@ -152,7 +152,7 @@
                   <Font name="TenaliRamakrishna Regular" size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="roundsLeft" alignment="TOP_LEFT" editable="false" layoutX="135.0" layoutY="138.0" prefHeight="39.0" prefWidth="312.0" style="-fx-background-color: black; -fx-text-fill: d6900f;">
+            <TextField fx:id="roundsLeft" alignment="TOP_LEFT" editable="false" layoutX="136.0" layoutY="134.0" prefHeight="39.0" prefWidth="312.0" style="-fx-background-color: black; -fx-text-fill: d6900f;">
                <font>
                   <Font name="TenaliRamakrishna Regular" size="18.0" />
                </font>
@@ -217,7 +217,7 @@
                               <Font name="TenaliRamakrishna Regular" size="24.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="statusField" alignment="TOP_LEFT" editable="false" layoutX="194.0" layoutY="136.0" prefHeight="67.0" prefWidth="180.0" style="-fx-text-fill: d6900f; -fx-background-color: black;" text="Dead or Alive">
+                        <TextField fx:id="statusField" alignment="TOP_LEFT" editable="false" layoutX="194.0" layoutY="136.0" prefHeight="44.0" prefWidth="180.0" style="-fx-text-fill: d6900f; -fx-background-color: black;" text="Dead or Alive">
                            <font>
                               <Font name="TenaliRamakrishna Regular" size="24.0" />
                            </font>
