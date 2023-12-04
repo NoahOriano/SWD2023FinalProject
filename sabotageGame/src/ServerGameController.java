@@ -49,12 +49,14 @@ public class ServerGameController {
      * @param thief is the input for the user who is stealing the data
      * @param victim is the input for the use who's data is being stolen
      */
-    public void steal(String thief, String victim) {
+    public ArrayList<NetworkMessage> steal(String thief, String victim) {
         GameState victimFile = playerStates.get(getIndex(victim)); //Finds the gameState of the player being stolen
         GameState thiefFile = playerStates.get(getIndex(thief)); //Finds the gameState of the player stealing
         int counter = 0;
 
         ArrayList<Evidence> collector = new ArrayList<>();
+
+        ArrayList<NetworkMessage> list = new ArrayList<>();
 
         for (int i = 0; i < victimFile.getPlayerFiles().size(); i++) {
             for (int j = 0; i < victimFile.getPlayerFiles().get(i).getEvidenceList().size(); j++) {
@@ -67,20 +69,26 @@ public class ServerGameController {
             Evidence evidence = collector.remove(rand); //Deconstructs the collector to get the evidence
             if (thiefFile.getPlayerFiles().get(getListIndex(evidence.getTarget(), //Checks to see if the evidence got added to the evidenceList
                     getIndex(thief))).addEvidence(evidence.getIdentifier(), evidence.getInvestigator())) {
+                String identity = "Innocent";
+                if(evidence.getIdentifier()==PlayerIdentifier.CULTIST)identity = "Cultist";
+                list.add(new NetworkMessage(MessageValue.EVIDENCE, evidence.getTarget(), identity, null));
                 counter++; //Increases to ensure only 3 pieces of evidence get added
             }
         }
+        return list;
     }
 
     /**
      * Allows user to pass all their available evidence on infoAbout to recipient
      * @param user is the input of the user who wants to pass the data to another player
      * @param infoAbout is the input of the player who the evidenceFile is about
-     * @param recipient is the input for the player who is recieving the evidenceFile
+     * @param recipient is the input for the player who is receiving the evidenceFile
      */
-    public void pass(String user, String infoAbout, String recipient) {
+    public ArrayList<Evidence> pass(String user, String infoAbout, String recipient) {
         int userIndex = getIndex(user); //Gets the index of user for playerStates
         int recipientIndex = getIndex(recipient); //Gets the index of recipient for playerStates
+
+        ArrayList<Evidence> list = new ArrayList<>();
 
         int infoIndex = getListIndex(infoAbout, userIndex); //Gets the index of infoAbout from user's playerFiles
         int infoRecipientIndex = getListIndex(infoAbout, recipientIndex);  //Gets the index of infoAbout from recipient's playerFiles
@@ -89,8 +97,12 @@ public class ServerGameController {
         for (int x = 0; x < playerStates.get(userIndex).getPlayerFiles().size(); x++) {
             PlayerIdentifier inputIdentifier = userList.getEvidenceList().get(x).getIdentifier();
             String inspector = userList.getEvidenceList().get(x).getInvestigator();
-            playerStates.get(recipientIndex).getPlayerFiles().get(infoRecipientIndex).addEvidence(inputIdentifier, inspector); //Adds all the evidence from
-        }                                                                           //the evidenceFiles to the recipients evidenceFiles
+            if(playerStates.get(recipientIndex).getPlayerFiles().get(infoRecipientIndex).addEvidence(inputIdentifier, inspector)){
+                EvidenceList temp = playerStates.get(recipientIndex).getPlayerFiles().get(infoRecipientIndex);
+                list.add(temp.getEvidenceList().get(temp.getEvidenceList().size()-1));
+            }; //Adds all the evidence from
+        } //the evidenceFiles to the recipients evidenceFiles
+        return list;
     }
 
     /**
@@ -98,14 +110,18 @@ public class ServerGameController {
      * @param detective is the input of the player making the investigative move
      * @param suspect is the input of the player who is being investigated
      */
-    public void investigate(String detective, String suspect) {
+    public Evidence investigate(String detective, String suspect) {
         int detectiveIndex = getIndex(detective); //Gets the index of detective for playerStates
         int suspectIndex = getIndex(suspect); //Gets the index of suspect for playerStates
 
         int detectiveListIndex = getListIndex(suspect, detectiveIndex); //Gets the index of suspect from detectives playerFiles
 
         //Adds the evidence discovered by the investigation
-        playerStates.get(detectiveIndex).getPlayerFiles().get(detectiveListIndex).addEvidence(playerStates.get(suspectIndex).getIdentifier(), detective);
+        if(playerStates.get(detectiveIndex).getPlayerFiles().get(detectiveListIndex).addEvidence(playerStates.get(suspectIndex).getIdentifier(), detective)){
+            return playerStates.get(detectiveIndex).getPlayerFiles().get(detectiveListIndex).getEvidenceList().get(
+                    playerStates.get(detectiveIndex).getPlayerFiles().get(detectiveListIndex).getEvidenceList().size());
+        }
+        return null;
     }
 
     /**

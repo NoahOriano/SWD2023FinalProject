@@ -50,6 +50,9 @@ public class ClientMessageRelay implements Runnable{
                         control.chatLog.appendText("Server>>> "+networkMessage.dataA());
                     }
                     if(networkMessage.identifier() == MessageValue.EVIDENCE){
+                        PlayerIdentifier identity = PlayerIdentifier.INNOCENT;
+                        if(networkMessage.dataB().equals("Cultist"))identity = PlayerIdentifier.CULTIST;
+                        master.addEvidence(networkMessage.dataA(), identity);
                         //@TODO logic for handling evidence and adding information to gamestate
                     }
                     if(networkMessage.identifier() == MessageValue.ROUNDOVER){
