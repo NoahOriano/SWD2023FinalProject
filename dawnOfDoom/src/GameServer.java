@@ -134,7 +134,7 @@ public class GameServer extends JFrame {
     /**
      * Default number of rounds in total
      */
-    public static final int DEFAULTROUNDS = 4;
+    public static final int DEFAULTROUNDS = 2;
     /**
      * Number of votes for skip or for starting lobby
      */
@@ -465,7 +465,7 @@ public class GameServer extends JFrame {
             }
         }
         resetActionsAndVotes();
-        sendMessageToAll(new NetworkMessage(MessageValue.ROUNDOVER, playerVotedOut, String.valueOf(10 - roundCounter), null));
+        sendMessageToAll(new NetworkMessage(MessageValue.ROUNDOVER, playerVotedOut, String.valueOf(roundCounter), null));
         if (isVoting) {
             sendMessageToAll(new NetworkMessage(MessageValue.INVESTIGATE, null, null, null));
             isVoting = !isVoting;
