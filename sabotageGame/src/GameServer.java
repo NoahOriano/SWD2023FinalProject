@@ -342,8 +342,8 @@ public class GameServer extends JFrame {
                             }
                         } else if (request.getRequestType() == MessageValue.PASS) {
                             if (!isVoting) {
-                                for (Evidence e : controller.pass(request.getRequesterName(), request.getData1(), request.getData2())) {
-                                    sendEvidence(sub, e);
+                                for (NetworkMessage passMessage : controller.steal(request.getData1(), request.getRequesterName())){
+                                    sub.handler.sendInformation(passMessage);
                                 }
                             }
                         } else if (request.getRequestType() == MessageValue.INVESTIGATE) {
