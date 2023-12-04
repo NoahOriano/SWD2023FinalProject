@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 
 /**
@@ -99,7 +100,6 @@ public class SceneControllerForActionScene extends SceneController{
     ImageView mapIcon1, mapIcon2, mapIcon3, mapIcon4, mapIcon5,
     mapIcon6, mapIcon7, mapIcon8, mapIcon9, mapIcon10, mapIcon11,
     mapIcon12, mapIcon13, mapIcon14, mapIcon15, mapIcon16;
-
 
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
