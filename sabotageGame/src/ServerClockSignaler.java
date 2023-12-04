@@ -27,15 +27,16 @@ public class ServerClockSignaler implements Runnable{
     @Override
     public void run() {
         while(true){
+            System.out.println("Clock tick");
             try {
-                Thread.sleep(delay);
+                Thread.sleep(delay*1000);
                 try {
                     requests.put(new ActionRequest(MessageValue.TIMER, null, null, null, null, null));
                 } catch (InterruptedException e) {
-                    //Ignore lol
+                    // Ignore lol
                 }
             } catch (InterruptedException e) {
-                //Ignore lol
+                // Ignore lol
             }
         }
     }

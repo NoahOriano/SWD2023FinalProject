@@ -8,10 +8,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
 import javax.naming.ldap.Control;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageProducer;
+import java.io.*;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 
@@ -150,10 +151,10 @@ public class SceneController {
         this.passConnection(loader.getController());
         SceneControllerForActionScene controller = loader.getController();
         controller.roundsLeft.setText("10");
-        controller.actionOptions.getItems().add("Vote");
         controller.chatLog.appendText("Server>>> click join as action and submit To join game");
         controller.statusField.setText("Alive");
         controller.actionOptions.getItems().add("Join");
+        controller.playerOptions.getItems().add(this.username);
         controller.usernameField.setText(this.getUsername());
         controller.serverPortField.setText(String.valueOf(this.getPort()));
         controller.serverIPField.setText(this.getIP());

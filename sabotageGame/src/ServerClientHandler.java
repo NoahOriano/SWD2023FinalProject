@@ -30,6 +30,10 @@ public class ServerClientHandler implements Runnable{
      * Whether the ServerClientHandler has a connection still
      */
     private boolean hasConnection;
+    /**
+     * Whether the Client has performed their action or vote for this turn
+     */
+    private boolean clientHasActed;
 
     /**
      * Gets streams to send and receive data to and from connected client
@@ -71,6 +75,7 @@ public class ServerClientHandler implements Runnable{
     public void run()
     {
         username = null;
+        clientHasActed = false;
         hasConnection = true;
         try // connect to server, get streams, process connection
         {
@@ -127,6 +132,9 @@ public class ServerClientHandler implements Runnable{
                 else if(networkMessage.identifier() == MessageValue.CHAT){
                     sendRequestToServer(new ActionRequest(MessageValue.CHAT, networkMessage.dataA(), networkMessage.dataB(), null, username, this));
                 }
+                else if(networkMessage.identifier() == MessageValue.JOIN){
+                    sendRequestToServer(new ActionRequest(MessageValue.JOIN, networkMessage.dataA(), networkMessage.dataB(), null, username, this));
+                }
             }
             catch (ClassNotFoundException classNotFoundException)
             {
@@ -156,6 +164,9 @@ public class ServerClientHandler implements Runnable{
         return hasConnection;
     }
 
+    public boolean hasActed(){
+        return clientHasActed;
+    }
 
     private void sendRequestToServer(ServerRequest request){
         requests.add(request);
