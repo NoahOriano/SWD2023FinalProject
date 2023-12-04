@@ -297,32 +297,12 @@ public class GameServer extends JFrame {
                     }
                 }
             } else { // If the game is active
-                if (request.getRequestType() == MessageValue.TIMER) {
-                    /*
-                    for (int i = 0; i < subServers.size(); i++) {
-                        SubServer sub = subServers.get(i);
-                        sub.handler.sendInformation(new NetworkMessage(MessageValue.CHAT, "Tick Tock", "Server", "Server"));
-                        displayMessage("The Clock Is Ticking");
-                    }
-                    */
-                    timerCounter++;
-                    if (timerCounter > (roundTime / timerDelay)) {
-                        if (roundCounter <= 0) {
-                            endGame();
-                        } else {
-                            roundCounter--;
-                            endRound();
-                        }
-                    } else if ((roundTime / timerDelay) - roundCounter == 3) {
-                        roundCounter--;
-                        sendTimeWarning();
-                    }
-                } else if (request.getRequesterName() != null && getSubServerByName(request.getRequesterName()) != null) {
+                if (request.getRequesterName() != null && getSubServerByName(request.getRequesterName()) != null) {
                     SubServer sub = getSubServerByName(request.getRequesterName());
                     if (sub.isInGame && sub.isAlive && !sub.hasActed) {
                         sub.hasActed = true;
                         totalActions++;
-                        sendMessageToAll(new NetworkMessage(MessageValue.CHAT, sub.username+"has submitted their action", "Server", null));
+                        sendMessageToAll(new NetworkMessage(MessageValue.CHAT, sub.username + "has submitted their action", "Server", null));
                         if (request.getRequestType() == MessageValue.VOTE) {
                             if (isVoting) {
                                 boolean flag = true;
@@ -369,6 +349,20 @@ public class GameServer extends JFrame {
                                 endGame();
                             } else {
                                 endRound();
+                                boolean hasImposters = false;
+                                boolean hasInnocent = false;
+                                for(int i = 0; i < subServers.size(); i++){
+                                    if(subServers.get(i).gameState!=null &&
+                                            subServers.get(i).gameState.getIdentifier() == PlayerIdentifier.CULTIST){
+                                        hasImposters = true;
+                                    }
+                                    if(subServers.get(i).gameState!=null &&
+                                            subServers.get(i).gameState.getIdentifier() == PlayerIdentifier.INNOCENT){
+                                        hasInnocent = true;
+                                    }
+                                }
+                                if(!hasImposters)endGame();
+                                if(!hasInnocent)endGame();
                             }
                         }
                     }
@@ -423,12 +417,12 @@ public class GameServer extends JFrame {
     private void startGame() {
         gameActive = true;
         votes = 0;
-        roundCounter = DEFAULTROUNDS + playerCounter/2;
+        roundCounter = DEFAULTROUNDS + playerCounter / 2;
         resetActionsAndVotes();
         displayMessage("Starting Game");
         ArrayList<SubServer> servers = new ArrayList<>();
         for (int i = 0; i < subServers.size(); i++) {
-            if(subServers.get(i).isInGame) servers.add(subServers.get(i));
+            if (subServers.get(i).isInGame) servers.add(subServers.get(i));
         }
         for (int i = 0; i < playerCounter / 3; i++) {
             int rand = (int) (Math.random() * servers.size());
@@ -461,11 +455,13 @@ public class GameServer extends JFrame {
         totalActions = 0;
         roundCounter--;
         timerCounter = 0;
-        if (playerVotedOut == null) {
-            sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "Voting skipped", "Server", null));
-        } else {
-            playerCounter--;
-            sendMessageToAll(new NetworkMessage(MessageValue.CHAT, playerVotedOut + " was life deleted", "Server", null));
+        if(isVoting) {
+            if (playerVotedOut == null) {
+                sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "Voting skipped", "Server", null));
+            } else {
+                playerCounter--;
+                sendMessageToAll(new NetworkMessage(MessageValue.CHAT, playerVotedOut + " was life deleted", "Server", null));
+            }
         }
         resetActionsAndVotes();
         sendMessageToAll(new NetworkMessage(MessageValue.ROUNDOVER, playerVotedOut, String.valueOf(10 - roundCounter), null));
