@@ -127,11 +127,6 @@ public class SceneController {
         this.output = output;
     }
 
-    /**
-     * passConnection allows a SceneController to be taken as an input and inherit all the current values from the
-     * SceneController Class and connects it to the SceneMaster
-     * @param controller is the input of the controller that is inheriting and connected to SceneMaster
-     */
     private void passConnection(SceneController controller){
         controller.connection = this.connection;
         controller.input = this.input;
@@ -145,11 +140,6 @@ public class SceneController {
         this.master.setController(controller);
     }
 
-    /**
-     * Unused Method that could be modified for future game Development
-     * @param event
-     * @throws IOException
-     */
     public void setGameJoinScene(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GameJoinScene.fxml"));
         Parent root = loader.load();
@@ -157,12 +147,6 @@ public class SceneController {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         loadScene(loader, root, stage);
     }
-
-    /**
-     * SetGameActionScene is the method that initializes of all of the GUI components
-     * @param event is the input of the ActionEvent that sets the method into motion
-     * @throws IOException
-     */
     public void setGameActionScene(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ActionScene.fxml"));
         Parent root = loader.load();
@@ -206,12 +190,6 @@ public class SceneController {
         loadScene(loader, root, stage);
 
     }
-
-    /**
-     * setSignOnScreen is the method that Loads and intializes the
-     * @param event
-     * @throws IOException
-     */
     public void setSignOnScreen(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SignOnScreen.fxml"));
         Parent root = loader.load();
@@ -230,10 +208,6 @@ public class SceneController {
         stage.show();                       // display the stage
     }
 
-    /**
-     * sendMessage takes in inputs from the GUI and flushes them out to an output stream
-     * @param message is the information that is being transmitted
-     */
     public void sendMessage(NetworkMessage message){
         try {
             output.writeObject(message);
