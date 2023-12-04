@@ -1,5 +1,5 @@
 /**
- * SavedPlayer class is going to store all the previous player information
+ * SavedPlayer class is going to store all the previous player information but was not utilized
  */
 public class SavedPlayer {
     private int gameWin;

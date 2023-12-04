@@ -1,3 +1,6 @@
+/**
+ * GameServerStarter is the class that initializes the server for the clients/players to connect to
+ */
 public class GameServerStarter {
     public static void main(String[] args) {
         GameServer server;
