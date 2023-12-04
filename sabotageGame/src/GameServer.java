@@ -311,14 +311,14 @@ public class GameServer extends JFrame {
                     }
                     */
                     timerCounter++;
-                    if (timerCounter > roundTime / timerDelay) {
+                    if (timerCounter > (roundTime / timerDelay) ){
                         if (roundCounter <= 0) {
                             endGame();
                         } else {
                             roundCounter--;
                             endRound();
                         }
-                    } else if (roundTime / timerDelay - roundCounter == 3) {
+                    } else if ((roundTime / timerDelay )- roundCounter == 3) {
                         roundCounter--;
                         sendTimeWarning();
                     }
@@ -399,6 +399,7 @@ public class GameServer extends JFrame {
      */
     private void endGame() {
         displayMessage("Game Over, starting new game");
+        gameActive = false;
         names = new ArrayList<>();
         controller = new ServerGameController();
         // Clear disconnected players to prevent endless server generation
@@ -424,9 +425,7 @@ public class GameServer extends JFrame {
         gameActive = true;
         resetActionsAndVotes();
         displayMessage("Starting Game");
-        ArrayList<SubServer> servers = new ArrayList<>(
-
-        );
+        ArrayList<SubServer> servers = new ArrayList<>();
         for (int i = 0; i < subServers.size(); i++) {
             servers.add(subServers.get(i));
         }
@@ -453,6 +452,12 @@ public class GameServer extends JFrame {
         roundCounter--;
         String playerVotedOut = getPlayerVotedOut();
         removePlayerByName(playerVotedOut);
+        if(playerVotedOut == null){
+            sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "Voting skipped", "Server",null));
+        }
+        else{
+            sendMessageToAll(new NetworkMessage(MessageValue.CHAT, playerVotedOut+" was life deleted", "Server",null));
+        }
         resetActionsAndVotes();
         sendMessageToAll(new NetworkMessage(MessageValue.ROUNDOVER, playerVotedOut, String.valueOf(10 - roundCounter), null));
         if (isVoting) {
