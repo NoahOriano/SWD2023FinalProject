@@ -11,8 +11,18 @@ public class EvidenceList {
     private int cultistCount;
     /**innocentCount is responsible for storing the amount of evidence that leads to the suspect being innocent*/
     private int innocentCount;
+    /**life is responsible for indicating whether the player is alive or dead*/
+    private boolean life;
+
+
 
     /**Getters and Setters of The EvidenceList class below*/
+    public boolean isLife() {
+        return life;
+    }
+    public void setLife(boolean life) {
+        this.life = life;
+    }
     public ArrayList<Evidence> getEvidenceList() {
         return evidenceList;
     }
@@ -56,6 +66,7 @@ public class EvidenceList {
         cultistCount = 0;
         innocentCount = 0;
         ArrayList<Evidence> evidenceList = new ArrayList<>();
+        life = true;
     }
 
     /**
