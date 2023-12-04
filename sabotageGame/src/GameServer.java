@@ -134,7 +134,7 @@ public class GameServer extends JFrame {
     /**
      * Default number of rounds in total
      */
-    public static final int DEFAULTROUNDS = 10;
+    public static final int DEFAULTROUNDS = 4;
     /**
      * Number of votes for skip or for starting lobby
      */
@@ -428,6 +428,7 @@ public class GameServer extends JFrame {
     private void startGame() {
         gameActive = true;
         votes = 0;
+        roundCounter = DEFAULTROUNDS + playerCounter/2;
         resetActionsAndVotes();
         displayMessage("Starting Game");
         ArrayList<SubServer> servers = new ArrayList<>();
