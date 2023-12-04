@@ -161,6 +161,23 @@ public class SceneController {
         controller.chatSelector.getItems().add("Global");
         ((SceneControllerForActionScene)loader.getController()).mapPane.setImage(new Image(String.valueOf(getClass().getResource("mapFinal.png"))));
         ((SceneControllerForActionScene)loader.getController()).profPic.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
+        ((SceneControllerForActionScene)loader.getController()).mapIcon1.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
+        ((SceneControllerForActionScene)loader.getController()).mapIcon2.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
+        ((SceneControllerForActionScene)loader.getController()).mapIcon3.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
+        ((SceneControllerForActionScene)loader.getController()).mapIcon4.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
+        ((SceneControllerForActionScene)loader.getController()).mapIcon5.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
+        ((SceneControllerForActionScene)loader.getController()).mapIcon6.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
+        ((SceneControllerForActionScene)loader.getController()).mapIcon7.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
+        ((SceneControllerForActionScene)loader.getController()).mapIcon8.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
+        ((SceneControllerForActionScene)loader.getController()).mapIcon9.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
+        ((SceneControllerForActionScene)loader.getController()).mapIcon10.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
+        ((SceneControllerForActionScene)loader.getController()).mapIcon11.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
+        ((SceneControllerForActionScene)loader.getController()).mapIcon12.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
+        ((SceneControllerForActionScene)loader.getController()).mapIcon13.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
+        ((SceneControllerForActionScene)loader.getController()).mapIcon14.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
+        ((SceneControllerForActionScene)loader.getController()).mapIcon15.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
+        ((SceneControllerForActionScene)loader.getController()).mapIcon16.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
+
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         loadScene(loader, root, stage);
 
