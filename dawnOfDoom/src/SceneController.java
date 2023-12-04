@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutorService;
 
 public class SceneController {
 
-    //Text color: #D6900F
+    //Text color for the orange used in the game: #D6900F
     /**
      * Connection to the server
      */
@@ -54,6 +54,7 @@ public class SceneController {
 
     /**SceneMaster*/
     private SceneMaster master;
+    /** The setters and getters for various aspects of the server, client, and game interaction.**/
 
     public void setMaster(SceneMaster master) {
         this.master = master;
@@ -127,6 +128,7 @@ public class SceneController {
         this.output = output;
     }
 
+    /** A private class method called passConnection() that is used pass the connection of the user to the network and initialize multiple class variable.**/
     private void passConnection(SceneController controller){
         controller.connection = this.connection;
         controller.input = this.input;
@@ -140,6 +142,7 @@ public class SceneController {
         this.master.setController(controller);
     }
 
+    /** The setter for the join game scene.**/
     public void setGameJoinScene(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GameJoinScene.fxml"));
         Parent root = loader.load();
@@ -147,6 +150,7 @@ public class SceneController {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         loadScene(loader, root, stage);
     }
+    /** The setter for the main action scene of the game where all the gameplay occurs.**/
     public void setGameActionScene(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ActionScene.fxml"));
         Parent root = loader.load();
@@ -163,33 +167,12 @@ public class SceneController {
         controller.chatSelector.getItems().add("Global");
         ((SceneControllerForActionScene)loader.getController()).mapPane.setImage(new Image(String.valueOf(getClass().getResource("mapFinal.png"))));
         ((SceneControllerForActionScene)loader.getController()).profPic.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon1.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon2.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon3.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon4.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon5.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon6.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon7.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon8.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon9.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon10.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon11.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon12.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon13.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon14.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon15.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-//        ((SceneControllerForActionScene)loader.getController()).mapIcon16.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
-
-        //((SceneControllerForActionScene)loader.getController()).mapIcon16.setVisible(true);
-//        for(int a=0; a<GameState.getPlayerFiles().getLength(); a++){
-//            ((SceneControllerForActionScene)loader.getController()).
-//
-//        }
 
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         loadScene(loader, root, stage);
 
     }
+    /** The setter for the sign on screen of the game where the user creates a username and officially joins the game after they have submitted a valid name.**/
     public void setSignOnScreen(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SignOnScreen.fxml"));
         Parent root = loader.load();
@@ -202,12 +185,14 @@ public class SceneController {
         loadScene(loader, root, stage);
     }
 
+    /** A class method that sets and loads each scene.**/
     public void loadScene(FXMLLoader loader, Parent root, Stage stage){
         Scene scene = new Scene(root);      // attach scene graph to scene
         stage.setScene(scene);              // attach scene to stage
         stage.show();                       // display the stage
     }
 
+    /** A class called sendMessage that is called when a player send a message, communicating it through the network.**/
     public void sendMessage(NetworkMessage message){
         try {
             output.writeObject(message);
