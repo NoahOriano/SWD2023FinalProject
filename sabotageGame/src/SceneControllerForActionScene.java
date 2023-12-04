@@ -56,9 +56,6 @@ public class SceneControllerForActionScene extends SceneController{
     TextField serverIPField;
 
     @FXML
-    Canvas display;
-
-    @FXML
     ImageIcon playerIcon;
 
     @FXML
@@ -79,13 +76,16 @@ public class SceneControllerForActionScene extends SceneController{
             @Override
             public void handle(ActionEvent actionEvent) {
                 if(actionOptions.getValue().equals("Steal")){
-                    sendMessage(new NetworkMessage(MessageValue.STEAL, getUsername(), selectedPlayerName.getText(), null));
+                    sendMessage(new NetworkMessage(MessageValue.STEAL, selectedPlayerName.getText(), null, null));
                 }
                 if(actionOptions.getValue().equals("Forge")){
-                    sendMessage(new NetworkMessage(MessageValue.FORGE, getUsername(), selectedPlayerName.getText(), null));
+                    sendMessage(new NetworkMessage(MessageValue.FORGE, selectedPlayerName.getText(), null, null));
                 }
                 if(actionOptions.getValue().equals("Investigate")){
-                    sendMessage(new NetworkMessage(MessageValue.INVESTIGATE, getUsername(), selectedPlayerName.getText(), null));
+                    sendMessage(new NetworkMessage(MessageValue.INVESTIGATE, selectedPlayerName.getText(), null, null));
+                }
+                if(actionOptions.getValue().equals("Vote")){
+                    sendMessage(new NetworkMessage(MessageValue.VOTE, selectedPlayerName.getText(), null, null));
                 }
             }
         });
@@ -95,13 +95,6 @@ public class SceneControllerForActionScene extends SceneController{
                 sendMessage(new NetworkMessage(MessageValue.CHAT, chat.getText(), chatSelector.getValue(), null));
             }
         });
-        display.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-
-            }
-        });
-
     }
 
     // Need to include a way to select and do actions, but that is more complicated
