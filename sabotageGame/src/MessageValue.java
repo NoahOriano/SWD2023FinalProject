@@ -1,7 +1,7 @@
 import java.io.Serializable;
 
 /**
- * Values for the identifiers used in a NetworkMessage
+ * Values for the identifiers used in a NetworkMessage and ActionRequest
  */
 public enum MessageValue implements Serializable {
     TERMINATE, VOTE, STEAL, FORGE, INVESTIGATE, PASS, MESSAGE, ROUNDOVER, GAMEOVER, CHAT, SIGNIN, EVIDENCE, TIMER, CULTIST, INNOCENT
