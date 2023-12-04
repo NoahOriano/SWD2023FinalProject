@@ -66,8 +66,14 @@ public class GameState {
      * Generates a new EvidenceList for a newly joined player
      * @param newUser username of player who has joined lobby
 */
-    public void addPlayerFile(String newUser){
+    public boolean addPlayerFile(String newUser){
+        for(int x = 0; x< playerFiles.size();x++){
+            if(playerFiles.get(x).getDefense().equals(newUser)){
+                return false;
+            }
+        }
         playerFiles.add(new EvidenceList(newUser,username));
+        return true;
     }
 
 }
