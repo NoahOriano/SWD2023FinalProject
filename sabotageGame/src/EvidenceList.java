@@ -65,7 +65,7 @@ public class EvidenceList {
         this.prosecutor = prosecutor;
         cultistCount = 0;
         innocentCount = 0;
-        ArrayList<Evidence> evidenceList = new ArrayList<>();
+        evidenceList = new ArrayList<>();
         life = true;
     }
 
