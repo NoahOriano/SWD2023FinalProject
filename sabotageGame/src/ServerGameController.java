@@ -53,7 +53,7 @@ public class ServerGameController {
 
 
     /**
-     * Steal method allows thief to steal up to 3 pieces of evidence from a victim, which in reverse works as a pass function
+     * Steal method allows thief to steal up to 3 pieces of evidence from a victim, which in reverse works as a pass method
      *
      * @param thief is the input for the user who is stealing the data
      * @param victim is the input for the use who's data is being stolen
