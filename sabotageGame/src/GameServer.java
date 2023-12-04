@@ -240,7 +240,7 @@ public class GameServer extends JFrame {
         if (getSubServerByName(request.getRequesterName()) != null && getSubServerByName(request.getRequesterName()).isInGame) {
             if (request.getRequestType() == MessageValue.CHAT) {
                 displayMessage("Chat Request Received from "+request.getRequesterName()+" to "+request.getData2());
-                if (request.getData2().equals("Global")) {
+                if (request.getData2()==null || request.getData2().equals("Global")) {
                     sendMessageToAll(new NetworkMessage(MessageValue.CHAT, request.getData1(), request.getRequesterName(), null));
                 }
                 else if (request.getData2().equals("Cult")) {
