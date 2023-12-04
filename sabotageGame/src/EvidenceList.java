@@ -65,6 +65,11 @@ public class EvidenceList {
         this.prosecutor = prosecutor;
     }
 
+    /**
+     * Constructor for EvidenceList
+     * @param defense
+     * @param prosecutor
+     */
     public EvidenceList(String defense, String prosecutor) {
         this.defense = defense;
         this.prosecutor = prosecutor;
@@ -99,6 +104,12 @@ public class EvidenceList {
             }
         }
         evidenceList.add(new Evidence(this.defense, identifier, this.prosecutor));
+        if(identifier.equals(PlayerIdentifier.CULTIST)){
+            cultistCount ++;
+        }
+        if(identifier.equals(PlayerIdentifier.INNOCENT)){
+            innocentCount ++;
+        }
         return true;
     }
 
@@ -119,6 +130,7 @@ public class EvidenceList {
         }
         return evidenceByName;
     }
+
 
             /*
 

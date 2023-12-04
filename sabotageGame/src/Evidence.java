@@ -41,6 +41,12 @@ public class Evidence {
         this.investigator = investigator;
     }
 
+
+    /**
+     * For client end, to not allow investigator to be sent over
+     * @param target
+     * @param identifier
+     */
     public Evidence(String target, PlayerIdentifier identifier) {
         this.target = target;
         this.identifier = identifier;
@@ -48,7 +54,6 @@ public class Evidence {
 
     /**
      * For server end, investigator never sent over network
-     *
      * @param target
      * @param identifier
      */

@@ -3,17 +3,13 @@
  */
 
 import java.util.ArrayList;
-import java.security.SecureRandom;
 
 public class ServerGameController {
-    /**
-     * playerStates hold all the different GameStates present within the overall game
-     */
+    /**playerStates hold all the different GameStates present within the overall game*/
     public ArrayList<GameState> playerStates;
 
     /**
      * getIndex methods is a helper method to get the Index of a player in playerStates
-     *
      * @param playerID
      * @return
      */
@@ -124,8 +120,6 @@ public class ServerGameController {
 
         int cultistListIndex = getListIndex(victim, cultistIndex);
 
-        if (playerStates.get(cultistIndex).getIdentifier().equals(PlayerIdentifier.CULTIST)) {
-
             if (playerStates.get(victimIndex).getIdentifier().equals(PlayerIdentifier.INNOCENT)) {
                 playerStates.get(cultistIndex).getPlayerFiles().get(cultistListIndex).addEvidence(PlayerIdentifier.CULTIST, cultist);
             }
@@ -133,6 +127,5 @@ public class ServerGameController {
                 playerStates.get(cultistIndex).getPlayerFiles().get(cultistListIndex).addEvidence(PlayerIdentifier.INNOCENT, cultist);
             }
         }
-    }
 
 }
