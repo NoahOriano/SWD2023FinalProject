@@ -22,5 +22,6 @@ public enum MessageValue implements Serializable {
     // SignIN data fields: username, null, null *** Only time username is sent, will be saved in subserver
 
     // Evidence data fields: suspect, identifier, null  *** Inspector is hidden from client
+
     // Timer data fields: null, null, null, null *** Used only by server side
 }

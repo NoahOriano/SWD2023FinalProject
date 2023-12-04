@@ -52,7 +52,7 @@ public class GameState {
      * @param name input of the suspect/defense
      * @return the evidence file
      */
-    private EvidenceList getPlayerFileByName(String name){
+    public EvidenceList getPlayerFileByName(String name){
         EvidenceList output = new EvidenceList(null,null);
         for(int x =0;x< playerFiles.size();x++){
             if(playerFiles.get(x).getDefense().equals(name)){

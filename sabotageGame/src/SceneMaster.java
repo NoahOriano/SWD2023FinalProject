@@ -27,4 +27,9 @@ public class SceneMaster {
         this.controller = controller;
     }
 
+    public void addEvidence(String suspect, PlayerIdentifier identifier) {
+        EvidenceList newEvidence = gameState.getPlayerFileByName(suspect);
+        newEvidence.addEvidence(identifier);
+    }
+
 }
