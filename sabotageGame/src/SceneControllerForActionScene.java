@@ -118,7 +118,6 @@ public class SceneControllerForActionScene extends SceneController{
         playerOptions.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                sendMessage(new NetworkMessage(MessageValue.SIGNIN, "GOgo", null, null));
             }
         });
     }
