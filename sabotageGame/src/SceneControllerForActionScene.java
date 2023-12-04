@@ -9,6 +9,9 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 
 import javax.swing.*;
 
@@ -80,7 +83,23 @@ public class SceneControllerForActionScene extends SceneController{
     /**
      * Whether the game is over, submitting anything will return user to signon if so
      */
+    @FXML
     boolean gameOver;
+
+    /** A variable that controls the image of the map in scene builder.**/
+    @FXML
+    ImageView mapPane;
+
+    /** A variable that controls the user's profile picture.**/
+    @FXML
+    ImageView profPic;
+
+    /** A series of variable that hold the images of the icons on the map.**/
+    @FXML
+    ImageView mapIcon1, mapIcon2, mapIcon3, mapIcon4, mapIcon5,
+    mapIcon6, mapIcon7, mapIcon8, mapIcon9, mapIcon10, mapIcon11,
+    mapIcon12, mapIcon13, mapIcon14, mapIcon15, mapIcon16;
+
 
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
