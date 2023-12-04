@@ -253,9 +253,6 @@ public class GameServer extends JFrame {
             }
         } else {
             if (!gameActive) { // If the game is not active
-                if (request.getRequestType() == MessageValue.TIMER) {
-                    sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "The Clock Is Ticking", "Server", null));
-                }
                 if (request.getRequestType() == MessageValue.SIGNIN) {
                     if (usernameIsAvailable(request.getData1())) {
                         for (int i = 0; i < subServers.size(); i++) {
@@ -296,12 +293,13 @@ public class GameServer extends JFrame {
                 }
             } else { // If the game is active
                 if (request.getRequestType() == MessageValue.TIMER) {
+                    /*
                     for (int i = 0; i < subServers.size(); i++) {
                         SubServer sub = subServers.get(i);
                         sub.handler.sendInformation(new NetworkMessage(MessageValue.CHAT, "Tick Tock", "Server", "Server"));
                         displayMessage("The Clock Is Ticking");
-                        sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "The Clock Is Ticking", "Server", null));
                     }
+                    */
                     timerCounter++;
                     if (timerCounter > roundTime / timerDelay) {
                         if (roundCounter <= 0) {
@@ -340,12 +338,17 @@ public class GameServer extends JFrame {
                                 if(evidence!=null) {
                                     sendEvidence(sub, evidence);
                                 }
+                                else{
+                                    displayMessage("Investigate returned null uh oh");
+                                }
                             }
-                        }
-                    } else if (request.getRequestType() == MessageValue.FORGE) {
-                        Evidence evidence = controller.forge(request.getRequesterName(), request.getData1());
-                        if(evidence!=null) {
-                            sendEvidence(sub, evidence);
+                        } else if (request.getRequestType() == MessageValue.FORGE) {
+                            Evidence evidence = controller.forge(request.getRequesterName(), request.getData1());
+                            if(evidence!=null) {
+                                sendEvidence(sub, evidence);
+                            }else{
+                                displayMessage("Investigate returned null uh oh");
+                            }
                         }
                     }
                 }
@@ -393,8 +396,11 @@ public class GameServer extends JFrame {
      */
     private void startGame() {
         gameActive = true;
+        resetActionsAndVotes();
         displayMessage("Starting Game");
-        ArrayList<SubServer> servers = new ArrayList<>();
+        ArrayList<SubServer> servers = new ArrayList<>(
+
+        );
         for (int i = 0; i < subServers.size(); i++) {
             servers.add(subServers.get(i));
         }
