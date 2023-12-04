@@ -77,6 +77,12 @@ public class EvidenceList {
      */
     public boolean addEvidence(PlayerIdentifier identifier) {
         evidenceList.add(new Evidence(defense, identifier));
+        if(identifier.equals(PlayerIdentifier.CULTIST)){
+            cultistCount++;
+        }
+        if(identifier.equals(PlayerIdentifier.INNOCENT)){
+            innocentCount++;
+        }
         return true;
     }
 
