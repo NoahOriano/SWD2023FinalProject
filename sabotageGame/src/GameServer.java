@@ -294,7 +294,7 @@ public class GameServer extends JFrame {
                         if (subServers.get(i).handler == request.getSender() && !subServers.get(i).hasActed) {
                             subServers.get(i).hasActed = true;
                             votes++;
-                            if (votes > playerCounter / 2) {
+                            if (votes > playerCounter / 2 && votes>3) {
                                 startGame();
                             }
                             sendMessageToAll(new NetworkMessage(MessageValue.CHAT, request.getRequesterName() + " has voted to start game", "Server", null));
