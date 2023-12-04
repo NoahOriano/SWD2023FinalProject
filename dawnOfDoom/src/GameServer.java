@@ -436,6 +436,7 @@ public class GameServer extends JFrame {
             servers.remove(0).handler.sendInformation(
                     new NetworkMessage(MessageValue.INNOCENT, null, null, null));
         }
+        //Creates and initializes playerStates
         for (int i = 0; i < controller.playerStates.size(); i++) {
             for (int j = 0; j < controller.playerStates.size(); j++) {
                 controller.playerStates.get(i).addPlayerFile(controller.playerStates.get(j).getUsername());
