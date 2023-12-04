@@ -1,5 +1,5 @@
 /**
- * ActionRequest class is the class utilized to send data to and from teh server
+ * ActionRequest class is the class utilized to send requests to the servers to complete player actions
  */
 public class ActionRequest extends ServerRequest{
     /**MessageValue requestType is the variable that dictates the action for the ActionRequest*/
