@@ -297,12 +297,12 @@ public class GameServer extends JFrame {
                     }
                 }
             } else { // If the game is active
-                if (request.getRequesterName() != null && getSubServerByName(request.getRequesterName()) != null) {
+                if (request.getRequesterName() != null && getSubServerByName(request.getRequesterName()) != null) { //Checks to see that the player exists and that subServer exists as well
                     SubServer sub = getSubServerByName(request.getRequesterName());
-                    if (sub.isInGame && sub.isAlive && !sub.hasActed) {
-                        sub.hasActed = true;
-                        totalActions++;
-                        sendMessageToAll(new NetworkMessage(MessageValue.CHAT, sub.username + " has submitted their action", "Server", null));
+                    if (sub.isInGame && sub.isAlive && !sub.hasActed) { //Checks to that the subServer is in Game and has not acted and player is alive
+                        sub.hasActed = true; //Alerts that the player has made a move so they can't make another one
+                        totalActions++; //tracks actions of all players
+                        sendMessageToAll(new NetworkMessage(MessageValue.CHAT, sub.username + " has submitted their action", "Server", null)); //Sends a notification
                         if (request.getRequestType() == MessageValue.VOTE) {
                             if (isVoting) {
                                 boolean flag = true;

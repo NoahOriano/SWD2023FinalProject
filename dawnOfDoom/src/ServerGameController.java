@@ -70,7 +70,7 @@ public class ServerGameController {
 
         if(victimFile.getPlayerFiles() != null) {
             for (int i = 0; i < victimFile.getPlayerFiles().size(); i++) {
-                for (int j = 0; i < victimFile.getPlayerFiles().get(i).getEvidenceList().size(); j++) {
+                for (int j = 0; j < victimFile.getPlayerFiles().get(i).getEvidenceList().size(); j++) {
                     collector.add(victimFile.getPlayerFiles().get(i).getEvidenceList().get(j)); //Adds all the victim's evidence to a new ArrayList of Evidence
                 }
             }
