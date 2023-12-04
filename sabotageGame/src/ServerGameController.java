@@ -1,9 +1,12 @@
 /**
  * Server controller for managing game states and data modifications
  */
-
 import java.util.ArrayList;
 
+/**
+ * ServerGameController contains all the main actions that players can make during the game, and stores an
+ * ArrayList of all the GameStates
+ */
 public class ServerGameController {
     /**playerStates hold all the different GameStates present within the overall game*/
     public ArrayList<GameState> playerStates;
@@ -76,18 +79,18 @@ public class ServerGameController {
      * @param recipient is the input for the player who is recieving the evidenceFile
      */
     public void pass(String user, String infoAbout, String recipient) {
-        int userIndex = getIndex(user);
-        int recipientIndex = getIndex(recipient);
+        int userIndex = getIndex(user); //Gets the index of user for playerStates
+        int recipientIndex = getIndex(recipient); //Gets the index of recipient for playerStates
 
-        int infoIndex = getListIndex(infoAbout, userIndex);
-        int infoRecipientIndex = getListIndex(infoAbout, recipientIndex);
-        EvidenceList userList = playerStates.get(userIndex).getPlayerFiles().get(infoIndex);
+        int infoIndex = getListIndex(infoAbout, userIndex); //Gets the index of infoAbout from user's playerFiles
+        int infoRecipientIndex = getListIndex(infoAbout, recipientIndex);  //Gets the index of infoAbout from recipient's playerFiles
+        EvidenceList userList = playerStates.get(userIndex).getPlayerFiles().get(infoIndex); //Storage to reduce amount of getters used
 
         for (int x = 0; x < playerStates.get(userIndex).getPlayerFiles().size(); x++) {
             PlayerIdentifier inputIdentifier = userList.getEvidenceList().get(x).getIdentifier();
             String inspector = userList.getEvidenceList().get(x).getInvestigator();
-            playerStates.get(recipientIndex).getPlayerFiles().get(infoRecipientIndex).addEvidence(inputIdentifier, inspector);
-        }
+            playerStates.get(recipientIndex).getPlayerFiles().get(infoRecipientIndex).addEvidence(inputIdentifier, inspector); //Adds all the evidence from
+        }                                                                           //the evidenceFiles to the recipients evidenceFiles
     }
 
     /**
@@ -96,10 +99,10 @@ public class ServerGameController {
      * @param suspect is the input of the player who is being investigated
      */
     public void investigate(String detective, String suspect) {
-        int detectiveIndex = getIndex(detective);
-        int suspectIndex = getIndex(suspect);
+        int detectiveIndex = getIndex(detective); //Gets the index of detective for playerStates
+        int suspectIndex = getIndex(suspect); //Gets the index of suspect for playerStates
 
-        int detectiveListIndex = getListIndex(suspect, detectiveIndex);
+        int detectiveListIndex = getListIndex(suspect, detectiveIndex); //Gets the index of suspect from detectives playerFiles
 
         playerStates.get(detectiveIndex).getPlayerFiles().get(detectiveListIndex).addEvidence(playerStates.get(suspectIndex).getIdentifier(), detective);
     }
