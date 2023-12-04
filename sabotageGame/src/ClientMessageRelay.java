@@ -42,7 +42,7 @@ public class ClientMessageRelay implements Runnable{
             {
                 networkMessage = (NetworkMessage) input.readObject(); // read new message
                 System.out.println("Message received");
-                SceneController controller = master.getController();
+                SceneController controller = master.getController(); //Sets controller to the same as SceneMaster
                 if(controller.getClass() == SceneControllerForActionScene.class){
                     SceneControllerForActionScene control = (SceneControllerForActionScene)controller;
                     if(networkMessage.identifier() == MessageValue.GAMEOVER){

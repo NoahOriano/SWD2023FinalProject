@@ -13,7 +13,9 @@ import javafx.scene.control.Button;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.Inet4Address;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.concurrent.Executors;
 
 
@@ -76,6 +78,28 @@ public class SceneControllerForGameJoin extends SceneController{
                         }
                     } catch (IOException e) {
                         System.out.println("NOT CONNECTED");
+                    }
+                }
+            });
+            hostServerButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    try {
+                        serverIPField.setText( Inet4Address.getLocalHost().getHostAddress());
+                    } catch (UnknownHostException e) {
+                        throw new RuntimeException(e);
+                    }
+                    Thread thread = new Thread() {
+                        @Override
+                        public void run() {
+                            GameServerStarter.main(new String[]{serverPortField.getText(), String.valueOf(100)});
+                        }
+                    };
+                    thread.start();
+                    try {
+                        serverIPField.setText( Inet4Address.getLocalHost().getHostAddress());
+                    } catch (UnknownHostException e) {
+                        throw new RuntimeException(e);
                     }
                 }
             });
