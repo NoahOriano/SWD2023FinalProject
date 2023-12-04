@@ -180,7 +180,7 @@ public class SceneController {
         ((SceneControllerForActionScene)loader.getController()).mapIcon15.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
         ((SceneControllerForActionScene)loader.getController()).mapIcon16.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
 
-        ((SceneControllerForActionScene)loader.getController()).mapIcon16.setVisible(true);
+        //((SceneControllerForActionScene)loader.getController()).mapIcon16.setVisible(true);
 //        for(int a=0; a<GameState.getPlayerFiles().getLength(); a++){
 //            ((SceneControllerForActionScene)loader.getController()).
 //
