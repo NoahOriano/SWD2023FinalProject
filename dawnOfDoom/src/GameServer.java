@@ -134,7 +134,7 @@ public class GameServer extends JFrame {
     /**
      * Default number of rounds in total
      */
-    public static final int DEFAULTROUNDS = 4;
+    public static final int DEFAULTROUNDS = 2;
     /**
      * Number of votes for skip or for starting lobby
      */
@@ -297,12 +297,12 @@ public class GameServer extends JFrame {
                     }
                 }
             } else { // If the game is active
-                if (request.getRequesterName() != null && getSubServerByName(request.getRequesterName()) != null) {
+                if (request.getRequesterName() != null && getSubServerByName(request.getRequesterName()) != null) { //Checks to see that the player exists and that subServer exists as well
                     SubServer sub = getSubServerByName(request.getRequesterName());
-                    if (sub.isInGame && sub.isAlive && !sub.hasActed) {
-                        sub.hasActed = true;
-                        totalActions++;
-                        sendMessageToAll(new NetworkMessage(MessageValue.CHAT, sub.username + " has submitted their action", "Server", null));
+                    if (sub.isInGame && sub.isAlive && !sub.hasActed) { //Checks to that the subServer is in Game and has not acted and player is alive
+                        sub.hasActed = true; //Alerts that the player has made a move so they can't make another one
+                        totalActions++; //tracks actions of all players
+                        sendMessageToAll(new NetworkMessage(MessageValue.CHAT, sub.username + " has submitted their action", "Server", null)); //Sends a notification
                         if (request.getRequestType() == MessageValue.VOTE) {
                             if (isVoting) {
                                 boolean flag = true;
@@ -465,7 +465,7 @@ public class GameServer extends JFrame {
             }
         }
         resetActionsAndVotes();
-        sendMessageToAll(new NetworkMessage(MessageValue.ROUNDOVER, playerVotedOut, String.valueOf(10 - roundCounter), null));
+        sendMessageToAll(new NetworkMessage(MessageValue.ROUNDOVER, playerVotedOut, String.valueOf(roundCounter), null));
         if (isVoting) {
             sendMessageToAll(new NetworkMessage(MessageValue.INVESTIGATE, null, null, null));
             isVoting = !isVoting;
