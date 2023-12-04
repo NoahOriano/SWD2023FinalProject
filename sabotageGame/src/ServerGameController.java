@@ -16,11 +16,11 @@ public class ServerGameController {
     public int getIndex(String playerID) {
         int index = -1;
         for (int x = 0; x < playerStates.size(); x++) {
-            if (playerStates.get(x).getUsername().equals(playerID)) {
-                index = x;
+            if (playerStates.get(x).getUsername().equals(playerID)) { //Checks to see which index has the same matching userName
+                index = x; //Sets the output to that index
             }
         }
-        return index;
+        return index; //Returns the index of the playerID in playerStates
     }
 
     /**
@@ -30,13 +30,13 @@ public class ServerGameController {
      * @return the index that the playerID can be found at
      */
     public int getListIndex(String playerID, int playerStatesIndex) {
-        int listIndex = 0;
+        int listIndex = -1;
         for (int x = 0; x < playerStates.get(playerStatesIndex).getPlayerFiles().size(); x++) {
-            if (playerStates.get(playerStatesIndex).getPlayerFiles().get(x).getDefense().equals(playerID)) {
-                listIndex = x;
+            if (playerStates.get(playerStatesIndex).getPlayerFiles().get(x).getDefense().equals(playerID)) { //Checks to see which index has the same matching userName
+                listIndex = x; //Sets the output to that index
             }
         }
-        return listIndex;
+        return listIndex; //Returns the index of the playerID in the playerFiles
     }
 
 
@@ -47,19 +47,19 @@ public class ServerGameController {
      * @param victim is the input for the use who's data is being stolen
      */
     public void steal(String thief, String victim) {
-        GameState victimFile = playerStates.get(getIndex(victim));
-        GameState thiefFile = playerStates.get(getIndex(thief));
+        GameState victimFile = playerStates.get(getIndex(victim)); //Finds the gameState of the player being stolen
+        GameState thiefFile = playerStates.get(getIndex(thief)); //Finds the gameState of the player stealing
         int counter = 0;
 
         ArrayList<Evidence> collector = new ArrayList<>();
 
         for (int i = 0; i < victimFile.getPlayerFiles().size(); i++) {
             for (int j = 0; i < victimFile.getPlayerFiles().get(i).getEvidenceList().size(); j++) {
-                collector.add(victimFile.getPlayerFiles().get(i).getEvidenceList().get(j));
+                collector.add(victimFile.getPlayerFiles().get(i).getEvidenceList().get(j)); //Adds all the victim's evidence to a new ArrayList of Evidence
             }
         }
 
-        while (counter < 3 && !collector.isEmpty()) {
+        while (counter < 3 && !collector.isEmpty()) {  //
             int rand = (int) (Math.random() * collector.size());
             Evidence evidence = collector.remove(rand);
             if (thiefFile.getPlayerFiles().get(getListIndex(evidence.getTarget(),

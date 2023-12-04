@@ -77,16 +77,18 @@ public class EvidenceList {
      */
     public boolean addEvidence(PlayerIdentifier identifier, String inspector) {
         for (int x = 0; x < evidenceList.size(); x++) {
+            //If statement checks to see that only new evidence gets added to the evidenceFile by checking that the source is different
+            //and that the information for the evidence is different as well, if both are the same it does not add evidence
             if (evidenceList.get(x).getInvestigator().equals(inspector) && evidenceList.get(x).getIdentifier().equals(identifier)) {
                 return false;
             }
         }
-        evidenceList.add(new Evidence(this.defense, identifier, this.prosecutor));
+        evidenceList.add(new Evidence(this.defense, identifier, this.prosecutor)); //Creates the evidence and adds it to the evidence list
         if(identifier.equals(PlayerIdentifier.CULTIST)){
-            cultistCount ++;
+            cultistCount ++; //If evidence indicated cultist increases the counter of evidence pointing to cultist
         }
         if(identifier.equals(PlayerIdentifier.INNOCENT)){
-            innocentCount ++;
+            innocentCount ++; //If evidence indicated innocent increases the counter of evidence point to innocent
         }
         return true;
     }
