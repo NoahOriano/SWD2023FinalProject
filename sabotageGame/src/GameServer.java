@@ -271,6 +271,11 @@ public class GameServer extends JFrame {
                     getSubServerByName(request.getRequesterName()).isAlive = true;
                     getSubServerByName(request.getRequesterName()).gameState = new GameState(request.getRequesterName());
                     controller.addPlayerState(getSubServerByName(request.getRequesterName()).gameState);
+                    for(int i = 0; i < controller.playerStates.size();i++){
+                        for(int j = 0; j < controller.playerStates.size(); i++) {
+                            controller.playerStates.get(i).addPlayerFile(controller.playerStates.get(i).getUsername());
+                        }
+                    }
                     request.getSender().sendInformation(new NetworkMessage(MessageValue.JOIN, null, null, null));
                     sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "Player Joined", "Server", null));
                     for(int i = 0; i < subServers.size();i++){

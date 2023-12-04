@@ -67,21 +67,23 @@ public class ServerGameController {
 
         ArrayList<NetworkMessage> list = new ArrayList<>();
 
-        for (int i = 0; i < victimFile.getPlayerFiles().size(); i++) {
-            for (int j = 0; i < victimFile.getPlayerFiles().get(i).getEvidenceList().size(); j++) {
-                collector.add(victimFile.getPlayerFiles().get(i).getEvidenceList().get(j)); //Adds all the victim's evidence to a new ArrayList of Evidence
+        if(victimFile.getPlayerFiles() != null) {
+            for (int i = 0; i < victimFile.getPlayerFiles().size(); i++) {
+                for (int j = 0; i < victimFile.getPlayerFiles().get(i).getEvidenceList().size(); j++) {
+                    collector.add(victimFile.getPlayerFiles().get(i).getEvidenceList().get(j)); //Adds all the victim's evidence to a new ArrayList of Evidence
+                }
             }
-        }
 
-        while (counter < 3 && !collector.isEmpty()) {  //Checks to see if 3 pieces of evidence or the collector array are empty
-            int rand = (int) (Math.random() * collector.size());
-            Evidence evidence = collector.remove(rand); //Deconstructs the collector to get the evidence
-            if (thiefFile.getPlayerFiles().get(getListIndex(evidence.getTarget(), //Checks to see if the evidence got added to the evidenceList
-                    getIndex(thief))).addEvidence(evidence.getIdentifier(), evidence.getInvestigator())) {
-                String identity = "Innocent";
-                if(evidence.getIdentifier()==PlayerIdentifier.CULTIST)identity = "Cultist";
-                list.add(new NetworkMessage(MessageValue.EVIDENCE, evidence.getTarget(), identity, null));
-                counter++; //Increases to ensure only 3 pieces of evidence get added
+            while (counter < 3 && !collector.isEmpty()) {  //Checks to see if 3 pieces of evidence or the collector array are empty
+                int rand = (int) (Math.random() * collector.size());
+                Evidence evidence = collector.remove(rand); //Deconstructs the collector to get the evidence
+                if (thiefFile.getPlayerFiles().get(getListIndex(evidence.getTarget(), //Checks to see if the evidence got added to the evidenceList
+                        getIndex(thief))).addEvidence(evidence.getIdentifier(), evidence.getInvestigator())) {
+                    String identity = "Innocent";
+                    if (evidence.getIdentifier() == PlayerIdentifier.CULTIST) identity = "Cultist";
+                    list.add(new NetworkMessage(MessageValue.EVIDENCE, evidence.getTarget(), identity, null));
+                    counter++; //Increases to ensure only 3 pieces of evidence get added
+                }
             }
         }
         return list;
@@ -98,7 +100,6 @@ public class ServerGameController {
         int recipientIndex = getIndex(recipient); //Gets the index of recipient for playerStates
 
         ArrayList<Evidence> list = new ArrayList<>();
-
         int infoIndex = getListIndex(infoAbout, userIndex); //Gets the index of infoAbout from user's playerFiles
         int infoRecipientIndex = getListIndex(infoAbout, recipientIndex);  //Gets the index of infoAbout from recipient's playerFiles
         EvidenceList userList = playerStates.get(userIndex).getPlayerFiles().get(infoIndex); //Storage to reduce amount of getters used
