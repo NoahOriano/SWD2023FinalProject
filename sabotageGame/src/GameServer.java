@@ -360,11 +360,13 @@ public class GameServer extends JFrame {
                                 }
                             }
                         } else if (request.getRequestType() == MessageValue.FORGE) {
-                            Evidence evidence = controller.forge(request.getRequesterName(), request.getData1());
-                            if (evidence != null) {
-                                sendEvidence(sub, evidence);
-                            } else {
-                                displayMessage("Investigate returned null uh oh");
+                            if(!isVoting) {
+                                Evidence evidence = controller.forge(request.getRequesterName(), request.getData1());
+                                if (evidence != null) {
+                                    sendEvidence(sub, evidence);
+                                } else {
+                                    displayMessage("Investigate returned null uh oh");
+                                }
                             }
                         }
                         if(totalActions == playerCounter){
