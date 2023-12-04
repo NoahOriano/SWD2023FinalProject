@@ -304,13 +304,13 @@ public class GameServer extends JFrame {
                     if (timerCounter > roundTime / timerDelay) {
                         if (roundCounter <= 0) {
                             endGame();
-                        } else if (roundTime / timerDelay - roundCounter == 3) {
-                            roundCounter--;
-                            sendTimeWarning();
                         } else {
                             roundCounter--;
                             endRound();
                         }
+                    } else if (roundTime / timerDelay - roundCounter == 3) {
+                        roundCounter--;
+                        sendTimeWarning();
                     }
                 } else if (request.getRequesterName() != null && getSubServerByName(request.getRequesterName()) != null) {
                     SubServer sub = getSubServerByName(request.getRequesterName());
@@ -422,12 +422,20 @@ public class GameServer extends JFrame {
      */
     private void endRound() {
         displayMessage("Ending Round");
+        sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "ENDING ROUND", "Server", null));
         roundCounter--;
         String playerVotedOut = getPlayerVotedOut();
         removePlayerByName(playerVotedOut);
         resetActionsAndVotes();
         sendMessageToAll(new NetworkMessage(MessageValue.ROUNDOVER, playerVotedOut, String.valueOf(10 - roundCounter), null));
-        sendMessageToAll(new NetworkMessage(MessageValue.INVESTIGATE, null, null, null));
+        if(isVoting) {
+            sendMessageToAll(new NetworkMessage(MessageValue.INVESTIGATE, null, null, null));
+            isVoting = !isVoting;
+        }
+        else{
+            sendMessageToAll(new NetworkMessage(MessageValue.VOTE, null, null, null));
+            isVoting = !isVoting;
+        }
     }
 
     /**
