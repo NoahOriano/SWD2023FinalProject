@@ -5,9 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.TextFlow;
 
@@ -19,11 +17,14 @@ import javax.swing.*;
  * This is done to allow sharing of elements, such as chat, between scenes
  */
 public class SceneControllerForActionScene extends SceneController{
+
+    @FXML
+    TextField roundsLeft;
     /**
      * Text area for the chat log
      */
     @FXML
-    TextFlow chatLog;
+    TextArea chatLog;
 
     /**
      * Text field for the chat input
@@ -35,7 +36,7 @@ public class SceneControllerForActionScene extends SceneController{
      * Selector for the chat recipients
      */
     @FXML
-    ComboBox<String> chatSelector;
+    ChoiceBox<String> chatSelector;
 
     /**
      * Submit button for the chat input
@@ -59,19 +60,30 @@ public class SceneControllerForActionScene extends SceneController{
     ImageIcon playerIcon;
 
     @FXML
-    TextFlow evidenceField;
+    TextField evidenceField;
 
     @FXML
     Button actionSubmit;
 
     @FXML
-    ComboBox<String> actionOptions;
+    ChoiceBox<String> actionOptions;
 
     @FXML
     TextField selectedPlayerName;
 
+
+    /**
+     * Whether the game is over, submitting anything will return user to signon if so
+     */
+    boolean gameOver;
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+
     @FXML
     public void initialize(){
+        gameOver = false;
         actionSubmit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {

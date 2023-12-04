@@ -314,7 +314,7 @@ public class GameServer extends JFrame {
         // Clear disconnected players to prevent endless server generation
         for (int i = 0; i < subServers.size(); i++) {
             if(subServers.get(i).handler.isConnected()){
-                if(subServers.get(i).gameState != null && subServers.get(i).gameState.identifier != PlayerIdentifier.INNOCENT) {
+                if(subServers.get(i).gameState != null && subServers.get(i).gameState.getIdentifier() != PlayerIdentifier.INNOCENT) {
                     subServers.get(i).handler.sendInformation(new NetworkMessage(MessageValue.GAMEOVER, "GAME LOST", null, null));
                 }
                 else{
@@ -340,12 +340,12 @@ public class GameServer extends JFrame {
             servers.add(subServers.get(i));
         }
         for(int i = 0; i < playerCounter/4+1;i++){
-            servers.get(i).gameState.identifier = PlayerIdentifier.CULTIST;
+            servers.get(i).gameState.setIdentifier(PlayerIdentifier.CULTIST);
             servers.remove((int)(Math.random()*servers.size())).handler.sendInformation(
                     new NetworkMessage(MessageValue.CULTIST, null, null,null));
         }
         while(!servers.isEmpty()){
-            servers.get(0).gameState.identifier = PlayerIdentifier.INNOCENT;
+            servers.get(0).gameState.setIdentifier( PlayerIdentifier.INNOCENT);
             servers.remove(0).handler.sendInformation(
                     new NetworkMessage(MessageValue.INNOCENT, null, null,null));
         }

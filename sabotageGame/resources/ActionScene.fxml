@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.Image?>
@@ -269,38 +268,33 @@
                   <Font name="TenaliRamakrishna Regular" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="82.0" layoutY="38.0" textFill="#d6900f">
+            <Label fx:id="serverPortField" layoutX="82.0" layoutY="38.0" prefHeight="48.0" prefWidth="372.0" textFill="#d6900f">
                <font>
                   <Font name="TenaliRamakrishna Regular" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="133.0" layoutY="75.0" textFill="#d6900f">
+            <Label fx:id="serverIPField" layoutX="133.0" layoutY="75.0" prefHeight="48.0" prefWidth="329.0" textFill="#d6900f">
                <font>
                   <Font name="TenaliRamakrishna Regular" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="144.0" layoutY="110.0" textFill="#d6900f">
+            <Label fx:id="roundsLeft" layoutX="144.0" layoutY="110.0" prefHeight="48.0" prefWidth="135.0" textFill="#d6900f">
                <font>
                   <Font name="TenaliRamakrishna Regular" size="24.0" />
                </font>
             </Label>
-            <ScrollPane layoutX="505.0" layoutY="453.0" prefHeight="184.0" prefWidth="598.0">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-              </content>
-            </ScrollPane>
-            <TextField layoutX="505.0" layoutY="647.0" prefHeight="60.0" prefWidth="438.0" promptText="Enter a Chat" style="-fx-background-color: white;">
+            <TextField fx:id="chat" layoutX="505.0" layoutY="647.0" prefHeight="60.0" prefWidth="438.0" promptText="Enter a Chat" style="-fx-background-color: white;">
                <font>
                   <Font name="TenaliRamakrishna Regular" size="18.0" />
                </font>
             </TextField>
-            <ChoiceBox layoutX="953.0" layoutY="647.0" prefWidth="150.0" style="-fx-background-color: Gray;" />
+            <ChoiceBox fx:id="chatSelector" layoutX="953.0" layoutY="647.0" prefWidth="150.0" style="-fx-background-color: Gray;" />
             <Label layoutX="505.0" layoutY="397.0" style="-fx-text-fill: d6900f;" text="Log:" textFill="#d6900f">
                <font>
                   <Font name="TenaliRamakrishna Regular" size="36.0" />
                </font>
             </Label>
-            <Button layoutX="953.0" layoutY="677.0" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: d6900f;" text="Submit">
+            <Button fx:id="textSubmit" layoutX="953.0" layoutY="677.0" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: d6900f;" text="Submit">
                <font>
                   <Font name="TenaliRamakrishna Regular" size="13.0" />
                </font>
@@ -320,21 +314,21 @@
                               <Font name="TenaliRamakrishna Regular" size="24.0" />
                            </font>
                         </Label>
-                        <ChoiceBox layoutX="13.0" layoutY="248.0" prefHeight="26.0" prefWidth="176.0" style="-fx-background-color: gray;" />
-                        <ChoiceBox layoutX="209.0" layoutY="248.0" prefHeight="26.0" prefWidth="177.0" style="-fx-background-color: gray;" />
+                        <ChoiceBox fx:id="playerOptions" layoutX="13.0" layoutY="248.0" prefHeight="26.0" prefWidth="176.0" style="-fx-background-color: gray;" />
+                        <ChoiceBox fx:id="actionOptions" layoutX="209.0" layoutY="248.0" prefHeight="26.0" prefWidth="177.0" style="-fx-background-color: gray;" />
                         <Label layoutX="209.0" layoutY="192.0" style="-fx-text-fill: d6900f;" text="Action:" textFill="#d6900f">
                            <font>
                               <Font name="TenaliRamakrishna Regular" size="24.0" />
                            </font>
                         </Label>
-                        <Button layoutX="14.0" layoutY="289.0" mnemonicParsing="false" prefWidth="372.0" style="-fx-background-color: d6900f;" text="Submit" />
-                        <TextField layoutX="12.0" layoutY="367.0" prefHeight="92.0" prefWidth="374.0" style="-fx-background-color: white;" />
+                        <Button fx:id="actionSubmit" layoutX="14.0" layoutY="289.0" mnemonicParsing="false" prefWidth="372.0" style="-fx-background-color: d6900f;" text="Submit" />
+                        <TextField fx:id="evidenceField" editable="false" layoutX="12.0" layoutY="367.0" prefHeight="92.0" prefWidth="374.0" style="-fx-background-color: white;" />
                         <Label layoutX="14.0" layoutY="319.0" style="-fx-text-fill: d6900f;" text="Result:" textFill="#d6900f">
                            <font>
                               <Font name="TenaliRamakrishna Regular" size="24.0" />
                            </font>
                         </Label>
-                        <Avatar layoutX="14.0" layoutY="36.0" radius="75.0" style="-fx-background-color: d6900f;">
+                        <Avatar fx:id="playerIcon" layoutX="14.0" layoutY="36.0" radius="75.0" style="-fx-background-color: d6900f;">
                            <image>
                               <Image url="@../../../../../Pictures/Screenshots/Screenshot%20from%202023-12-03%2018-24-24.png" />
                            </image>
@@ -362,6 +356,7 @@
                      </children>
                   </Pane>
                </children></Pane>
+            <TextField fx:id="chatLog" layoutX="505.0" layoutY="452.0" prefHeight="185.0" prefWidth="597.0" style="-fx-background-color: white;" />
          </children></AnchorPane>
   </content>
 </TitledPane>
