@@ -154,6 +154,9 @@ public class SceneControllerForActionScene extends SceneController {
                     } else if (actionOptions.getValue().equals("Join")) {
                         sendMessage(new NetworkMessage(MessageValue.JOIN, playerOptions.getValue(), null, null));
                     }
+                    else if (actionOptions.getValue().equals("Skip")) {
+                        sendMessage(new NetworkMessage(MessageValue.VOTE, null, null, null));
+                    }
                 } else {
                     try {
                         setSignOnScreen(actionEvent);

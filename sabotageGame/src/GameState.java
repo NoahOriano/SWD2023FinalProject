@@ -46,7 +46,6 @@ public class GameState {
         this.username = username;
         playerFiles = new ArrayList<>();
         playerFiles.add(new EvidenceList(username, username));
-        identifier = PlayerIdentifier.INNOCENT;
     }
 
     /**

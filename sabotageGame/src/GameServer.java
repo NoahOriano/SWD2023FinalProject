@@ -276,11 +276,6 @@ public class GameServer extends JFrame {
                     getSubServerByName(request.getRequesterName()).isAlive = true;
                     getSubServerByName(request.getRequesterName()).gameState = new GameState(request.getRequesterName());
                     controller.addPlayerState(getSubServerByName(request.getRequesterName()).gameState);
-                    for (int i = 0; i < controller.playerStates.size(); i++) {
-                        for (int j = 0; j < controller.playerStates.size(); j++) {
-                            controller.playerStates.get(i).addPlayerFile(controller.playerStates.get(j).getUsername());
-                        }
-                    }
                     request.getSender().sendInformation(new NetworkMessage(MessageValue.JOIN, null, null, null));
                     sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "Player Joined", "Server", null));
                     for (int i = 0; i < subServers.size(); i++) {
@@ -433,17 +428,23 @@ public class GameServer extends JFrame {
         displayMessage("Starting Game");
         ArrayList<SubServer> servers = new ArrayList<>();
         for (int i = 0; i < subServers.size(); i++) {
-            servers.add(subServers.get(i));
+            if(subServers.get(i).isInGame) servers.add(subServers.get(i));
         }
-        for (int i = 0; i < playerCounter / 4 + 1; i++) {
-            servers.get(i).gameState.setIdentifier(PlayerIdentifier.CULTIST);
-            servers.remove((int) (Math.random() * servers.size())).handler.sendInformation(
+        for (int i = 0; i < playerCounter / 3; i++) {
+            int rand = (int) (Math.random() * servers.size());
+            servers.get(rand).gameState.setIdentifier(PlayerIdentifier.CULTIST);
+            servers.remove(rand).handler.sendInformation(
                     new NetworkMessage(MessageValue.CULTIST, null, null, null));
         }
         while (!servers.isEmpty()) {
             servers.get(0).gameState.setIdentifier(PlayerIdentifier.INNOCENT);
             servers.remove(0).handler.sendInformation(
                     new NetworkMessage(MessageValue.INNOCENT, null, null, null));
+        }
+        for (int i = 0; i < controller.playerStates.size(); i++) {
+            for (int j = 0; j < controller.playerStates.size(); j++) {
+                controller.playerStates.get(i).addPlayerFile(controller.playerStates.get(j).getUsername());
+            }
         }
         sendMessageToAll(new NetworkMessage(MessageValue.INVESTIGATE, null, null, null));
     }
@@ -454,15 +455,16 @@ public class GameServer extends JFrame {
     private void endRound() {
         displayMessage("Ending Round");
         sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "ENDING ROUND", "Server", null));
-        totalActions = 0;
-        roundCounter--;
-        timerCounter = 0;
         String playerVotedOut = getPlayerVotedOut();
         removePlayerByName(playerVotedOut);
         resetActionsAndVotes();
+        totalActions = 0;
+        roundCounter--;
+        timerCounter = 0;
         if (playerVotedOut == null) {
             sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "Voting skipped", "Server", null));
         } else {
+            playerCounter--;
             sendMessageToAll(new NetworkMessage(MessageValue.CHAT, playerVotedOut + " was life deleted", "Server", null));
         }
         resetActionsAndVotes();
