@@ -62,12 +62,12 @@ public class ServerGameController {
             }
         }
 
-        while (counter < 3 && !collector.isEmpty()) {  //
+        while (counter < 3 && !collector.isEmpty()) {  //Checks to see if 3 pieces of evidence or the collector array are empty
             int rand = (int) (Math.random() * collector.size());
-            Evidence evidence = collector.remove(rand);
-            if (thiefFile.getPlayerFiles().get(getListIndex(evidence.getTarget(),
+            Evidence evidence = collector.remove(rand); //Deconstructs the collector to get the evidence
+            if (thiefFile.getPlayerFiles().get(getListIndex(evidence.getTarget(), //Checks to see if the evidence got added to the evidenceList
                     getIndex(thief))).addEvidence(evidence.getIdentifier(), evidence.getInvestigator())) {
-
+                counter++; //Increases to ensure only 3 pieces of evidence get added
             }
         }
     }
@@ -104,6 +104,7 @@ public class ServerGameController {
 
         int detectiveListIndex = getListIndex(suspect, detectiveIndex); //Gets the index of suspect from detectives playerFiles
 
+        //Adds the evidence discovered by the investigation
         playerStates.get(detectiveIndex).getPlayerFiles().get(detectiveListIndex).addEvidence(playerStates.get(suspectIndex).getIdentifier(), detective);
     }
 
@@ -113,15 +114,17 @@ public class ServerGameController {
      * @param victim is the input of the player who is having false evidence made about them
      */
     public void forge(String cultist, String victim) {
-        int cultistIndex = getIndex(cultist);
-        int victimIndex = getIndex(victim);
+        int cultistIndex = getIndex(cultist); //Gets the index of cultist for playerStates
+        int victimIndex = getIndex(victim); //Gets the index of victim for playerStates
 
-        int cultistListIndex = getListIndex(victim, cultistIndex);
+        int cultistListIndex = getListIndex(victim, cultistIndex); //Gets the index of victim from cultist playerFiles
 
-            if (playerStates.get(victimIndex).getIdentifier().equals(PlayerIdentifier.INNOCENT)) {
+            if (playerStates.get(victimIndex).getIdentifier().equals(PlayerIdentifier.INNOCENT)) { //If victim is innocent generates cultist evidence
+                //Evidence gets added to the cultist's evidenceFiles
                 playerStates.get(cultistIndex).getPlayerFiles().get(cultistListIndex).addEvidence(PlayerIdentifier.CULTIST, cultist);
             }
-            if (playerStates.get(cultistIndex).getIdentifier().equals(PlayerIdentifier.INNOCENT)) {
+            if (playerStates.get(cultistIndex).getIdentifier().equals(PlayerIdentifier.CULTIST)) { //If victim is cultist generate cultist evidence
+                //Evidence gets added to the cultist's evidenceFiles
                 playerStates.get(cultistIndex).getPlayerFiles().get(cultistListIndex).addEvidence(PlayerIdentifier.INNOCENT, cultist);
             }
         }
