@@ -159,7 +159,7 @@ public class SceneController {
         controller.serverPortField.setText(String.valueOf(this.getPort()));
         controller.serverIPField.setText(this.getIP());
         controller.chatSelector.getItems().add("Global");
-        ((SceneControllerForActionScene)loader.getController()).mapPane.setImage(new Image(Str"mapFinal.png"))));
+        ((SceneControllerForActionScene)loader.getController()).mapPane.setImage(new Image(String.valueOf(getClass().getResource("mapFinal.png"))));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         loadScene(loader, root, stage);
 
