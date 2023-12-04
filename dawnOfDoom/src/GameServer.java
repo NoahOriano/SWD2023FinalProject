@@ -134,7 +134,7 @@ public class GameServer extends JFrame {
     /**
      * Default number of rounds in total
      */
-    public static final int DEFAULTROUNDS = 4;
+    public static final int DEFAULTROUNDS = 2;
     /**
      * Number of votes for skip or for starting lobby
      */
