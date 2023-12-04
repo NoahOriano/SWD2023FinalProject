@@ -177,6 +177,11 @@ public class SceneController {
         ((SceneControllerForActionScene)loader.getController()).mapIcon14.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
         ((SceneControllerForActionScene)loader.getController()).mapIcon15.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
         ((SceneControllerForActionScene)loader.getController()).mapIcon16.setImage(new Image(String.valueOf(getClass().getResource("profPicFinal.png"))));
+        ArrayList<>
+        for(int a=0; a<GameState.getPlayerFiles().getLength(); a++){
+            ((SceneControllerForActionScene)loader.getController()).
+
+        }
 
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         loadScene(loader, root, stage);

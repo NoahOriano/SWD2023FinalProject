@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 /**
@@ -100,6 +101,25 @@ public class SceneControllerForActionScene extends SceneController{
     ImageView mapIcon1, mapIcon2, mapIcon3, mapIcon4, mapIcon5,
     mapIcon6, mapIcon7, mapIcon8, mapIcon9, mapIcon10, mapIcon11,
     mapIcon12, mapIcon13, mapIcon14, mapIcon15, mapIcon16;
+
+    /** A private ArrayList of ImageViews that holds the map icons.**/
+    private ArrayList<ImageView> mapIcons = new ArrayList<>();
+
+    /** The getter for the ArrayList of ImageViews that hold the player icons on the map.**/
+    public ArrayList<ImageView> getMapIcons(){
+        this.mapIcons.add(mapIcon1);
+        this.mapIcons.add(mapIcon2);
+        this.mapIcons.add(mapIcon3);
+        this.mapIcons.add(mapIcon4);
+        this.mapIcons.add(mapIcon5);
+        this.mapIcons.add(mapIcon6);
+        this.mapIcons.add(mapIcon7);
+        this.mapIcons.add(mapIcon8);
+        for (ImageView imageView : Arrays.asList(mapIcon9, mapIcon10, mapIcon11, mapIcon12, mapIcon13, mapIcon14, mapIcon15, mapIcon16)) {
+            this.mapIcons.add(imageView);
+        }
+        return this.mapIcons;
+    }
 
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
