@@ -51,6 +51,7 @@ public class SceneControllerForSignOn extends SceneController{
      * Whether the user has signed in or not
      */
     boolean signedIn = false;
+
     @FXML
     public void initialize(){
         serverIPField.setText(getIP());
