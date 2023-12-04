@@ -53,12 +53,13 @@ public class ServerGameController {
 
 
     /**
-     * Steal method allows thief to steal up to 3 pieces of evidence from a victim
+     * Steal method allows thief to steal up to 3 pieces of evidence from a victim, which in reverse works as a pass method
      *
      * @param thief is the input for the user who is stealing the data
      * @param victim is the input for the use who's data is being stolen
      */
     public ArrayList<NetworkMessage> steal(String thief, String victim) {
+
         GameState victimFile = playerStates.get(getIndex(victim)); //Finds the gameState of the player being stolen
         GameState thiefFile = playerStates.get(getIndex(thief)); //Finds the gameState of the player stealing
         int counter = 0;
@@ -86,32 +87,6 @@ public class ServerGameController {
                 }
             }
         }
-        return list;
-    }
-
-    /**
-     * Allows user to pass all their available evidence on infoAbout to recipient
-     * @param user is the input of the user who wants to pass the data to another player
-     * @param infoAbout is the input of the player who the evidenceFile is about
-     * @param recipient is the input for the player who is receiving the evidenceFile
-     */
-    public ArrayList<Evidence> pass(String user, String infoAbout, String recipient) {
-        int userIndex = getIndex(user); //Gets the index of user for playerStates
-        int recipientIndex = getIndex(recipient); //Gets the index of recipient for playerStates
-
-        ArrayList<Evidence> list = new ArrayList<>();
-        int infoIndex = getListIndex(infoAbout, userIndex); //Gets the index of infoAbout from user's playerFiles
-        int infoRecipientIndex = getListIndex(infoAbout, recipientIndex);  //Gets the index of infoAbout from recipient's playerFiles
-        EvidenceList userList = playerStates.get(userIndex).getPlayerFiles().get(infoIndex); //Storage to reduce amount of getters used
-
-        for (int x = 0; x < playerStates.get(userIndex).getPlayerFiles().size(); x++) {
-            PlayerIdentifier inputIdentifier = userList.getEvidenceList().get(x).getIdentifier();
-            String inspector = userList.getEvidenceList().get(x).getInvestigator();
-            if(playerStates.get(recipientIndex).getPlayerFiles().get(infoRecipientIndex).addEvidence(inputIdentifier, inspector)){
-                EvidenceList temp = playerStates.get(recipientIndex).getPlayerFiles().get(infoRecipientIndex);
-                list.add(temp.getEvidenceList().get(temp.getEvidenceList().size()-1));
-            }; //Adds all the evidence from
-        } //the evidenceFiles to the recipients evidenceFiles
         return list;
     }
 
