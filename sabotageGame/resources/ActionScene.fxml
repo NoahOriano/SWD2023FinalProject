@@ -142,17 +142,17 @@
                   <Font name="TenaliRamakrishna Regular" size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="serverPortField" alignment="TOP_LEFT" editable="false" layoutX="82.0" layoutY="48.0" prefHeight="44.0" prefWidth="372.0" style="-fx-text-fill: d6900f; -fx-background-color: black;">
+            <TextField fx:id="serverPortField" alignment="TOP_LEFT" editable="false" layoutX="75.0" layoutY="40.0" prefHeight="49.0" prefWidth="372.0" style="-fx-text-fill: d6900f; -fx-background-color: black;">
+               <font>
+                  <Font name="TenaliRamakrishna Regular" size="24.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="serverIPField" alignment="TOP_LEFT" editable="false" layoutX="131.0" layoutY="89.0" prefHeight="43.0" prefWidth="321.0" style="-fx-background-color: black; -fx-text-fill: d6900f;">
                <font>
                   <Font name="TenaliRamakrishna Regular" size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="serverIPField" alignment="TOP_LEFT" editable="false" layoutX="130.0" layoutY="98.0" prefHeight="43.0" prefWidth="321.0" style="-fx-background-color: black; -fx-text-fill: d6900f;">
-               <font>
-                  <Font name="TenaliRamakrishna Regular" size="18.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="roundsLeft" alignment="TOP_LEFT" editable="false" layoutX="142.0" layoutY="141.0" prefHeight="48.0" prefWidth="312.0" style="-fx-background-color: black; -fx-text-fill: d6900f;">
+            <TextField fx:id="roundsLeft" alignment="TOP_LEFT" editable="false" layoutX="135.0" layoutY="138.0" prefHeight="39.0" prefWidth="312.0" style="-fx-background-color: black; -fx-text-fill: d6900f;">
                <font>
                   <Font name="TenaliRamakrishna Regular" size="18.0" />
                </font>
@@ -170,7 +170,7 @@
             </Label>
             <Button fx:id="textSubmit" layoutX="953.0" layoutY="677.0" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: d6900f;" text="Submit">
                <font>
-                  <Font name="TenaliRamakrishna Regular" size="13.0" />
+                  <Font name="TenaliRamakrishna Regular" size="14.0" />
                </font>
             </Button>
             <Label layoutX="35.0" layoutY="172.0" />
@@ -207,9 +207,9 @@
                               <Font name="TenaliRamakrishna Regular" size="24.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="usernameField" alignment="TOP_LEFT" editable="false" layoutX="194.0" layoutY="70.0" prefHeight="42.0" prefWidth="180.0" style="-fx-text-fill: d6900f; -fx-background-color: black;" text="Name">
+                        <TextField fx:id="usernameField" alignment="TOP_LEFT" editable="false" layoutX="191.0" layoutY="66.0" prefHeight="50.0" prefWidth="180.0" style="-fx-text-fill: d6900f; -fx-background-color: black;" text="Name">
                            <font>
-                              <Font name="TenaliRamakrishna Regular" size="24.0" />
+                              <Font name="TenaliRamakrishna Regular" size="14.0" />
                            </font>
                         </TextField>
                         <Label layoutX="194.0" layoutY="103.0" prefHeight="31.0" prefWidth="216.0" style="-fx-text-fill: d6900f;" text="Status:" textFill="#d6900f">
@@ -217,9 +217,9 @@
                               <Font name="TenaliRamakrishna Regular" size="24.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="statusField" alignment="TOP_LEFT" editable="false" layoutX="194.0" layoutY="138.0" prefHeight="25.0" prefWidth="180.0" style="-fx-text-fill: d6900f; -fx-background-color: black;" text="Dead or Alive">
+                        <TextField fx:id="statusField" alignment="TOP_LEFT" editable="false" layoutX="194.0" layoutY="136.0" prefHeight="67.0" prefWidth="180.0" style="-fx-text-fill: d6900f; -fx-background-color: black;" text="Dead or Alive">
                            <font>
-                              <Font name="TenaliRamakrishna Regular" size="18.0" />
+                              <Font name="TenaliRamakrishna Regular" size="24.0" />
                            </font>
                         </TextField>
                         <Circle fill="#d6900f" layoutX="101.0" layoutY="103.0" radius="75.0" stroke="BLACK" strokeType="INSIDE" />
