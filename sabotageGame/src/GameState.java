@@ -45,6 +45,7 @@ public class GameState {
     public GameState(String username){
         this.username = username;
         playerFiles = new ArrayList<>();
+        playerFiles.add(new EvidenceList(username, username));
     }
 
     /**
