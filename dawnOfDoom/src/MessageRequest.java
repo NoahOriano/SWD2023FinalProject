@@ -30,10 +30,12 @@ public class MessageRequest extends ServerRequest{
         this.sender = sender;
     }
 
+    /** The getter for message being sent through the network system.**/
     public String getMessage() {
         return message;
     }
 
+    /** The getter for the sender of a message.**/
     public ServerClientHandler getSender() {
         return sender;
     }
