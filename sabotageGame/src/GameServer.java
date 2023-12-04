@@ -144,7 +144,8 @@ public class GameServer extends JFrame {
     /**
      * Whether the game is currently active, otherwise, it is in lobby
      */
-    public boolean gameActive;
+    private boolean gameActive;
+
 
     /**
      * Constructor, which sets up a GUI
@@ -237,13 +238,12 @@ public class GameServer extends JFrame {
      * @param request Action request to handle all the data fom
      */
     public void handleActionRequest(ActionRequest request) {
-        if (getSubServerByName(request.getRequesterName()) != null && getSubServerByName(request.getRequesterName()).isInGame) {
-            if (request.getRequestType() == MessageValue.CHAT) {
-                displayMessage("Chat Request Received from "+request.getRequesterName()+" to "+request.getData2());
-                if (request.getData2()==null || request.getData2().equals("Global")) {
+        if (request.getRequestType() == MessageValue.CHAT) {
+            if (getSubServerByName(request.getRequesterName()) != null && getSubServerByName(request.getRequesterName()).isInGame) {
+                displayMessage("Chat Request Received from " + request.getRequesterName() + " to " + request.getData2());
+                if (request.getData2() == null || request.getData2().equals("Global")) {
                     sendMessageToAll(new NetworkMessage(MessageValue.CHAT, request.getData1(), request.getRequesterName(), null));
-                }
-                else if (request.getData2().equals("Cult")) {
+                } else if (request.getData2().equals("Cult")) {
                     for (int i = 0; i < subServers.size(); i++) {
                         if (subServers.get(i).gameState != null && subServers.get(i).gameState.getIdentifier() == PlayerIdentifier.CULTIST) {
                             subServers.get(i).handler.sendInformation(new NetworkMessage(MessageValue.CHAT, request.getData1(), request.getRequesterName(), null));
@@ -251,77 +251,105 @@ public class GameServer extends JFrame {
                     }
                 }
             }
-        }
-        if (!gameActive) { // If the game is not active
-            if (request.getRequestType() == MessageValue.SIGNIN) {
-                if (usernameIsAvailable(request.getData1())) {
+        } else {
+            if (!gameActive) { // If the game is not active
+                if (request.getRequestType() == MessageValue.SIGNIN) {
+                    if (usernameIsAvailable(request.getData1())) {
+                        for (int i = 0; i < subServers.size(); i++) {
+                            if (subServers.get(i).handler == request.getSender()) {
+                                playerCounter++;
+                                subServers.get(i).init(request.getData1());
+                                displayMessage("User Connected:" + request.getData1());
+                            }
+                        }
+                        request.getSender().sendInformation(new NetworkMessage(MessageValue.SIGNIN, null, null, null));
+                    }
+                }
+                if (request.getRequestType() == MessageValue.JOIN) {
+                    getSubServerByName(request.getRequesterName()).isInGame = true;
+                    controller.addPlayerState(getSubServerByName(request.getRequesterName()).gameState);
+                    request.getSender().sendInformation(new NetworkMessage(MessageValue.JOIN, null, null, null));
+                    sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "Player Joined", "Server", null));
+                }
+                if (request.getRequestType() == MessageValue.VOTE) {
                     for (int i = 0; i < subServers.size(); i++) {
-                        if (subServers.get(i).handler == request.getSender()) {
-                            playerCounter++;
-                            subServers.get(i).init(request.getData1());
-                            displayMessage("User Connected:" + request.getData1());
+                        if (subServers.get(i).handler == request.getSender() && !subServers.get(i).hasActed) {
+                            subServers.get(i).hasActed = true;
+                            votes++;
+                            if (votes > playerCounter / 2) {
+                                startGame();
+                            }
+                            sendMessageToAll(new NetworkMessage(MessageValue.CHAT, request.getRequesterName() + " has voted to start game", "Server", null));
                         }
                     }
-                    request.getSender().sendInformation(new NetworkMessage(MessageValue.SIGNIN, null, null, null));
                 }
-            }
-            if (request.getRequestType() == MessageValue.JOIN){
-                getSubServerByName(request.getRequesterName()).isInGame = true;
-                request.getSender().sendInformation(new NetworkMessage(MessageValue.JOIN, null,null,null));
-                sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "Player Joined", "Server",null));
-            }
-            if (request.getRequestType() == MessageValue.VOTE) {
-                for (int i = 0; i < subServers.size(); i++) {
-                    if (subServers.get(i).handler == request.getSender() && !subServers.get(i).hasActed) {
-                        subServers.get(i).hasActed = true;
-                        votes++;
-                        if (votes > playerCounter / 2) {
-                            startGame();
+            } else { // If the game is active
+                if (request.getRequestType() == MessageValue.TIMER) {
+                    for (int i = 0; i < subServers.size(); i++) {
+                        SubServer sub = subServers.get(i);
+                        sub.handler.sendInformation(new NetworkMessage(MessageValue.CHAT, "Tick Tock", "Server", "Server"));
+                        displayMessage("The Clock Is Ticking");
+                    }
+                    timerCounter++;
+                    if (timerCounter > roundTime / timerDelay) {
+                        if (roundCounter <= 0) {
+                            endGame();
+                        } else if (roundTime / timerDelay - roundCounter == 3) {
+                            roundCounter--;
+                            sendTimeWarning();
+                        } else {
+                            roundCounter--;
+                            endRound();
                         }
-                        sendMessageToAll(new NetworkMessage(MessageValue.CHAT, request.getRequesterName()+" has voted to start game", "Server", null));
+                    }
+                } else if (request.getRequesterName() != null && getSubServerByName(request.getRequesterName()) != null) {
+                    SubServer sub = getSubServerByName(request.getRequesterName());
+                    if (sub.isInGame && sub.isAlive && !sub.hasActed) {
+                        sub.hasActed = true;
+                        if (request.getRequestType() == MessageValue.VOTE) {
+                            if (isVoting) {
+                                // @TODO handle incoming votes
+                            }
+                        } else if (request.getRequestType() == MessageValue.STEAL) {
+                            if (!isVoting) {
+                                for (NetworkMessage message : controller.steal(request.getRequesterName(), request.getData1())) {
+                                    sub.handler.sendInformation(message);
+                                }
+                            }
+                        } else if (request.getRequestType() == MessageValue.PASS) {
+                            if (!isVoting) {
+                                for (Evidence e : controller.pass(request.getRequesterName(), request.getData1(), request.getData2())) {
+                                    sendEvidence(sub, e);
+                                }
+                            }
+                        } else if (request.getRequestType() == MessageValue.INVESTIGATE) {
+                            if (!isVoting) {
+                                Evidence evidence = controller.investigate(request.getRequesterName(), request.getData1());
+                                if(evidence!=null) {
+                                    sendEvidence(sub, evidence);
+                                }
+                            }
+                        }
+                    } else if (request.getRequestType() == MessageValue.FORGE) {
+                        Evidence evidence = controller.forge(request.getRequesterName(), request.getData1());
+                        if(evidence!=null) {
+                            sendEvidence(sub, evidence);
+                        }
                     }
                 }
-            }
-        } else { // If the game is active
-            if (request.getRequestType() == MessageValue.TIMER) {
-                for(int i = 0; i < subServers.size();i++){
-                    SubServer sub = subServers.get(i);
-                    sub.handler.sendInformation(new NetworkMessage(MessageValue.CHAT, "Tick Tock", "Server", "Server"));
-                    displayMessage("The Clock Is Ticking");
-                }
-                timerCounter++;
-                if (timerCounter > roundTime / timerDelay) {
-                    if (roundCounter <= 0) {
-                        endGame();
-                    } else if (roundTime / timerDelay - roundCounter == 3) {
-                        roundCounter--;
-                        sendTimeWarning();
-                    } else {
-                        roundCounter--;
-                        endRound();
-                    }
-                }
-            } else if (request.getRequestType() == MessageValue.VOTE) {
-                if (isVoting) {
-                    // @TODO handle incoming votes
-                }
-            } else if (request.getRequestType() == MessageValue.STEAL) {
-                if (!isVoting) {
-                    // @TODO handle incoming steal request
-                }
-            } else if (request.getRequestType() == MessageValue.PASS) {
-                if (!isVoting) {
-                    // @TODO handle incoming pass request
-                }
-            } else if (request.getRequestType() == MessageValue.INVESTIGATE) {
-                if (!isVoting) {
-                    // @TODO handle incoming investigate request
-                }
-            } else if (request.getRequestType() == MessageValue.FORGE) {
-                // @TODO handle incoming forge request
             }
         }
     }
+
+    private void sendEvidence(SubServer sub, Evidence evidence) {
+        if(evidence.getIdentifier()== PlayerIdentifier.INNOCENT) {
+            sub.handler.sendInformation(new NetworkMessage(MessageValue.EVIDENCE, evidence.getTarget(), "Innocent", null));
+        }
+        if(evidence.getIdentifier()== PlayerIdentifier.CULTIST) {
+            sub.handler.sendInformation(new NetworkMessage(MessageValue.EVIDENCE, evidence.getTarget(), "Cultist", null));
+        }
+    }
+
 
     /**
      * Ends the round, indicating the round is over to all clients, and resets the game state for a new game
