@@ -18,7 +18,7 @@ public class GameServer extends JFrame {
     /**
      * List of sub servers, generated to handle connections
      */
-    private ArrayList<SubServer> subServers = new ArrayList<SubServer>();
+    private ArrayList<SubServer> subServers;
     /**
      * Connection service which allows connection to clients to be retrieved
      */
@@ -62,11 +62,25 @@ public class GameServer extends JFrame {
          * Username of connected client
          */
         String username; // Username of connected player, null identifies a player not signed in
+        /**
+         * Whether the user has acted this round
+         */
+        boolean hasActed;
+
+        private boolean isInGame;
+
+        boolean isAlive;
 
         GameState gameState;
 
+        int votesAgainst;
+
         public SubServer(ServerClientHandler handler) {
             this.handler = handler;
+            this.isAlive = false;
+            this.isInGame = false;
+            this.hasActed = false;
+            this.votesAgainst = 0;
         }
         public void init(String name){
             this.username = name;
@@ -120,6 +134,10 @@ public class GameServer extends JFrame {
      * Default number of rounds in total
      */
     public static final int DEFAULTROUNDS = 10;
+    /**
+     * Number of votes for skip or for starting lobby
+     */
+    private int votes;
 
 
     /**
@@ -151,6 +169,7 @@ public class GameServer extends JFrame {
      * Set up and run server
      */
     public void runServer() {
+        subServers = new ArrayList<>();
         playerCounter = 0;
         gameActive = false;
         controller = new ServerGameController();
@@ -230,8 +249,12 @@ public class GameServer extends JFrame {
             }
             if(request.getRequestType() == MessageValue.VOTE){
                 for(int i = 0; i < subServers.size(); i++){
-                    if(subServers.get(i).handler == request.getSender()){
-                        // @TODO Handle game lobby start vote
+                    if(subServers.get(i).handler == request.getSender() && !subServers.get(i).hasActed){
+                        subServers.get(i).hasActed = true;
+                        votes++;
+                        if(votes > playerCounter/2){
+                            startGame();
+                        }
                     }
                 }
             }
@@ -291,30 +314,83 @@ public class GameServer extends JFrame {
         // Clear disconnected players to prevent endless server generation
         for (int i = 0; i < subServers.size(); i++) {
             if(subServers.get(i).handler.isConnected()){
-                // @TODO add signal to client to go back to game signin
+                if(subServers.get(i).gameState != null && subServers.get(i).gameState.identifier != PlayerIdentifier.INNOCENT) {
+                    subServers.get(i).handler.sendInformation(new NetworkMessage(MessageValue.GAMEOVER, "GAME LOST", null, null));
+                }
+                else{
+                    subServers.get(i).handler.sendInformation(new NetworkMessage(MessageValue.GAMEOVER, "GAME WON", null, null));
+                }
             }
             else{
                 subServers.remove(i);
                 i--; // Shift index again since subServer indexes have shifted
             }
         }
-    }
-
-    private void startGame(){
-        gameActive = true;
-        // @TODO send game start message
-        // @TODO game start logic
+        resetSubServers(); // Reset all subServers
     }
 
     /**
-     * Ends the game, indicating the round is over to all clients, and resets the game state for a new game
-     * Removes all players as active players
-     * Client side should return to signin page with username field prefilled with old username
+     * Starts the game, assigning clients as innocents or guilty
+     */
+    private void startGame(){
+        gameActive = true;
+        displayMessage("Starting Game");
+        ArrayList<SubServer> servers = new ArrayList<>();
+        for(int i = 0; i < subServers.size(); i++){
+            servers.add(subServers.get(i));
+        }
+        for(int i = 0; i < playerCounter/4+1;i++){
+            servers.get(i).gameState.identifier = PlayerIdentifier.CULTIST;
+            servers.remove((int)(Math.random()*servers.size())).handler.sendInformation(
+                    new NetworkMessage(MessageValue.CULTIST, null, null,null));
+        }
+        while(!servers.isEmpty()){
+            servers.get(0).gameState.identifier = PlayerIdentifier.INNOCENT;
+            servers.remove(0).handler.sendInformation(
+                    new NetworkMessage(MessageValue.INNOCENT, null, null,null));
+        }
+        sendMessageToAll(new NetworkMessage(MessageValue.INVESTIGATE, null, null,null));
+    }
+
+    /**
+     * Ends the round, indicating the round is over to all clients
      */
     private void endRound() {
         displayMessage("Ending Round");
         roundCounter--;
-        sendMessageToAll(new NetworkMessage(MessageValue.ROUNDOVER, null, null, null));
+        String playerVotedOut = getPlayerVotedOut();
+        removePlayerByName(playerVotedOut);
+        resetActionsAndVotes();
+        sendMessageToAll(new NetworkMessage(MessageValue.ROUNDOVER, playerVotedOut, String.valueOf(10-roundCounter), null));
+        sendMessageToAll(new NetworkMessage(MessageValue.INVESTIGATE, null, null, null));
+    }
+
+    /**
+     * Remove a player from the active servers, meaning they can no longer play :(
+     * @param playerVotedOut player who was voted out
+     */
+    private void removePlayerByName(String playerVotedOut) {
+        for(int i = 0; i < subServers.size(); i++){
+            if(subServers.get(i).isInGame && subServers.get(i).username.equals(playerVotedOut)){
+                subServers.get(i).isAlive = false;
+            }
+        }
+    }
+
+    /**
+     * Gets the player who was voted out, if any
+     * @return player name or null if nobody was voted out
+     */
+    private String getPlayerVotedOut(){
+        int max = votes;
+        String player = null;
+        for(int i = 0; i < subServers.size(); i++){
+            if(subServers.get(i).isInGame && subServers.get(i).votesAgainst > votes){
+                player = subServers.get(i).username;
+                max = subServers.get(i).votesAgainst;
+            }
+        }
+        return player;
     }
 
     /**
@@ -325,6 +401,10 @@ public class GameServer extends JFrame {
         sendMessageToAll(new NetworkMessage(MessageValue.CHAT, "ROUND ALMOST OVER", "Server", null));
     }
 
+    /**
+     * Send a message to all clients connected or not
+     * @param message message to send
+     */
     private void sendMessageToAll(NetworkMessage message) {
         for (int i = 0; i < subServers.size(); i++) {
             subServers.get(i).handler.sendInformation(message);
@@ -351,11 +431,47 @@ public class GameServer extends JFrame {
 
     /**
      * Displays a message, adding it to the log
-     *
      * @param messageToDisplay the message to display
      */
     private void displayMessage(final String messageToDisplay) {
         displayArea.append("\n" + messageToDisplay);
     }
 
+    /**
+     * Return subserver connected to specific username
+     * @param name name of user of subserver
+     * @return subserver for client
+     */
+    private SubServer getSubServerByName(String name){
+        for(int i = 0; i < subServers.size(); i++){
+            if(subServers.get(i).username!=null && subServers.get(i).username.equals(name)){
+                return subServers.get(i);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Reset actions and votes, done between rounds
+     */
+    private void resetActionsAndVotes(){
+        for(int i = 0; i < subServers.size(); i++){
+            subServers.get(i).votesAgainst=0;
+            subServers.get(i).hasActed=false;
+        }
+    }
+
+    /**
+     * Reset subservers for use between games
+     */
+    private void resetSubServers(){
+        for (SubServer subServer : subServers) {
+            subServer.votesAgainst = 0;
+            subServer.hasActed = false;
+            subServer.isInGame = false;
+            subServer.isAlive = false;
+            subServer.gameState = null;
+            subServer.username = null;
+        }
+    }
 }
