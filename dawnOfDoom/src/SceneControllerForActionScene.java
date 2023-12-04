@@ -145,7 +145,10 @@ public class SceneControllerForActionScene extends SceneController {
                 if (!gameOver) {
                     if (actionOptions.getValue().equals("Steal")) {
                         sendMessage(new NetworkMessage(MessageValue.STEAL, playerOptions.getValue(), null, null));
-                    } else if (actionOptions.getValue().equals("Forge")) {
+                    } else if (actionOptions.getValue().equals("Pass")) {
+                        sendMessage(new NetworkMessage(MessageValue.PASS, playerOptions.getValue(), null, null));
+                    }
+                    else if (actionOptions.getValue().equals("Forge")) {
                         sendMessage(new NetworkMessage(MessageValue.FORGE, playerOptions.getValue(), null, null));
                     } else if (actionOptions.getValue().equals("Investigate")) {
                         sendMessage(new NetworkMessage(MessageValue.INVESTIGATE, playerOptions.getValue(), null, null));
