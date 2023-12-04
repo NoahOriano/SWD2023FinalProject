@@ -15,7 +15,7 @@ public enum MessageValue implements Serializable {
     // Pass message data fields: player's file to retrieve, player to pass to, null
 
     // Message data fields: text to display on server, null, null
-    // Round-over data fields: player name voted out, special event when implemented, rounds left
+    // Round-over data fields: player name voted out, rounds left, null
     // Game-over data fields: game end identifier such as win or loss, null, null
     // Chat data fields: text to display, recipient group or name of user, null
     // Chat data fields FROM SERVER: text to display, sender of chat, null
