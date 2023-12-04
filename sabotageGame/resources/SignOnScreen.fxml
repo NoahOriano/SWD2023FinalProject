@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane fx:id="pane" alignment="TOP_LEFT" prefHeight="445.0" prefWidth="853.0" vgap="0.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SceneControllerForSignOn">
+<GridPane fx:id="pane" alignment="TOP_LEFT" prefHeight="445.0" prefWidth="853.0" vgap="0.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SceneControllerForSignOn">
     <rowConstraints>
       <RowConstraints minHeight="10.0" prefHeight="30.0" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" />
@@ -45,9 +45,9 @@
       </ImageView>
       <Button fx:id="submit" mnemonicParsing="false" text="Submit" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="12" />
       <TextField fx:id="usernameInput" alignment="TOP_LEFT" prefHeight="26.0" prefWidth="164.0" promptText="Username:" style="-fx-background-image: f5dbab;" GridPane.columnIndex="5" GridPane.rowIndex="11" />
-      <TextField fx:id="serverPortField" editable="false" maxWidth="150.0" prefHeight="26.0" prefWidth="180.0" style="-fx-background-color: f5dbab;" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="13" />
-      <TextField fx:id="serverIPField" editable="false" prefHeight="26.0" prefWidth="228.0" style="-fx-background-color: f5dbab;" GridPane.columnIndex="5" GridPane.rowIndex="13" />
-      <TextField editable="false" prefHeight="25.0" prefWidth="155.0" style="-fx-background-color: f5dbab;" text="IP and Port of Server:" GridPane.columnIndex="4" GridPane.rowIndex="13">
+      <TextField fx:id="serverPortField" editable="false" maxWidth="150.0" prefHeight="26.0" prefWidth="180.0" style="-fx-background-color: white;" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="13" />
+      <TextField fx:id="serverIPField" editable="false" prefHeight="26.0" prefWidth="228.0" style="-fx-background-color: white;" GridPane.columnIndex="5" GridPane.rowIndex="13" />
+      <TextField editable="false" prefHeight="25.0" prefWidth="155.0" style="-fx-background-color: white;" text="IP and Port of Server:" GridPane.columnIndex="4" GridPane.rowIndex="13">
          <font>
             <Font name="System Italic" size="13.0" />
          </font></TextField>

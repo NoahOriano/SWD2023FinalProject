@@ -73,7 +73,7 @@ public class ClientMessageRelay implements Runnable{
                         control.actionOptions.getItems().add("Vote");
                     }
                     if(networkMessage.identifier() == MessageValue.CHAT){
-                        control.chatLog.appendText(networkMessage.dataB()+">>> "+networkMessage.dataA());
+                        control.chatLog.appendText("\n"+networkMessage.dataB()+">>> "+networkMessage.dataA());
                     }
                     if(networkMessage.identifier() == MessageValue.INVESTIGATE){
                         control.actionOptions.getItems().clear();

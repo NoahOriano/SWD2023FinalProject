@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import javax.naming.ldap.Control;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -15,6 +16,8 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 
 public class SceneController {
+
+    //Text color: #D6900F
     /**
      * Connection to the server
      */
@@ -137,12 +140,24 @@ public class SceneController {
     public void setGameJoinScene(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GameJoinScene.fxml"));
         Parent root = loader.load();
+        this.passConnection(loader.getController());
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         loadScene(loader, root, stage);
     }
     public void setGameActionScene(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ActionScene.fxml"));
         Parent root = loader.load();
+        this.passConnection(loader.getController());
+        SceneControllerForActionScene controller = loader.getController();
+        controller.roundsLeft.setText("10");
+        controller.actionOptions.getItems().add("Vote");
+        controller.chatLog.appendText("Server>>> click join as action and submit To join game");
+        controller.statusField.setText("Alive");
+        controller.actionOptions.getItems().add("Join");
+        controller.usernameField.setText(this.getUsername());
+        controller.serverPortField.setText(String.valueOf(this.getPort()));
+        controller.serverIPField.setText(this.getIP());
+        controller.chatSelector.getItems().add("Global");
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         loadScene(loader, root, stage);
 
@@ -150,6 +165,7 @@ public class SceneController {
     public void setSignOnScreen(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SignOnScreen.fxml"));
         Parent root = loader.load();
+        this.passConnection(loader.getController());
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         ((SceneControllerForSignOn)loader.getController()).imageView.setImage(
                 new Image(String.valueOf(getClass().getResource("townBackground.png"))));
@@ -159,7 +175,6 @@ public class SceneController {
     }
 
     public void loadScene(FXMLLoader loader, Parent root, Stage stage){
-        this.passConnection(loader.getController());
         Scene scene = new Scene(root);      // attach scene graph to scene
         stage.setScene(scene);              // attach scene to stage
         stage.show();                       // display the stage

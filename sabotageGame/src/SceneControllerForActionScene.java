@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 import javax.swing.*;
@@ -66,12 +67,16 @@ public class SceneControllerForActionScene extends SceneController{
     Button actionSubmit;
 
     @FXML
+    ChoiceBox<String> playerOptions;
+
+    @FXML
     ChoiceBox<String> actionOptions;
 
     @FXML
-    TextField selectedPlayerName;
+    TextField usernameField;
 
-
+    @FXML
+    TextField statusField;
     /**
      * Whether the game is over, submitting anything will return user to signon if so
      */
@@ -88,16 +93,16 @@ public class SceneControllerForActionScene extends SceneController{
             @Override
             public void handle(ActionEvent actionEvent) {
                 if(actionOptions.getValue().equals("Steal")){
-                    sendMessage(new NetworkMessage(MessageValue.STEAL, selectedPlayerName.getText(), null, null));
+                    sendMessage(new NetworkMessage(MessageValue.STEAL, playerOptions.getValue(), null, null));
                 }
                 if(actionOptions.getValue().equals("Forge")){
-                    sendMessage(new NetworkMessage(MessageValue.FORGE, selectedPlayerName.getText(), null, null));
+                    sendMessage(new NetworkMessage(MessageValue.FORGE, playerOptions.getValue(), null, null));
                 }
                 if(actionOptions.getValue().equals("Investigate")){
-                    sendMessage(new NetworkMessage(MessageValue.INVESTIGATE, selectedPlayerName.getText(), null, null));
+                    sendMessage(new NetworkMessage(MessageValue.INVESTIGATE, playerOptions.getValue(), null, null));
                 }
                 if(actionOptions.getValue().equals("Vote")){
-                    sendMessage(new NetworkMessage(MessageValue.VOTE, selectedPlayerName.getText(), null, null));
+                    sendMessage(new NetworkMessage(MessageValue.VOTE, playerOptions.getValue(), null, null));
                 }
             }
         });
@@ -105,6 +110,12 @@ public class SceneControllerForActionScene extends SceneController{
             @Override
             public void handle(ActionEvent actionEvent) {
                 sendMessage(new NetworkMessage(MessageValue.CHAT, chat.getText(), chatSelector.getValue(), null));
+            }
+        });
+        playerOptions.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
             }
         });
     }
